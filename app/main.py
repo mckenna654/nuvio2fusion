@@ -73,10 +73,12 @@ async def load_preset(
     prefix_mode: str = "category",
     addon_name: str | None = None,
 ) -> dict[str, Any]:
-    """Loads a built-in preset (fusion, complete_manifest) and converts it."""
+    """Loads a built-in Xperience preset and converts it."""
     file_map = {
-        "fusion": "fusion.json",
+        "widgets": "xperience_widgets.json",
+        "xperience": "xperience_widgets.json",
         "complete": "complete_manifest.json",
+        "manifest": "complete_manifest.json",
     }
     fname = file_map.get(preset_name.lower())
     if not fname:

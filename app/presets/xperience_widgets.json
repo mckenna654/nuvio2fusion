@@ -1,5 +1,5 @@
 {
-  "exportType": "fusionWidgets",
+  "exportType": "widgets",
   "exportVersion": 1,
   "requiredAddons": [
     "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json"

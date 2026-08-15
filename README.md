@@ -19,7 +19,7 @@
 
 ## 💡 What is XP2AIOM?
 
-**Nuvio (formerly Xperience)** offers rich UI presets (like *Fusion*) and custom catalog groupings. **AIOMetadata** is the next-generation Stremio metadata addon for custom catalogs, multi-provider artwork (RPDB, TopPoster, Fanart), and unified search.
+**Nuvio (formerly Xperience)** offers rich UI layout configurations and custom catalog groupings. **AIOMetadata** is the next-generation Stremio metadata addon for custom catalogs, multi-provider artwork (RPDB, TopPoster, Fanart), and unified search.
 
 **XP2AIOM** bridges the gap: it allows you to log into your Nuvio account (or drop in your widget/manifest export JSON) and outputs a valid, formatted AIOMetadata configuration file ready for 1-click import into AIOMetadata's configuration dashboard.
 
@@ -40,7 +40,7 @@ graph LR
 - **🌐 4 Ingestion Options**:
   - 🔑 **Nuvio Login**: Direct authentication with your Nuvio/Xperience account to pull your setup automatically.
   - 🔗 **Manifest URL**: Paste any live `manifest.json` URL.
-  - 📁 **File Upload / Drag & Drop**: Drop your exported `fusion-widgets.json` or custom preset files.
+  - 📁 **File Upload / Drag & Drop**: Drop your exported Xperience JSON files (`widgets.json`, `manifest.json`, etc.).
   - 📝 **Raw JSON Paste**: Paste JSON layout payloads directly into the browser.
 - **🧠 Smart Catalog & Filter Translation**:
   - Automatically translates MDBLists, Trakt Lists, TMDB, Studios (A24, Marvel, Disney), Decades, Genres, and Streaming Services (Netflix, Disney+, Apple TV+, HBO Max, Prime, Paramount+).
@@ -134,8 +134,8 @@ Navigate to `http://localhost:7088`.
 
 1. Open **XP2AIOM** (`http://<your-server-ip>:7088`).
 2. Choose your preferred input method:
-   - Click **Nuvio Login** and enter your credentials, OR
-   - Drag & drop your `fusion-widgets.json` file into the upload zone.
+   - Paste your **Xperience Manifest URL**, OR
+   - Drag & drop your Xperience export `.json` file into the upload zone.
 3. *(Optional)* Upload your current `aiometadata-config.json` under **Merge with Existing AIOMetadata Config** if you want to keep your API keys.
 4. Select your preferred catalog naming style (`[Category] Name`, `Clean`, or `Preserve`).
 5. Click **Generate AIOMetadata Configuration**.

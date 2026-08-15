@@ -97,8 +97,8 @@ class NuvioClient:
                     continue
 
         raise RuntimeError(
-            "Xperience / Nuvio stores your layout in your Stremio Manifest URL. "
-            "Please paste your Manifest URL in the 'Manifest URL' tab, or click one of the 1-Click Presets (Fusion, Complete Setup)."
+            "Xperience stores your layout in your Stremio Manifest URL. "
+            "Please paste your Manifest URL in the 'Manifest URL' tab, or click one of the 1-Click Xperience Config presets."
         )
 
     async def fetch_by_token(self, token: str, base_url: str = "https://xperience-app.com") -> dict[str, Any]:
