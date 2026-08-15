@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nuvio ➔ AIOMetadata Bridge</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#f5f3ff',
+              100: '#ede9fe',
+              500: '#8b5cf6',
+              600: '#7c3aed',
+              700: '#6d28d9',
+              800: '#5b21b6',
+              900: '#4c1d95',
+            },
+            darkBg: '#0f172a',
+            darkCard: '#1e293b',
+            darkBorder: '#334155'
+          }
+        }
+      }
+    }
+  </script>
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col font-sans antialiased selection:bg-purple-500 selection:text-white">
+
+  <!-- Navbar -->
+  <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-purple-600 to-indigo-500 flex items-center justify-center shadow-lg shadow-purple-500/30">
+          <i class="fa-solid fa-layer-group text-white text-lg"></i>
+        </div>
+        <div>
+          <span class="text-xl font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-indigo-400 bg-clip-text text-transparent">Nuvio ➔ AIOMetadata</span>
+          <span class="ml-2 text-xs uppercase px-2 py-0.5 rounded bg-purple-500/20 text-purple-300 font-semibold border border-purple-500/30">Bridge</span>
+        </div>
+      </div>
+      <div class="flex items-center space-x-4">
+        <a href="https://github.com" target="_blank" class="text-slate-400 hover:text-slate-200 transition text-sm flex items-center space-x-1.5">
+          <i class="fa-brands fa-github text-lg"></i>
+          <span class="hidden sm:inline">Self-Hosted</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+      
+      <!-- Left Column: Ingest & Settings -->
+      <div class="lg:col-span-5 space-y-6">
+        
+        <!-- Input Method Card -->
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl relative overflow-hidden">
+          <div class="absolute top-0 right-0 w-32 h-32 bg-purple-500/5 rounded-full blur-3xl pointer-events-none"></div>
+
+          <h2 class="text-lg font-semibold text-white mb-4 flex items-center space-x-2">
+            <i class="fa-solid fa-arrow-right-to-bracket text-purple-400"></i>
+            <span>Import from Nuvio / Xperience</span>
+          </h2>
+
+          <!-- Tabs -->
+          <div class="flex border-b border-slate-800 mb-5 space-x-2 overflow-x-auto" id="inputTabs">
+            <button onclick="switchTab('tab-upload')" id="btn-tab-upload" class="tab-btn active px-3 py-2 text-sm font-medium border-b-2 border-purple-500 text-purple-400 flex items-center space-x-2">
+              <i class="fa-solid fa-file-arrow-up"></i>
+              <span>Upload JSON</span>
+            </button>
+            <button onclick="switchTab('tab-manifest')" id="btn-tab-manifest" class="tab-btn px-3 py-2 text-sm font-medium border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center space-x-2">
+              <i class="fa-solid fa-link"></i>
+              <span>Manifest URL</span>
+            </button>
+            <button onclick="switchTab('tab-login')" id="btn-tab-login" class="tab-btn px-3 py-2 text-sm font-medium border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center space-x-2">
+              <i class="fa-solid fa-user-lock"></i>
+              <span>Nuvio Login</span>
+            </button>
+            <button onclick="switchTab('tab-paste')" id="btn-tab-paste" class="tab-btn px-3 py-2 text-sm font-medium border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center space-x-2">
+              <i class="fa-solid fa-code"></i>
+              <span>Paste JSON</span>
+            </button>
+          </div>
+
+          <!-- Tab 1: Upload File -->
+          <div id="tab-upload" class="tab-content space-y-4">
+            <div id="dropZone" class="border-2 border-dashed border-slate-700 hover:border-purple-500/60 rounded-xl p-6 text-center cursor-pointer transition bg-slate-950/40 group">
+              <input type="file" id="fileInput" accept=".json" class="hidden" onchange="handleFileSelected(event)">
+              <div class="w-12 h-12 mx-auto rounded-full bg-slate-800 group-hover:bg-purple-900/30 flex items-center justify-center text-purple-400 mb-3 transition">
+                <i class="fa-solid fa-cloud-arrow-up text-xl"></i>
+              </div>
+              <p class="text-sm font-medium text-slate-200" id="fileStatusText">Click or drag <span class="text-purple-400">fusion-widgets.json</span> or preset export here</p>
+              <p class="text-xs text-slate-500 mt-1">Supports Xperience widgets, layouts, and Stremio manifests (.json)</p>
+            </div>
+          </div>
+
+          <!-- Tab 2: Manifest URL -->
+          <div id="tab-manifest" class="tab-content hidden space-y-4">
+            <div>
+              <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Nuvio / Xperience Manifest URL</label>
+              <div class="relative">
+                <input type="url" id="manifestUrl" placeholder="https://xperience-app.com/manifest/.../manifest.json" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-purple-500 transition pl-10">
+                <i class="fa-solid fa-globe absolute left-3.5 top-3.5 text-slate-500 text-sm"></i>
+              </div>
+            </div>
+            <button onclick="fetchManifest()" class="w-full py-2.5 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-medium text-sm rounded-xl shadow-lg shadow-purple-600/30 transition flex items-center justify-center space-x-2">
+              <i class="fa-solid fa-cloud-arrow-down"></i>
+              <span>Fetch & Convert Manifest</span>
+            </button>
+          </div>
+
+          <!-- Tab 3: Login -->
+          <div id="tab-login" class="tab-content hidden space-y-4">
+            <div>
+              <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Nuvio Email</label>
+              <input type="email" id="nuvioEmail" placeholder="your@email.com" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-purple-500 transition">
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Password</label>
+              <input type="password" id="nuvioPassword" placeholder="••••••••" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-purple-500 transition">
+            </div>
+            <button onclick="loginNuvio()" class="w-full py-2.5 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-medium text-sm rounded-xl shadow-lg shadow-purple-600/30 transition flex items-center justify-center space-x-2">
+              <i class="fa-solid fa-plug"></i>
+              <span>Connect & Pull Setup</span>
+            </button>
+          </div>
+
+          <!-- Tab 4: Raw Paste -->
+          <div id="tab-paste" class="tab-content hidden space-y-4">
+            <div>
+              <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Paste Raw JSON</label>
+              <textarea id="rawJsonInput" rows="6" placeholder='{ "exportType": "widgets", "widgets": [ ... ] }' class="w-full bg-slate-950 border border-slate-700 rounded-xl p-3 text-xs font-mono text-slate-300 focus:outline-none focus:border-purple-500 transition"></textarea>
+            </div>
+            <button onclick="processRawJson()" class="w-full py-2.5 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-medium text-sm rounded-xl shadow-lg shadow-purple-600/30 transition flex items-center justify-center space-x-2">
+              <i class="fa-solid fa-bolt"></i>
+              <span>Parse & Convert JSON</span>
+            </button>
+          </div>
+
+        </div>
+
+        <!-- Configuration Options Card -->
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-5">
+          <h2 class="text-lg font-semibold text-white flex items-center space-x-2">
+            <i class="fa-solid fa-sliders text-purple-400"></i>
+            <span>AIOMetadata Options</span>
+          </h2>
+
+          <div>
+            <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Addon Name</label>
+            <input type="text" id="optAddonName" value="AIOMetadata" placeholder="AIOMetadata" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-2 text-sm text-slate-200 focus:outline-none focus:border-purple-500 transition">
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Catalog Naming Style</label>
+            <select id="optPrefixMode" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-2 text-sm text-slate-200 focus:outline-none focus:border-purple-500 transition">
+              <option value="category" selected>[Category] Name (Movies/Shows) - Recommended</option>
+              <option value="clean">Clean (No Category Prefix)</option>
+              <option value="preserve">Preserve Original Exact Names</option>
+            </select>
+          </div>
+
+          <!-- Base Config Template Merge -->
+          <div class="pt-2 border-t border-slate-800">
+            <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">
+              Merge with Existing AIOMetadata Config <span class="text-slate-500 text-[10px] lowercase">(optional)</span>
+            </label>
+            <p class="text-xs text-slate-500 mb-2">Upload your current config to preserve API keys (TMDB, Trakt, RPDB) and provider settings.</p>
+            <input type="file" id="baseConfigInput" accept=".json" class="block w-full text-xs text-slate-400 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-purple-900/30 file:text-purple-300 hover:file:bg-purple-900/50 cursor-pointer">
+          </div>
+
+          <!-- Toggles -->
+          <div class="pt-2 border-t border-slate-800 space-y-3">
+            <label class="flex items-center justify-between cursor-pointer">
+              <span class="text-sm text-slate-300">Rating Posters (RPDB)</span>
+              <input type="checkbox" id="optRatingPosters" checked class="w-4 h-4 accent-purple-500 rounded cursor-pointer">
+            </label>
+            <label class="flex items-center justify-between cursor-pointer">
+              <span class="text-sm text-slate-300">Enable All Imported Catalogs</span>
+              <input type="checkbox" id="optEnableAll" checked class="w-4 h-4 accent-purple-500 rounded cursor-pointer">
+            </label>
+          </div>
+
+          <button onclick="triggerConversion()" id="convertBtn" class="w-full py-3 bg-purple-600 hover:bg-purple-500 text-white font-semibold text-sm rounded-xl shadow-lg shadow-purple-600/30 transition flex items-center justify-center space-x-2">
+            <i class="fa-solid fa-wand-magic-sparkles"></i>
+            <span>Generate AIOMetadata Configuration</span>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Right Column: Results & Interactive Preview -->
+      <div class="lg:col-span-7 space-y-6">
+        
+        <!-- Summary Cards -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-md">
+            <div class="text-xs font-semibold text-slate-500 uppercase">Total Catalogs</div>
+            <div class="text-2xl font-bold text-white mt-1" id="statTotal">0</div>
+          </div>
+          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-md">
+            <div class="text-xs font-semibold text-slate-500 uppercase">MDBList Rows</div>
+            <div class="text-2xl font-bold text-purple-400 mt-1" id="statMdblist">0</div>
+          </div>
+          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-md">
+            <div class="text-xs font-semibold text-slate-500 uppercase">Trakt Lists</div>
+            <div class="text-2xl font-bold text-pink-400 mt-1" id="statTrakt">0</div>
+          </div>
+          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-md">
+            <div class="text-xs font-semibold text-slate-500 uppercase">Other Providers</div>
+            <div class="text-2xl font-bold text-indigo-400 mt-1" id="statOthers">0</div>
+          </div>
+        </div>
+
+        <!-- Export & Action Bar -->
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl flex flex-wrap items-center justify-between gap-4">
+          <div>
+            <h3 class="text-base font-semibold text-white">Converted Layout Payload</h3>
+            <p class="text-xs text-slate-400 mt-0.5">Ready for 1-click import into AIOMetadata config dashboard.</p>
+          </div>
+          <div class="flex items-center space-x-3">
+            <button onclick="copyToClipboard()" id="copyBtn" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-sm font-medium rounded-xl border border-slate-700 transition flex items-center space-x-1.5 disabled:opacity-50">
+              <i class="fa-regular fa-copy"></i>
+              <span>Copy JSON</span>
+            </button>
+            <button onclick="downloadJson()" id="downloadBtn" class="px-4 py-2 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-sm font-semibold rounded-xl shadow-lg shadow-purple-600/30 transition flex items-center space-x-1.5 disabled:opacity-50">
+              <i class="fa-solid fa-download"></i>
+              <span>Download .JSON</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Catalogs Table Preview -->
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl">
+          <div class="flex items-center justify-between mb-4 flex-wrap gap-2">
+            <h3 class="text-base font-semibold text-white flex items-center space-x-2">
+              <i class="fa-solid fa-list-check text-purple-400"></i>
+              <span>Detected Catalogs (<span id="catalogCountDisplay">0</span>)</span>
+            </h3>
+            <div class="relative">
+              <input type="text" id="catalogSearch" placeholder="Filter catalogs..." oninput="filterCatalogsTable()" class="bg-slate-950 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-slate-200 focus:outline-none focus:border-purple-500 transition pl-8 w-48">
+              <i class="fa-solid fa-magnifying-glass absolute left-2.5 top-2.5 text-slate-500 text-xs"></i>
+            </div>
+          </div>
+
+          <div class="overflow-x-auto max-h-96 border border-slate-800 rounded-xl">
+            <table class="min-w-full divide-y divide-slate-800 text-left text-xs">
+              <thead class="bg-slate-950/80 sticky top-0 text-slate-400 uppercase tracking-wider font-semibold">
+                <tr>
+                  <th class="px-4 py-3">Catalog Name</th>
+                  <th class="px-3 py-3">Source</th>
+                  <th class="px-3 py-3">Type</th>
+                  <th class="px-3 py-3">ID</th>
+                  <th class="px-3 py-3 text-center">Active</th>
+                </tr>
+              </thead>
+              <tbody id="catalogsTableBody" class="divide-y divide-slate-800 bg-slate-900/40 text-slate-300">
+                <tr>
+                  <td colspan="5" class="px-4 py-8 text-center text-slate-500">
+                    No catalogs loaded yet. Choose an import method on the left.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Notification Toast -->
+  <div id="toast" class="fixed bottom-6 right-6 px-4 py-3 rounded-xl shadow-2xl text-sm font-medium flex items-center space-x-2 z-50 transform transition-all duration-300 opacity-0 translate-y-4 pointer-events-none">
+    <i id="toastIcon" class="fa-solid fa-circle-check"></i>
+    <span id="toastMsg">Notification message</span>
+  </div>
+
+  <script src="/static/js/app.js"></script>
+</body>
+</html>
