@@ -6,7 +6,7 @@ import json
 import os
 from typing import Any
 from fastapi import FastAPI, File, Form, HTTPException, Request, UploadFile
-from fastapi.responses import FileResponse, HTMLResponse
+from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
@@ -20,12 +20,13 @@ from app.nuvio_client import NuvioClient
 app = FastAPI(
     title="Nuvio / Xperience to AIOMetadata Bridge",
     description="Web GUI to import layouts and catalogs from Nuvio and export to AIOMetadata.",
-    version="1.0.2",
+    version="1.0.5",
 )
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 static_dir = os.path.join(current_dir, "static")
 templates_dir = os.path.join(current_dir, "templates")
+presets_dir = os.path.join(current_dir, "presets")
 index_html_path = os.path.join(templates_dir, "index.html")
 
 app.mount("/static", StaticFiles(directory=static_dir), name="static")
@@ -41,13 +42,6 @@ class ConvertRequest(BaseModel):
     force_enabled: bool | None = None
     force_rating_posters: bool | None = None
     allow_duplicates: bool = False
-
-
-class NuvioLoginRequest(BaseModel):
-    email: str
-    password: str
-    addon_name: str | None = None
-    prefix_mode: str = "category"
 
 
 class NuvioTokenRequest(BaseModel):
@@ -71,6 +65,44 @@ async def serve_index() -> FileResponse:
 @app.get("/api/health")
 async def health_check() -> dict[str, str]:
     return {"status": "ok", "app": "Nuvio-AIOMetadata Bridge"}
+
+
+@app.get("/api/presets/{preset_name}")
+async def load_preset(
+    preset_name: str,
+    prefix_mode: str = "category",
+    addon_name: str | None = None,
+) -> dict[str, Any]:
+    """Loads a built-in preset (fusion, complete_manifest) and converts it."""
+    file_map = {
+        "fusion": "fusion.json",
+        "complete": "complete_manifest.json",
+    }
+    fname = file_map.get(preset_name.lower())
+    if not fname:
+        raise HTTPException(status_code=404, detail=f"Preset '{preset_name}' not found.")
+
+    preset_path = os.path.join(presets_dir, fname)
+    if not os.path.exists(preset_path):
+        raise HTTPException(status_code=404, detail=f"Preset file '{fname}' missing.")
+
+    try:
+        with open(preset_path, encoding="utf-8") as f:
+            data = json.load(f)
+
+        parser = XperienceParser(prefix_mode=prefix_mode)
+        catalogs = deduplicate_catalogs(parser.parse(data))
+        final_config = build_final_aio_config(catalogs=catalogs, addon_name=addon_name)
+
+        return {
+            "success": True,
+            "preset": preset_name,
+            "totalCatalogs": len(catalogs),
+            "catalogs": catalogs,
+            "aioConfig": final_config,
+        }
+    except Exception as ex:
+        raise HTTPException(status_code=500, detail=f"Error loading preset: {ex}") from ex
 
 
 @app.post("/api/convert")
@@ -101,29 +133,6 @@ async def convert_payload(request: ConvertRequest) -> dict[str, Any]:
         }
     except Exception as ex:
         raise HTTPException(status_code=400, detail=str(ex)) from ex
-
-
-@app.post("/api/nuvio/login")
-async def nuvio_login(request: NuvioLoginRequest) -> dict[str, Any]:
-    """Logs in to Nuvio, pulls the full setup, and converts it to AIOMetadata."""
-    try:
-        raw_setup = await nuvio_client.authenticate_and_fetch_setup(
-            email=request.email,
-            password=request.password,
-        )
-        parser = XperienceParser(prefix_mode=request.prefix_mode)
-        catalogs = deduplicate_catalogs(parser.parse(raw_setup))
-        final_config = build_final_aio_config(catalogs=catalogs, addon_name=request.addon_name)
-
-        return {
-            "success": True,
-            "message": "Successfully connected to Nuvio account and retrieved catalogs.",
-            "totalCatalogs": len(catalogs),
-            "catalogs": catalogs,
-            "aioConfig": final_config,
-        }
-    except Exception as ex:
-        raise HTTPException(status_code=400, detail=f"Nuvio login error: {ex}") from ex
 
 
 @app.post("/api/nuvio/token")

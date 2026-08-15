@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import re
 from typing import Any, ClassVar
 import httpx
 
@@ -15,7 +16,7 @@ class NuvioClient:
 
     timeout: float
 
-    def __init__(self, timeout: float = 15.0) -> None:
+    def __init__(self, timeout: float = 20.0) -> None:
         self.timeout = timeout
 
     def normalize_manifest_url(self, raw_url: str) -> str:
@@ -26,7 +27,6 @@ class NuvioClient:
         elif not (url.startswith("http://") or url.startswith("https://")):
             url = "https://" + url
 
-        # If URL doesn't end in .json and looks like a manifest path
         if "/manifest/" in url and not url.endswith("/manifest.json") and not url.endswith(".json"):
             url = url.rstrip("/") + "/manifest.json"
 
@@ -36,8 +36,9 @@ class NuvioClient:
         """Fetches and parses a remote Stremio / Nuvio / Xperience manifest URL."""
         manifest_url = self.normalize_manifest_url(raw_manifest_url)
         headers = {
-            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) NuvioBridge/1.0",
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
             "Accept": "application/json, text/plain, */*",
+            "Accept-Language": "en-US,en;q=0.9",
         }
         async with httpx.AsyncClient(timeout=self.timeout, follow_redirects=True, verify=False) as client:
             resp = await client.get(manifest_url, headers=headers)
@@ -51,12 +52,11 @@ class NuvioClient:
         password: str,
     ) -> dict[str, Any]:
         """Attempts authentication or guides user to use the manifest URL."""
-        # If user accidentally entered their manifest URL in the email field
         if "manifest" in email.lower() or email.startswith(("http", "stremio")):
             return await self.fetch_manifest_url(email)
 
         headers = {
-            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) NuvioBridge/1.0",
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
             "Content-Type": "application/json",
             "Accept": "application/json",
         }
@@ -97,15 +97,14 @@ class NuvioClient:
                     continue
 
         raise RuntimeError(
-            "Xperience / Nuvio uses token-based manifest authentication. "
-            "Please copy your Stremio / Xperience Manifest URL (from the Xperience Install/Share button) "
-            "or export your fusion-widgets.json file, and paste it into the 'Manifest URL' or 'Upload JSON' tab."
+            "Xperience / Nuvio stores your layout in your Stremio Manifest URL. "
+            "Please paste your Manifest URL in the 'Manifest URL' tab, or click one of the 1-Click Presets (Fusion, Complete Setup)."
         )
 
     async def fetch_by_token(self, token: str, base_url: str = "https://xperience-app.com") -> dict[str, Any]:
         """Fetches user setup using an existing Bearer token or session ID."""
         headers = {
-            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) NuvioBridge/1.0",
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
             "Authorization": f"Bearer {token}",
             "Accept": "application/json",
         }

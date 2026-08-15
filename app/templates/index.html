@@ -31,7 +31,7 @@
   </script>
   <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link rel="stylesheet" href="/static/css/styles.css?v=1.0.4">
+  <link rel="stylesheet" href="/static/css/styles.css?v=1.0.5">
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col font-sans antialiased selection:bg-purple-500 selection:text-white">
 
@@ -57,7 +57,32 @@
   </header>
 
   <!-- Main Content -->
-  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
+
+    <!-- 1-Click Instant Presets Banner -->
+    <div class="bg-gradient-to-r from-purple-950/40 via-indigo-950/40 to-slate-900 border border-purple-800/40 rounded-2xl p-6 shadow-xl relative overflow-hidden">
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <div>
+          <div class="flex items-center space-x-2 text-purple-400 text-xs font-bold uppercase tracking-wider">
+            <i class="fa-solid fa-wand-magic-sparkles"></i>
+            <span>Instant 1-Click Presets (No Login Required)</span>
+          </div>
+          <h2 class="text-lg font-bold text-white mt-1">Want the popular Fusion or Complete Xperience setup immediately?</h2>
+          <p class="text-xs text-slate-400 mt-0.5">Click below to instantly generate full catalog configurations ready for AIOMetadata.</p>
+        </div>
+        <div class="flex flex-wrap items-center gap-3">
+          <button type="button" onclick="loadBuiltinPreset('fusion')" class="px-4 py-2.5 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-semibold text-xs rounded-xl shadow-lg shadow-purple-600/30 transition flex items-center space-x-2 cursor-pointer">
+            <i class="fa-solid fa-bolt"></i>
+            <span>Load Fusion Preset (264 Rows)</span>
+          </button>
+          <button type="button" onclick="loadBuiltinPreset('complete')" class="px-4 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 font-semibold text-xs rounded-xl transition flex items-center space-x-2 cursor-pointer">
+            <i class="fa-solid fa-layer-group"></i>
+            <span>Load Complete Setup (367 Rows)</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
       
       <!-- Left Column: Ingest & Settings -->
@@ -68,9 +93,9 @@
 
           <h2 class="text-lg font-semibold text-white mb-1 flex items-center space-x-2">
             <i class="fa-solid fa-arrow-right-to-bracket text-purple-400"></i>
-            <span>Import from Nuvio / Xperience</span>
+            <span>Connect Custom Setup</span>
           </h2>
-          <p class="text-xs text-slate-400 mb-4">Paste your Xperience Manifest URL, upload your exported widgets, or connect via token.</p>
+          <p class="text-xs text-slate-400 mb-4">Paste your Xperience Manifest URL or upload your exported widgets.</p>
 
           <!-- Tabs Header -->
           <div class="flex border-b border-slate-800 mb-5 space-x-1 overflow-x-auto" id="tabBar">
@@ -86,9 +111,9 @@
               <i class="fa-solid fa-code"></i>
               <span>Paste JSON</span>
             </button>
-            <button type="button" data-target="tab-login" class="tab-btn px-3 py-2 text-sm font-medium border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center space-x-2 cursor-pointer transition">
+            <button type="button" data-target="tab-token" class="tab-btn px-3 py-2 text-sm font-medium border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center space-x-2 cursor-pointer transition">
               <i class="fa-solid fa-key"></i>
-              <span>Direct Auth</span>
+              <span>Token</span>
             </button>
           </div>
 
@@ -105,7 +130,7 @@
                 <i class="fa-solid fa-globe absolute left-3.5 top-3.5 text-slate-500 text-sm"></i>
               </div>
             </div>
-            <button type="button" onclick="fetchManifest()" class="w-full py-2.5 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-medium text-sm rounded-xl shadow-lg shadow-purple-600/30 transition flex items-center justify-center space-x-2 cursor-pointer">
+            <button type="button" onclick="fetchManifest()" id="btnFetchManifest" class="w-full py-2.5 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-medium text-sm rounded-xl shadow-lg shadow-purple-600/30 transition flex items-center justify-center space-x-2 cursor-pointer">
               <i class="fa-solid fa-cloud-arrow-down"></i>
               <span>Fetch & Convert Setup</span>
             </button>
@@ -135,8 +160,8 @@
             </button>
           </div>
 
-          <!-- Tab 4: Direct Auth -->
-          <div id="tab-login" class="tab-pane hidden space-y-4">
+          <!-- Tab 4: Token -->
+          <div id="tab-token" class="tab-pane hidden space-y-4">
             <div>
               <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Nuvio / Xperience Bearer Token or Session Key</label>
               <input type="password" id="nuvioToken" placeholder="eyJhbGciOiJIUzI1NiJ9..." class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-purple-500 transition">
@@ -193,7 +218,7 @@
 
           <button type="button" onclick="triggerConversion()" id="convertBtn" class="w-full py-3 bg-purple-600 hover:bg-purple-500 text-white font-semibold text-sm rounded-xl shadow-lg shadow-purple-600/30 transition flex items-center justify-center space-x-2 cursor-pointer">
             <i class="fa-solid fa-wand-magic-sparkles"></i>
-            <span>Generate AIOMetadata Configuration</span>
+            <span>Re-Generate Configuration</span>
           </button>
         </div>
 
@@ -267,7 +292,7 @@
               <tbody id="catalogsTableBody" class="divide-y divide-slate-800 bg-slate-900/40 text-slate-300">
                 <tr>
                   <td colspan="5" class="px-4 py-8 text-center text-slate-500">
-                    No catalogs loaded yet. Choose an import method on the left.
+                    No catalogs loaded yet. Choose an import method or click a preset above.
                   </td>
                 </tr>
               </tbody>
@@ -292,22 +317,16 @@
     let currentAioConfig = null;
     let currentCatalogs = [];
 
-    // Tab Switching Logic
     function switchTab(targetId) {
-      // Hide all panes
       document.querySelectorAll('.tab-pane').forEach(el => el.classList.add('hidden'));
-      
-      // Deactivate all buttons
       document.querySelectorAll('.tab-btn').forEach(btn => {
         btn.classList.remove('border-purple-500', 'text-purple-400');
         btn.classList.add('border-transparent', 'text-slate-400');
       });
 
-      // Show targeted pane
       const targetPane = document.getElementById(targetId);
       if (targetPane) targetPane.classList.remove('hidden');
 
-      // Highlight active button
       const activeBtn = document.querySelector(`[data-target="${targetId}"]`);
       if (activeBtn) {
         activeBtn.classList.add('border-purple-500', 'text-purple-400');
@@ -315,9 +334,7 @@
       }
     }
 
-    // Initialize Event Listeners
     document.addEventListener('DOMContentLoaded', () => {
-      // Attach click events to tab buttons
       document.querySelectorAll('.tab-btn').forEach(btn => {
         btn.addEventListener('click', (e) => {
           e.preventDefault();
@@ -327,9 +344,28 @@
       });
 
       setupDropZone();
+      
+      // Auto-load Fusion preset on startup so user immediately sees results
+      loadBuiltinPreset('fusion', true);
     });
 
-    // Drag & Drop Setup
+    async function loadBuiltinPreset(presetName, silent = false) {
+      if (!silent) showToast(`Loading ${presetName.toUpperCase()} preset...`, 'info');
+      try {
+        const prefixMode = document.getElementById('optPrefixMode').value;
+        const addonName = document.getElementById('optAddonName').value.trim() || 'AIOMetadata';
+        const res = await fetch(`/api/presets/${presetName}?prefix_mode=${prefixMode}&addon_name=${encodeURIComponent(addonName)}`);
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.detail || 'Failed to load preset');
+
+        currentRawData = data.aioConfig;
+        updateResults(data);
+        if (!silent) showToast(`Loaded ${data.totalCatalogs} catalogs from ${presetName.toUpperCase()}!`, 'success');
+      } catch (err) {
+        if (!silent) showToast(err.message, 'error');
+      }
+    }
+
     function setupDropZone() {
       const dropZone = document.getElementById('dropZone');
       const fileInput = document.getElementById('fileInput');
@@ -394,14 +430,24 @@
       }
     }
 
+    // Dual-Mode Manifest Fetcher (Server-side with Browser-side Fallback)
     async function fetchManifest() {
-      const url = document.getElementById('manifestUrl').value.trim();
+      let url = document.getElementById('manifestUrl').value.trim();
       if (!url) {
         showToast('Please enter a manifest URL', 'error');
         return;
       }
 
+      // Format stremio:// to https://
+      if (url.startsWith('stremio://')) {
+        url = 'https://' + url.substring('stremio://'.length);
+      } else if (!url.startsWith('http://') && !url.startsWith('https://')) {
+        url = 'https://' + url;
+      }
+
       showToast('Fetching manifest...', 'info');
+
+      // Attempt 1: Server-Side Fetch
       try {
         const res = await fetch('/api/nuvio/manifest', {
           method: 'POST',
@@ -413,13 +459,28 @@
           })
         });
 
-        const data = await res.json();
-        if (!res.ok) throw new Error(data.detail || 'Failed to fetch manifest');
+        if (res.ok) {
+          const data = await res.json();
+          currentRawData = data.aioConfig;
+          updateResults(data);
+          showToast(`Loaded ${data.totalCatalogs} catalogs from manifest!`, 'success');
+          return;
+        }
+      } catch (serverErr) {
+        console.warn('Server-side fetch failed, trying browser client-side fetch fallback...', serverErr);
+      }
 
-        updateResults(data);
-        showToast(`Loaded ${data.totalCatalogs} catalogs from manifest!`, 'success');
-      } catch (err) {
-        showToast(err.message, 'error');
+      // Attempt 2: Direct Client-Side Browser Fetch Fallback
+      try {
+        const clientResp = await fetch(url);
+        if (!clientResp.ok) throw new Error(`HTTP ${clientResp.status}`);
+        const manifestData = await clientResp.json();
+
+        currentRawData = manifestData;
+        await triggerConversion();
+        showToast(`Loaded catalogs via client fetch!`, 'success');
+      } catch (clientErr) {
+        showToast(`Failed to fetch manifest: ${clientErr.message}. You can also use the 1-Click Fusion Preset button above!`, 'error');
       }
     }
 
@@ -445,6 +506,7 @@
         const data = await res.json();
         if (!res.ok) throw new Error(data.detail || 'Failed to authenticate via token');
 
+        currentRawData = data.aioConfig;
         updateResults(data);
         showToast(`Loaded ${data.totalCatalogs} catalogs!`, 'success');
       } catch (err) {

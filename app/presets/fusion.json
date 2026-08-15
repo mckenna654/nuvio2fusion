@@ -1,0 +1,4178 @@
+{
+  "exportType": "fusionWidgets",
+  "exportVersion": 1,
+  "requiredAddons": [
+    "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json"
+  ],
+  "widgets": [
+    {
+      "id": "collection.d1c82c11-aa12-467c-86b4-1fdac5a547be",
+      "title": "Discover",
+      "hideTitle": false,
+      "type": "collection.row",
+      "dataSource": {
+        "kind": "collection",
+        "payload": {
+          "items": [
+            {
+              "id": "0fa1d194-c237-4714-89db-0e64bc8a9af5",
+              "title": "Watchlist",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "all::trakt.watchlist",
+                    "type": "all"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/vH9k7TLG/watchlist.png"
+            },
+            {
+              "id": "6c5c9949-696a-4060-84c5-fc4c21f3764e",
+              "title": "Trending Movies",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.158678",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/gkHRm77c/trending-movies.png"
+            },
+            {
+              "id": "e8318110-3092-4752-bed7-1e3bdc377c2e",
+              "title": "Trending Shows",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "series::mdblist.158679",
+                    "type": "series"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/nhVmzk8c/trending-shows.png"
+            },
+            {
+              "id": "47c8ba34-81ce-4947-a8f4-5a352a3578de",
+              "title": "Latest Movies",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.158684",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/sD4SsLLj/latest-movies.png"
+            },
+            {
+              "id": "20c9ff4f-890d-4079-a979-8b9f44f1ac80",
+              "title": "Latest Shows",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "series::mdblist.158790",
+                    "type": "series"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/TYJmfssR/latest-shows.png"
+            },
+            {
+              "id": "e9127b2b-5a88-4bd6-b788-c7f5b61c7061",
+              "title": "Airing Soon",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "series::mdblist.159365",
+                    "type": "series"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/CxM81NyV/airing-soon.png"
+            },
+            {
+              "id": "2ab6d89b-edfc-408e-bd0c-1fa7a38a73cf",
+              "title": "Upcoming",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.159320",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "series::mdblist.159327",
+                    "type": "series"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/K8cTzNXj/upcoming.png"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "collection.682af18e-323b-454f-8349-bac89de2aa69",
+      "title": "Streaming Services",
+      "hideTitle": false,
+      "type": "collection.row",
+      "dataSource": {
+        "kind": "collection",
+        "payload": {
+          "items": [
+            {
+              "id": "d3805f69-3f51-4c13-9cce-0d3d09f0e58c",
+              "title": "Netflix",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "series::mdblist.158623",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.158622",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.160016",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "series::mdblist.160018",
+                    "type": "series"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/3R9D8yrK/netflix.png"
+            },
+            {
+              "id": "fa8e0505-dffe-4cd0-902d-2d81911fcdc1",
+              "title": "Disney+",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.158635",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "series::mdblist.158634",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.160024",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "series::mdblist.160029",
+                    "type": "series"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/pTknW9VP/disney.png"
+            },
+            {
+              "id": "b2115eea-64d3-4ea7-8798-f8fc14f5eee0",
+              "title": "Apple TV",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "series::mdblist.158629",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.158630",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.160030",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "series::mdblist.160031",
+                    "type": "series"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/j5vJxWqT/apple-tv.png"
+            },
+            {
+              "id": "b1bab225-0f93-4a07-8007-e2b715001014",
+              "title": "Prime Video",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.158637",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "series::mdblist.158636",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.160032",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "series::mdblist.160034",
+                    "type": "series"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/JzkSVMTy/prime-video.png"
+            },
+            {
+              "id": "5146ef8a-e062-4b6e-a0a0-b80a6faa30e0",
+              "title": "HBO Max",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "series::mdblist.158643",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.158644",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.160035",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "series::mdblist.160036",
+                    "type": "series"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/3R9D8yr8/hbo-max.png"
+            },
+            {
+              "id": "3d8ff58c-91a8-4687-a426-19109bc8c16f",
+              "title": "Paramount+",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.158646",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "series::mdblist.158645",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.160038",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "series::mdblist.160039",
+                    "type": "series"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/gJ46zwcm/paramount.png"
+            },
+            {
+              "id": "65484195-ce27-4ca8-a74d-ff80a91c1362",
+              "title": "Hulu",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "series::mdblist.158639",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.158640",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/bNM4BsR1/hulu.png"
+            },
+            {
+              "id": "1124e8c2-af78-4ebd-aac5-566885df9ac8",
+              "title": "Peacock",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "series::mdblist.158647",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.158648",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/fR91nDHV/peacock.png"
+            },
+            {
+              "id": "df322fa8-edac-4c55-b778-8e2f92cb4948",
+              "title": "STARZ",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.158650",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "series::mdblist.158649",
+                    "type": "series"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/4NZrCrDB/starz.png"
+            },
+            {
+              "id": "2f91a2ba-b856-4885-a46a-c330ad11ea3c",
+              "title": "MUBI",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.158652",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "series::mdblist.158651",
+                    "type": "series"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/26RLyjtL/mubi.png"
+            },
+            {
+              "id": "37204ff5-a985-40f3-88dc-01fb9216c627",
+              "title": "Crunchyroll",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "series::mdblist.158641",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.158642",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/Prc0RPMp/crunchyroll.png"
+            },
+            {
+              "id": "c0289f31-5948-4a4c-8ed0-a7976f066ee9",
+              "title": "The Criterion Channel",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.158668",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "series::mdblist.158667",
+                    "type": "series"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/KvTrvTfN/criterion-channel.png"
+            },
+            {
+              "id": "2bd8cfe1-91e1-414d-9bca-15b50e67e978",
+              "title": "Shudder",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.158654",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "series::mdblist.158653",
+                    "type": "series"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/76XTHCPD/shudder.png"
+            },
+            {
+              "id": "2356cc99-302c-4d39-9342-ac77e9308c7d",
+              "title": "AMC+",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.158657",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "series::mdblist.158656",
+                    "type": "series"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/KctdHZHg/amc.png"
+            },
+            {
+              "id": "08ad8c97-79f3-4077-b403-375e40774253",
+              "title": "britbox",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "series::mdblist.158658",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.158659",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/pX736pBm/britbox.png"
+            },
+            {
+              "id": "5c119e2d-d19a-4750-8d2a-36e4db00dd2e",
+              "title": "Discovery+",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "series::mdblist.158665",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.158666",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/2jnPKzKL/discovery.png"
+            },
+            {
+              "id": "6a2c65da-8242-4b58-aef9-6de3ccb8a02b",
+              "title": "Curiosity Stream",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.158664",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "series::mdblist.158663",
+                    "type": "series"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/RZX6s8cF/curiosity.png"
+            },
+            {
+              "id": "de7e411a-1797-4f8c-b603-457599ebbe02",
+              "title": "MagellanTV",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.158661",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "series::mdblist.158660",
+                    "type": "series"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/kMWkpnpx/magellantv.png"
+            },
+            {
+              "id": "6ae12ce3-1a3a-4295-a428-cc6e421ecab7",
+              "title": "Netflix Kids",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "series::mdblist.158669",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.158670",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/fTZ646GC/netflix-kids.png"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "collection.6561d465-96ac-42e4-9986-c826c161ed65",
+      "title": "Genres",
+      "hideTitle": false,
+      "type": "collection.row",
+      "dataSource": {
+        "kind": "collection",
+        "payload": {
+          "items": [
+            {
+              "id": "2eaeb983-6556-40dd-b261-5b5689cf364b",
+              "title": "Action",
+              "hideTitle": false,
+              "imageAspect": "poster",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.158800",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "series::mdblist.158825",
+                    "type": "series"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/X7gBJLM1/Action.png"
+            },
+            {
+              "id": "3a440bda-f331-40ff-b1d3-f65fd4b683c9",
+              "title": "Comedy",
+              "hideTitle": false,
+              "imageAspect": "poster",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.158801",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "series::mdblist.158826",
+                    "type": "series"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/3xJ4DGY5/Comedy.png"
+            },
+            {
+              "id": "f2b605f5-db29-4bdb-bf05-7e829042831c",
+              "title": "Mystery",
+              "hideTitle": false,
+              "imageAspect": "poster",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.158802",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "series::mdblist.158823",
+                    "type": "series"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/0yW6GNym/Mystery.png"
+            },
+            {
+              "id": "e1864b80-2e42-47c4-bcea-4a38d6a961ef",
+              "title": "Fantasy / Sci-Fi",
+              "hideTitle": false,
+              "imageAspect": "poster",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.158803",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "series::mdblist.158827",
+                    "type": "series"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/598W8k2h/Fantasy-Sci-Fi.png"
+            },
+            {
+              "id": "fe3fea02-7682-4b25-ad87-a6ab869f4f15",
+              "title": "Crime",
+              "hideTitle": false,
+              "imageAspect": "poster",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.158804",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "series::mdblist.158828",
+                    "type": "series"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/FHsdJSNv/Crime.png"
+            },
+            {
+              "id": "af9f40c1-9cc3-4d5c-86ea-1341c15fa2bc",
+              "title": "Thriller",
+              "hideTitle": false,
+              "imageAspect": "poster",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.158805",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "series::mdblist.158829",
+                    "type": "series"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/t4S1dg4K/Thriller.png"
+            },
+            {
+              "id": "66d5dcb2-2a5a-415d-b6ce-4ffa7883bc23",
+              "title": "Romance",
+              "hideTitle": false,
+              "imageAspect": "poster",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.158806",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "series::mdblist.158824",
+                    "type": "series"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/Jz6y3hzv/Romance.png"
+            },
+            {
+              "id": "bbaee3ed-a13a-49e8-83ec-304de5e282b9",
+              "title": "Drama",
+              "hideTitle": false,
+              "imageAspect": "poster",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.158807",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "series::mdblist.158830",
+                    "type": "series"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/Gmh8sDd2/Drama.png"
+            },
+            {
+              "id": "647d4fe5-e7f8-45c8-a48f-64025e655c56",
+              "title": "Family",
+              "hideTitle": false,
+              "imageAspect": "poster",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.158809",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "series::mdblist.158831",
+                    "type": "series"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/zGXbRh8V/Family.png"
+            },
+            {
+              "id": "9401fba7-bc79-4823-8f1b-f95a95ff0e51",
+              "title": "Adventure",
+              "hideTitle": false,
+              "imageAspect": "poster",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.158810",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "series::mdblist.158832",
+                    "type": "series"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/kXyR4srj/Adventure.png"
+            },
+            {
+              "id": "0521d806-0d96-4b60-b696-7ddaeec3cff9",
+              "title": "Animation",
+              "hideTitle": false,
+              "imageAspect": "poster",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.158811",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "series::mdblist.158834",
+                    "type": "series"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/rF9Rmj6P/Animation.png"
+            },
+            {
+              "id": "8ddf1da3-804a-4cab-a992-03e68ebdf8ad",
+              "title": "Reality TV",
+              "hideTitle": false,
+              "imageAspect": "poster",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "series::mdblist.160049",
+                    "type": "series"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/fR237bRP/Reality-TV.png"
+            },
+            {
+              "id": "da60d79a-a68f-4c41-a22a-839a7b86a6bb",
+              "title": "Horror",
+              "hideTitle": false,
+              "imageAspect": "poster",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.158812",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "series::mdblist.158835",
+                    "type": "series"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/htyJ8Gtm/Horror.png"
+            },
+            {
+              "id": "8905f1ce-3dcf-429c-ab3a-f26f896ef542",
+              "title": "Documentary",
+              "hideTitle": false,
+              "imageAspect": "poster",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.158813",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "series::mdblist.158836",
+                    "type": "series"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/dVtkTCw0/Documentary.png"
+            },
+            {
+              "id": "31a1bf41-d31e-424f-b85e-2aad5b6448e2",
+              "title": "History",
+              "hideTitle": false,
+              "imageAspect": "poster",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.158814",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "series::mdblist.158837",
+                    "type": "series"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/CxPZCKxR/History.png"
+            },
+            {
+              "id": "c4543836-b3f6-4da7-b745-6d8fbeacc776",
+              "title": "War",
+              "hideTitle": false,
+              "imageAspect": "poster",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.158815",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "series::mdblist.158838",
+                    "type": "series"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/s2MMTRM8/War.png"
+            },
+            {
+              "id": "46255c53-bad3-4d5b-acd7-05d059dfde35",
+              "title": "Musical",
+              "hideTitle": false,
+              "imageAspect": "poster",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.158816",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/527H5t28/Music.png"
+            },
+            {
+              "id": "a27927b3-be06-48bd-b33d-33cea06a37e7",
+              "title": "Stand-Up Comedy",
+              "hideTitle": false,
+              "imageAspect": "poster",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.159674",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/htyJ8GtN/Stand-Up-Comedy.png"
+            },
+            {
+              "id": "7cf7a970-4c81-4ab6-b96c-26fb34021325",
+              "title": "Anime",
+              "hideTitle": false,
+              "imageAspect": "poster",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "series::mdblist.158840",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.158817",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/xTPNC5rZ/Anime.png"
+            },
+            {
+              "id": "b021dd0a-2151-437a-9d37-1155ffe0e19d",
+              "title": "KDrama",
+              "hideTitle": false,
+              "imageAspect": "poster",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.158818",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "series::mdblist.158841",
+                    "type": "series"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/qB2H2Z7f/KDrama.png"
+            },
+            {
+              "id": "fb31a324-7760-4b58-9645-b7c22c0f2498",
+              "title": "Bollywood",
+              "hideTitle": false,
+              "imageAspect": "poster",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.158819",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "series::mdblist.158842",
+                    "type": "series"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/Nfx2MDqG/Bollywood.png"
+            },
+            {
+              "id": "1b70cba0-a660-490d-963a-b1151aff4acb",
+              "title": "Austria",
+              "hideTitle": false,
+              "imageAspect": "poster",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.159308",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "series::mdblist.159309",
+                    "type": "series"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/zXkHB7Z5/Austria.png"
+            },
+            {
+              "id": "3d854b8b-f3d0-4717-9fd9-a59bd693e64c",
+              "title": "Christmas",
+              "hideTitle": false,
+              "imageAspect": "poster",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.159798",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "series::mdblist.159802",
+                    "type": "series"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/bNRSJgcw/Christmas.png"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "collection.56e8f4a3-5f77-4891-b1d9-95e8e794a186",
+      "title": "Decades",
+      "hideTitle": false,
+      "type": "collection.row",
+      "dataSource": {
+        "kind": "collection",
+        "payload": {
+          "items": [
+            {
+              "id": "a6e940fa-c357-4dda-9872-b892e5e62e6e",
+              "title": "20s Movies",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.158796",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/L5jnk6gT/20s.png"
+            },
+            {
+              "id": "f58e77af-a6ae-4c70-b06c-673de6549982",
+              "title": "10s Movies",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.158791",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/br1s0NSR/10s.png"
+            },
+            {
+              "id": "f7f5ee69-3d9b-4ea1-949e-db334541a882",
+              "title": "00s Movies",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.158792",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/RhwN1VJK/00s.png"
+            },
+            {
+              "id": "2c254bd8-ea40-487e-b180-658e8fe04d1e",
+              "title": "90s Movies",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.158793",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/J7XDCKYH/90s.png"
+            },
+            {
+              "id": "b4f233a2-1685-490b-a27c-6753de5e45a1",
+              "title": "80s Movies",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.158794",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/qBKhHQDz/80s.png"
+            },
+            {
+              "id": "2a948ebc-294a-4f53-b436-7f74d640a896",
+              "title": "70s Movies",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.158795",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/VvXd9L0j/70s.png"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "collection.264f3e4e-9c00-4504-bdd6-998944ae8664",
+      "title": "Studios",
+      "hideTitle": false,
+      "type": "collection.row",
+      "dataSource": {
+        "kind": "collection",
+        "payload": {
+          "items": [
+            {
+              "id": "efc4db57-51d9-470d-a829-df804c10bee7",
+              "title": "Warner Bros. Pictures",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.159685",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/65B5yJLY/warner-bros.png"
+            },
+            {
+              "id": "1dff74c0-d91c-4942-8a98-9a9e0a2632a0",
+              "title": "Universal Pictures",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.159686",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/TYTYpMq9/universal.png"
+            },
+            {
+              "id": "58ab507e-847b-4bca-9bcb-ddd86fdc5124",
+              "title": "Paramount Pictures",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.159687",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/VLzLdQBX/paramount.png"
+            },
+            {
+              "id": "87db7372-fa17-497f-8af2-797cecb8e9cb",
+              "title": "A24",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.159693",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/WpG1Nbr1/a24.png"
+            },
+            {
+              "id": "d6c29ade-10b3-4a3d-9fde-fdcaff19b15d",
+              "title": "Metro-Goldwyn-Mayer",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.159684",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/0yNF111W/mgm.png"
+            },
+            {
+              "id": "d9f476de-0016-4f14-b908-1b37eebf0c86",
+              "title": "20th Century Studios",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.159689",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/QNQd8x5t/20th-century.png"
+            },
+            {
+              "id": "b3003b89-3c16-41b8-9bb7-ed7185b0d338",
+              "title": "Columbia Pictures",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.159688",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/dQ2Vstd3/columbia.png"
+            },
+            {
+              "id": "35560966-e509-4cc6-82d2-04d4ebd427aa",
+              "title": "Walt Disney Animation Studio",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.159700",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/tR34qCP6/disney.png"
+            },
+            {
+              "id": "4e847630-2998-49b0-bfda-44450a2c9b19",
+              "title": "DreamWorks Animation",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.159680",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/WpG1Nbrg/dreamworks.png"
+            },
+            {
+              "id": "f28f3a1c-6bba-4d93-894e-f9d0f0991159",
+              "title": "Pixar Animation Studios",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.159678",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/SNmNJF7W/pixar.png"
+            },
+            {
+              "id": "ae6afefd-9a75-4f8f-87ab-7cc2026b19a5",
+              "title": "Illumination",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.159699",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/bYxwyNbb/illumination.png"
+            },
+            {
+              "id": "27e3f543-988d-4f39-8a3f-9572214de928",
+              "title": "Marvel Studios",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.159690",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/CLwLzTHR/marvel.png"
+            },
+            {
+              "id": "d39247ff-e6b2-4c36-b438-bdb230991d4f",
+              "title": "Lucasfilm",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.159677",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/J7Nzr4J3/lucasfilm.png"
+            },
+            {
+              "id": "6631f388-e879-4b59-b3f2-87c27abd6149",
+              "title": "New Line Cinema",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.159691",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/0292bRdw/new-line-cinema.png"
+            },
+            {
+              "id": "790c60c4-4bf5-4a41-83f5-019e4fbc63a5",
+              "title": "Miramax",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.159695",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/ZKJKCtFB/miramax.png"
+            },
+            {
+              "id": "5d3666b4-89ad-4a7a-ab21-3145c8e1bc37",
+              "title": "Searchlight Pictures",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.159696",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/xT9TcDyv/searchlight.png"
+            },
+            {
+              "id": "282f342e-ef6e-495c-bdb3-8a4cb577d919",
+              "title": "Touchstone Pictures",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.159698",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/PrdrPszb/touchstone.png"
+            },
+            {
+              "id": "9e681ac3-f0f9-4ff1-a894-dde8df89ec84",
+              "title": "TriStar Pictures",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.159697",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/9FcFr5tb/tristar.png"
+            },
+            {
+              "id": "261acaa1-a7e6-45cf-bc4e-77c4cffab159",
+              "title": "Lionsgate",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.159692",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/c1RLx4Yf/lionsgate.png"
+            },
+            {
+              "id": "5dd5420d-1999-49af-ab80-354c3ebf2598",
+              "title": "Studio Ghibli",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.159694",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/tR34qCP1/Bild.png"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "collection.13283a82-ca77-4a59-8e3e-9d444ca7a614",
+      "title": "Awards",
+      "hideTitle": false,
+      "type": "collection.row",
+      "dataSource": {
+        "kind": "collection",
+        "payload": {
+          "items": [
+            {
+              "id": "3b8a9e2d-3f4c-4606-8c92-eef2ba385a0f",
+              "title": "Academy Awards",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.159414",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/fb4dMhv2/academy-awards.png"
+            },
+            {
+              "id": "b99fb6a5-7c4b-42e1-a668-23d7496157b4",
+              "title": "Academy Awards: Best Picture",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.159412",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/YScFtwxV/best-picture.png"
+            },
+            {
+              "id": "78fa89f8-e5e2-4753-9c6a-f495e6a2a560",
+              "title": "Primetime Emmy Awards",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "series::mdblist.159408",
+                    "type": "series"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/jjz75k8Z/emmys.png"
+            },
+            {
+              "id": "c1891c56-2fec-4234-8624-de732f988423",
+              "title": "Golden Globe Awards",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.159385",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/k5xb4hjY/golden-globes.png"
+            },
+            {
+              "id": "fe5a8c6e-3650-4373-9ca4-d2c350152f5e",
+              "title": "BAFTA Film Awards",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.160235",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/131RtRL3/bafta.png"
+            },
+            {
+              "id": "cb4b8ecb-0422-4d09-84a0-8f47e6d79a10",
+              "title": "Cannes Film Festival Awards",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.160006",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/cJq3dNc2/cannes.png"
+            },
+            {
+              "id": "53438e54-dfa0-494d-b939-e0c9cdf8faab",
+              "title": "Venice Film Festival Awards",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.160239",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/wBhmvbWb/venice.png"
+            },
+            {
+              "id": "d510983d-a390-44d4-b258-d7d261b492b6",
+              "title": "Berlin International Film Festival Awards",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.160238",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/hGFmKq0N/berlinale.png"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "collection.c6afef0b-1431-411d-a538-ab788a26adf9",
+      "title": "Collections",
+      "hideTitle": false,
+      "type": "collection.row",
+      "dataSource": {
+        "kind": "collection",
+        "payload": {
+          "items": [
+            {
+              "id": "61436781-94de-48d3-99ca-3040ca509dfc",
+              "title": "IMDb Top Movies",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.160008",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/252jXrGL/IMDb-Top-Movies.avif"
+            },
+            {
+              "id": "6b3d13e6-d3cc-44d3-ae57-886ab523c537",
+              "title": "IMDb Top Shows",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "series::mdblist.160009",
+                    "type": "series"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/Y90r5ZDf/IMDb-Top-Shows.jpg"
+            },
+            {
+              "id": "dcda3879-b060-4873-96b4-2bbba3302a4c",
+              "title": "Marvel Cinematic Universe",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.159982",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "series::mdblist.159984",
+                    "type": "series"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/85YpN4xq/Marvel.jpg"
+            },
+            {
+              "id": "260537b2-cc4f-4a0b-a7c1-a91876a8e14d",
+              "title": "DC Extended Universe",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "series::mdblist.159997",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.159996",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/tJ1gxwhd/DC-Universe.jpg"
+            },
+            {
+              "id": "0f4a3aaa-2b35-47ff-a0af-c3e93858d69f",
+              "title": "Star Wars Universe",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.143863",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/4NV92H9m/Star-Wars.jpg"
+            },
+            {
+              "id": "d86cd9fe-fc3e-42aa-938d-42eb8317329f",
+              "title": "Harry Potter",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.159905",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/KYJcsxfm/Harry-Potter.jpg"
+            },
+            {
+              "id": "3a440be4-512e-431e-8524-a2788995ab49",
+              "title": "Avatar",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "all::trakt.list.884",
+                    "type": "series"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/XYw1dYtR/Avatar2.jpg"
+            },
+            {
+              "id": "37bfbd89-0fe5-4d86-8744-f9968457198f",
+              "title": "James Bond",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.159896",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/pTrWw4c0/James-Bond.jpg"
+            },
+            {
+              "id": "e05e6e89-67c0-400f-b876-38872f20a592",
+              "title": "Mission: Impossible",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "all::trakt.list.131",
+                    "type": "series"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/pdRGZtHT/Mission-Impossible.jpg"
+            },
+            {
+              "id": "2c1b208c-c0c2-4d5c-ad8b-8f8196f1a843",
+              "title": "Jurassic World",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.159912",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/XYw1dYT0/Jurassic-World.jpg"
+            },
+            {
+              "id": "1c55937e-def3-46e1-a1c6-cd31327e728d",
+              "title": "The Lord of the Rings",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.159975",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/QxgFvJJf/TLOTR2-2.jpg"
+            },
+            {
+              "id": "9c946899-4d07-41dd-a291-30f9a8bfcf9e",
+              "title": "The Dark Knight",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "all::trakt.list.29",
+                    "type": "series"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/7YC9FVHK/The-Dark-Knight-2.jpg"
+            },
+            {
+              "id": "05b2cbed-ba57-4e53-8c1e-f0edc4b34ffb",
+              "title": "The Lion King",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "all::trakt.list.330",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "all::trakt.list.20131034",
+                    "type": "series"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/zvB2MYvP/The-Lion-King.jpg"
+            },
+            {
+              "id": "55b145f4-5c34-4796-b384-8dabbf4812e3",
+              "title": "Frozen",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "all::trakt.list.1996672",
+                    "type": "series"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/PJxVcnJw/Frozen.jpg"
+            },
+            {
+              "id": "33bb3120-0dd2-4b77-bab5-b1cae80bb0eb",
+              "title": "Fast & Furious",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.159901",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.159903",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/6pdbnpFf/Fast-And-Furious.jpg"
+            },
+            {
+              "id": "550c949a-a819-44a3-95bd-49af57d7b645",
+              "title": "Pirates of the Caribbean",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.159955",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/XqJ1h6qF/Pirates-Of-The-Carribean.jpg"
+            },
+            {
+              "id": "b2f6b786-0658-4a04-b6c2-8a53649c99a5",
+              "title": "Dune",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.159893",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/cCVLMhm7/Dune.jpg"
+            },
+            {
+              "id": "cdb40976-4974-4a1c-927a-7d9239853c77",
+              "title": "The Matrix",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "all::trakt.list.81",
+                    "type": "series"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/CxjrkxWy/The-Matrix.jpg"
+            },
+            {
+              "id": "2c8bf0a8-a74e-40ae-b891-b9b4fa3f2873",
+              "title": "Transformers",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.159926",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/jSTJpqHg/Transformers.jpg"
+            },
+            {
+              "id": "b4797972-d1e0-4ecc-a171-7abf7c93faf9",
+              "title": "Indiana Jones",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "all::trakt.list.15",
+                    "type": "series"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/rmsVB3ZG/Indiana-Jones.jpg"
+            },
+            {
+              "id": "0726b4d7-d649-45d5-af07-413f6df10436",
+              "title": "Star Trek",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.143870",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/YqYWDLW9/Star-Trek.jpg"
+            },
+            {
+              "id": "c1358779-c541-463c-b5ca-be39b3d86711",
+              "title": "Top Gun",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "all::trakt.list.5022174",
+                    "type": "series"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/cCHkjGC8/Top-Gun.jpg"
+            },
+            {
+              "id": "11d5f33e-23ef-4b9f-88e6-4515e456078b",
+              "title": "Jumanji",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "all::trakt.list.4436019",
+                    "type": "series"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/X7ZLR8j1/Jumanji-2.jpg"
+            },
+            {
+              "id": "606e4a7b-c872-4091-b720-bae9ed9f5046",
+              "title": "Despicable Me",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "all::trakt.list.896",
+                    "type": "series"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/5tgPKk46/Despicable-Me.jpg"
+            },
+            {
+              "id": "4c1d05bc-06b4-431a-ba07-a73ca7b4203b",
+              "title": "Ghostbusters",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.159851",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/zf8tj1rG/Ghostbuster2.jpg"
+            },
+            {
+              "id": "97bb056f-1302-4a37-a7ae-1f842f55e511",
+              "title": "Gremlins",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "all::trakt.list.126",
+                    "type": "series"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/Bn5nHx15/Gremlins.png"
+            },
+            {
+              "id": "7110207c-ecbb-44ba-9d80-41e3c4a100ff",
+              "title": "Back to the Future",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "all::trakt.list.21",
+                    "type": "series"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/fRxqmR1j/Back-To-The-Future.jpg"
+            },
+            {
+              "id": "275f0ef3-6a9c-4efe-8f92-e5914e9bf45a",
+              "title": "The Godfather",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "all::trakt.list.38",
+                    "type": "series"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/DZ5YBwvh/The-Godfather.jpg"
+            },
+            {
+              "id": "209e895f-069e-4c93-a5c2-874e568d2c57",
+              "title": "Planet of the Apes",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "all::trakt.list.1531",
+                    "type": "series"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/C1J6mxhF/Planet-Of-Apes.jpg"
+            },
+            {
+              "id": "c5fe8478-5759-43ae-9c65-73bef920c2fb",
+              "title": "The Avengers",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "all::trakt.list.995",
+                    "type": "series"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/mkDpqWkX/The-Avengers.jpg"
+            },
+            {
+              "id": "ce1bd51e-6b0a-4c59-9380-e2c62b93ec17",
+              "title": "Iron Man",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "all::trakt.list.169",
+                    "type": "series"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/xCgFt1fz/Iron-Man.jpg"
+            },
+            {
+              "id": "a10ccdb5-2d5f-495a-9deb-7405fe0de51e",
+              "title": "Guardians of the Galaxy",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "all::trakt.list.1798",
+                    "type": "series"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/cHT5XLxv/Guardians-Of-The-Galaxy.jpg"
+            },
+            {
+              "id": "9706c080-2a1e-4af8-9e77-2c0fb1db0656",
+              "title": "Deadpool",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "all::trakt.list.3513847",
+                    "type": "series"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/Wz3YKczy/Deadpool.jpg"
+            },
+            {
+              "id": "24cd93b9-a955-4ed6-a5bf-7cfbdb2618f0",
+              "title": "The Bourne",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.159877",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/25rcwfDk/The-Bourne.jpg"
+            },
+            {
+              "id": "120e30f5-0307-4dc7-852f-52b8ec17032c",
+              "title": "Alien",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.159936",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/jdpDzx3L/Alien.png"
+            },
+            {
+              "id": "c31bb410-7548-489d-b3ed-6bf98528691e",
+              "title": "Mad Max",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "all::trakt.list.335",
+                    "type": "series"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/Ssmv6Mhq/Mad-Max2.jpg"
+            },
+            {
+              "id": "266de963-09d2-41ae-b820-ec368b742e8a",
+              "title": "Terminator",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.159876",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/1zsCHZZk/Terminator2.jpg"
+            },
+            {
+              "id": "7847f426-e608-439c-9d75-819902eac667",
+              "title": "Rocky",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.159954",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/NGWXxkLW/Rocky.jpg"
+            },
+            {
+              "id": "0e668485-8507-4f46-bfcc-8c6b65b56a71",
+              "title": "Rambo",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "all::trakt.list.151",
+                    "type": "series"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/DznjgKT3/Rambo2.jpg"
+            },
+            {
+              "id": "f0189289-22d9-41c0-9c5f-5ce9b513127c",
+              "title": "The Expendables",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "all::trakt.list.1065",
+                    "type": "series"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/yNsQPzHz/The-Expendables.jpg"
+            },
+            {
+              "id": "905db623-a8c4-48f6-aa27-7599af2c89db",
+              "title": "Die Hard",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "all::trakt.list.68",
+                    "type": "series"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/qv8DyvW1/Die-Hard.jpg"
+            },
+            {
+              "id": "2c2f207e-08da-4223-98f8-c988fe6786a7",
+              "title": "The Hunger Games",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.159906",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/y8Fpc8wH/The-Hunger-Games.jpg"
+            },
+            {
+              "id": "b649e6bc-aa45-43d4-a543-5463acdbdc1c",
+              "title": "The Conjuring Universe",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.159945",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/GmRsW3Fy/The-Conjuring-Universe.png"
+            },
+            {
+              "id": "46c111cb-d92f-420b-8ca5-2f2ab8b5551c",
+              "title": "John Wick",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.143882",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/jSz3PSGs/John-Wick.jpg"
+            },
+            {
+              "id": "033fadb9-002d-454d-aee9-df66f59f12f0",
+              "title": "Resident Evil",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.159874",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/h4Jxx54Y/Resident-Evil.png"
+            },
+            {
+              "id": "984494c5-7de3-4aca-9bbc-509ba96868af",
+              "title": "A Quiet Place",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.159884",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/2SnVGsgj/A-Quiet-Place.png"
+            },
+            {
+              "id": "9fa4cfdd-3263-4dea-a71f-4ee608f42917",
+              "title": "Bad Boys",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.159891",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/Y9C0ph0X/Bad-Boys.png"
+            },
+            {
+              "id": "efa62f00-572b-415d-94aa-e2f4cf6ffe23",
+              "title": "Men In Black",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.162279",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/7PS00WLD/Men-In-Black.jpg"
+            },
+            {
+              "id": "c9bbd644-4f64-4fcb-a879-0165c72d2e9b",
+              "title": "Monsterverse",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.159974",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/1tdmsBLt/Monsterverse.jpg"
+            },
+            {
+              "id": "08f1375f-7f03-4cc3-8953-13fe96b018f8",
+              "title": "Now You See Me",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.159956",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/PqT34kjs/Now-You-See-Me.jpg"
+            },
+            {
+              "id": "a41080f4-1bf3-48fa-90f9-d1d19d1214d1",
+              "title": "Night at the Museum",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "all::trakt.list.137",
+                    "type": "series"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/gJ4BN2zG/NATM.jpg"
+            },
+            {
+              "id": "b2eda47b-f1e2-4914-a5df-799dd20f6591",
+              "title": "Madagascar",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "all::trakt.list.130",
+                    "type": "series"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/0QZHcykM/Madagascar.jpg"
+            },
+            {
+              "id": "3e6152cd-7df1-4ed6-adfe-06044cbb92f2",
+              "title": "Kung Fu Panda",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "all::trakt.list.411",
+                    "type": "series"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/FKNWZQ4J/Kung-Fu-Panda.jpg"
+            },
+            {
+              "id": "54e38c2d-946c-4ed7-b59b-2856b9a07cb7",
+              "title": "Sing",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "all::trakt.list.22823347",
+                    "type": "series"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/L6qDcT9y/Sing-2.jpg"
+            },
+            {
+              "id": "4f3775a2-64aa-43ae-a09b-8a17f4c1a6ad",
+              "title": "Ice Age",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "all::trakt.list.58",
+                    "type": "series"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/3R3cXvHL/Ice-Age2.jpg"
+            },
+            {
+              "id": "d25c1e6c-d35f-40a6-830b-599e5de0c73b",
+              "title": "Alice in Wonderland",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "all::trakt.list.620",
+                    "type": "series"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/76qW32kq/Alice-In-Wonderland.jpg"
+            },
+            {
+              "id": "182ab9a0-ac47-416f-bc62-64487d492097",
+              "title": "The Naked Gun",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.162557",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/VNg7ZHft/The-Naked-Gun.jpg"
+            },
+            {
+              "id": "5ac94b60-35d2-4ddf-bea9-1ab095f8702a",
+              "title": "Scary Movie",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "all::trakt.list.251",
+                    "type": "series"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/g0sMtBzV/Scary-Movie.jpg"
+            },
+            {
+              "id": "736dee23-a990-4fe0-b3a2-9f8e2eda8fdc",
+              "title": "Pitch Perfect",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "all::trakt.list.11488806",
+                    "type": "series"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/25rcwfDq/Pitch-Perfect.jpg"
+            },
+            {
+              "id": "ee680d2f-b66e-421b-85ce-c55e9998150d",
+              "title": "Murder Mystery",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "all::trakt.list.22922356",
+                    "type": "series"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/rpMnJLk0/Murder-Mystery.jpg"
+            },
+            {
+              "id": "0b83793f-a190-43b8-8603-159143635109",
+              "title": "The Hangover",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "all::trakt.list.854",
+                    "type": "series"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/N0DNCPsm/The-Hangover.jpg"
+            },
+            {
+              "id": "27abe0a0-4265-488d-8e09-e481f364ef16",
+              "title": "American Pie",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.159942",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/vBGNrVdK/American-Pie2.jpg"
+            },
+            {
+              "id": "a5bc4150-3a59-410d-9fa2-b680446e3700",
+              "title": "Happy Death Day",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "all::trakt.list.4921178",
+                    "type": "series"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/LsH6Tnzv/Happy-Death-Day.png"
+            },
+            {
+              "id": "975ff376-57a9-402d-bbf4-ea60fa8e569d",
+              "title": "Dexter",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.159904",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/brKwHgTS/Dexter.jpg"
+            },
+            {
+              "id": "a6d3caed-717c-43f1-8989-7f6099b533f9",
+              "title": "Hannibal Lecter",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.159853",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/rwGwxSt3/Hannibal-Lecter.jpg"
+            },
+            {
+              "id": "af94954b-7eac-4ff3-9247-0fce3c6ba044",
+              "title": "The Exorcist",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.159878",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/fRs0GWcv/The-Exorcist.png"
+            },
+            {
+              "id": "a3acaae4-a839-4986-b9e3-39c14cdcdb20",
+              "title": "Halloween",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.159855",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/TPf79X6P/Halloween2.jpg"
+            },
+            {
+              "id": "773eb339-bbf6-4862-b60c-2921fe03c814",
+              "title": "Friday the 13th",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.159951",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/50fRBCMK/Friday-The-13th2.jpg"
+            },
+            {
+              "id": "e9f1e1d3-98a1-4aff-8c8d-f7ebee8c9b3c",
+              "title": "A Nightmare on Elm Street",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "all::trakt.list.53",
+                    "type": "series"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/Z56CHGXK/A-Nightmare-On-Elm-Street.png"
+            },
+            {
+              "id": "b6018c13-46d6-40be-b591-05a14cb76807",
+              "title": "Saw",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.159952",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/9Xv9BYrm/Saw.png"
+            },
+            {
+              "id": "43853bc2-adb1-431d-a8fa-91d50e3dbcdb",
+              "title": "Scream",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.159929",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/zD9hkFVD/Scream.png"
+            },
+            {
+              "id": "709a1a5e-76ce-4d72-bd6a-63fa46bdfe5d",
+              "title": "Terrifier",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "all::trakt.list.19471398",
+                    "type": "series"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/J4ZkYHkb/Terrifier.jpg"
+            },
+            {
+              "id": "d8b4f701-0326-4cce-a92e-8805e83fe303",
+              "title": "It",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.159910",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/RFhSkyps/It.png"
+            },
+            {
+              "id": "23a4ecc0-2771-4c27-82ed-ff0c694109ec",
+              "title": "Chucky",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.159943",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/C1r1dSfh/Chucky.png"
+            },
+            {
+              "id": "045818ce-d758-4b4a-9c76-592b67829e56",
+              "title": "Candyman",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "all::trakt.list.412",
+                    "type": "series"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/W3Y3tTJ1/Candyman.png"
+            },
+            {
+              "id": "521cf73a-12eb-40c2-a48a-69c65dd9a0e9",
+              "title": "Psycho",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "all::trakt.list.65",
+                    "type": "series"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/FFfccBFH/Psycho.png"
+            },
+            {
+              "id": "8037025c-1c2b-40a4-86c8-bb210d6ce489",
+              "title": "The Shining",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.159882",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/25rcwfDm/The-Shining.jpg"
+            },
+            {
+              "id": "1337ea2b-0517-4f54-af68-04eb617bcaf1",
+              "title": "The Ring",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.162384",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/8CNKHVS7/The-Ring.jpg"
+            },
+            {
+              "id": "7de80f3f-38ac-4932-892e-7869b09226d5",
+              "title": "Paranormal Activity",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "all::trakt.list.977",
+                    "type": "series"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/tTcqpkLZ/Paranormal-Activity.png"
+            },
+            {
+              "id": "5a75578c-d664-4843-a143-aa9f8a5eb5d3",
+              "title": "Final Destination",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.159948",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/DyXZyVv1/Final-Destination.png"
+            },
+            {
+              "id": "2b4bb3bb-5261-4e7e-9000-c06725064661",
+              "title": "The Purge",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.159867",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/MpwjCZ7s/The-Purge.png"
+            },
+            {
+              "id": "acb0b7d3-ad81-42a5-93f8-92c4e66b70ab",
+              "title": "Silent Hill",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "all::trakt.list.76",
+                    "type": "series"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/FzRCqXzf/Silent-Hill.jpg"
+            },
+            {
+              "id": "e98a87a1-3c9a-4c01-9ebb-8acfe5a27369",
+              "title": "Insidious",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "all::trakt.list.1381",
+                    "type": "series"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/ZqHfsDbL/Insidious.jpg"
+            },
+            {
+              "id": "51fe98f4-8ec5-40e6-9658-1e2ea2a32904",
+              "title": "Blair Witch",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "all::trakt.list.218",
+                    "type": "series"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/wvjM67MF/Blair-Witch.png"
+            },
+            {
+              "id": "9c86d805-a769-42e9-a2b4-fc62877d3a2f",
+              "title": "Quarantine",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.159870",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/59HvvR9y/Quarantine.jpg"
+            },
+            {
+              "id": "939b4b9e-4437-4118-95ec-fc7d57efce0d",
+              "title": "Police Academy",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "all::trakt.list.389",
+                    "type": "series"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/2yBz6vDd/Police-Academy.png"
+            },
+            {
+              "id": "084fed3d-faae-4714-b583-2e325a212490",
+              "title": "The Karate Kid",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.159880",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/j51xtcGr/Karate-Kid.png"
+            },
+            {
+              "id": "441a5205-57f3-4491-aba5-1cce5507da71",
+              "title": "The Last Airbender",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.159887",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/Pq4Nsmtg/Avatar-the-Last-Airbender.png"
+            },
+            {
+              "id": "cdf6663b-deb0-4c6c-85c1-0cbaf5ef5457",
+              "title": "xXx",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "all::trakt.list.313",
+                    "type": "series"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/W1VJBpGf/x-Xx.jpg"
+            },
+            {
+              "id": "8668d0c5-9c1f-4baa-9481-6f4e020b8293",
+              "title": "Johnny English",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "all::trakt.list.409",
+                    "type": "series"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/3R9bnx87/Johnny-English.jpg"
+            },
+            {
+              "id": "e5b6317e-88be-43c9-845d-f2d62a0afcbf",
+              "title": "Herbie",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "all::trakt.list.534",
+                    "type": "series"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/HLzSvPYj/Herbie.jpg"
+            },
+            {
+              "id": "bed9ad80-8242-417d-94f8-35a152b71bf9",
+              "title": "Are You Afraid of the Dark?",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.159844",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/g0mSDPWW/AYAOFTH.jpg"
+            },
+            {
+              "id": "4ed9c8f1-c484-494e-9d95-107740277eab",
+              "title": "Eberhoferkrimis",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.159895",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/prgLYCZg/Eberhofer-Krimis.jpg"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "collection.c3c236fc-488e-47e1-9a19-ae9e61fbda28",
+      "title": "Lists",
+      "hideTitle": false,
+      "type": "collection.row",
+      "dataSource": {
+        "kind": "collection",
+        "payload": {
+          "items": [
+            {
+              "id": "42500004-cc8d-48cd-85c9-eb1637697f16",
+              "title": "Metacritic's Must See",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.160245",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/d1YfcYSz/Metacritics-Must-See.png"
+            },
+            {
+              "id": "1883fc4f-c106-4326-8ce3-b268cc93f456",
+              "title": "Certified Fresh Releases",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.160243",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/9MhkHhNg/Certified-Fresh-Releases.png"
+            },
+            {
+              "id": "42ec1e2f-ab53-48f8-974c-43bb06473a16",
+              "title": "1001 Movies You Must See",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.160257",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/D0Zvt6mz/001-Movies-You-Must-see-before-you-die-landscape.png"
+            },
+            {
+              "id": "bcea01e9-8cc8-4c6f-ae81-77581c318194",
+              "title": "Movies Everyone Should Watch",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.160272",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/zBs5HBp5/Movies-Everyone-Should-Watch-Once-in-Their-Lifetime.png"
+            },
+            {
+              "id": "1e44e956-c4b3-48c3-9afc-8c729fb2efc5",
+              "title": "Letterboxd's Top 500",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.160274",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/vBsKwsSK/Letterboxd-Top-500.png"
+            },
+            {
+              "id": "3a885bdf-ee93-4033-b215-94f614fc3e01",
+              "title": "Top 100 of the 21st Century",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.160269",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/qRTFHT5p/New-York-Times-Best--100_Best_Movies_of_the_21st_CenturyMovies.png"
+            },
+            {
+              "id": "d29cf208-cb67-4d3e-b691-491eabe5b268",
+              "title": "Mindgame Movies",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.160054",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/MTSLJSFk/Mindgame-Movies.png"
+            },
+            {
+              "id": "c411bc12-aae7-45a8-8ed2-945e2b3e0124",
+              "title": "The Billion-Dollar Club",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.160241",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/C1g2pgQF/The-Billion-Dollar-Club.png"
+            },
+            {
+              "id": "058ae0ae-2530-4e9c-aa50-2ba32cd1b1ba",
+              "title": "Echoes of Reality",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.160271",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/DZTN3TYY/Echoes-of-Reality.png"
+            },
+            {
+              "id": "b4792b55-8a6b-4a89-9576-ff8bf99753dc",
+              "title": "Pure WTF",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.160266",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/G2CfnC5w/Movie-That-Make-You-Say-WTF.png"
+            },
+            {
+              "id": "97135642-c518-4e78-b460-a2f0b263f43f",
+              "title": "Movies That Leave You Changed",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.160267",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/85SYgS0G/Movies-That-Leave-You-Changed.png"
+            },
+            {
+              "id": "ac0f8cda-4c80-4c9c-9605-8955349f14c8",
+              "title": "When You Need to Feel Something",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.160270",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/MTSLJSFp/When-You-Need-to-Feel-Something.png"
+            },
+            {
+              "id": "11000b2e-8d2d-4686-82ea-ed7291444487",
+              "title": "Tales of the Heart",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.160273",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/1tkPVtMy/Tales-of-the-Heart.png"
+            },
+            {
+              "id": "064cced3-9f6a-4ec3-a6b5-a472a8af58b7",
+              "title": "Disney+ Live Action Movies",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.162280",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/kXHvJtYG/Disney-Live-Action.png"
+            },
+            {
+              "id": "5737b8da-5bcb-4ea1-9562-2362a97edf26",
+              "title": "Letterboxd's Top 250 Horror",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.160265",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/50VrWVkR/Letterboxd-Top-250-Horror.png"
+            },
+            {
+              "id": "89d49a08-11c1-4b6e-aba6-7b2d88410c95",
+              "title": "The World of Attenborough",
+              "hideTitle": false,
+              "imageAspect": "wide",
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "movie::mdblist.160263",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+                    "catalogId": "series::mdblist.160264",
+                    "type": "series"
+                  }
+                }
+              ],
+              "imageURL": "https://i.postimg.cc/NMcnvczG/The-World-of-Attenborough.png"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "catalog.7652829b-94ee-45f2-8b47-482a485965bb",
+      "title": "Popular Movies",
+      "type": "row.classic",
+      "cacheTTL": 3600,
+      "limit": 20,
+      "presentation": {
+        "aspectRatio": "poster",
+        "badges": {
+          "providers": false,
+          "ratings": true
+        },
+        "cardStyle": "medium"
+      },
+      "dataSource": {
+        "kind": "addonCatalog",
+        "payload": {
+          "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+          "catalogId": "movie::mdblist.160045",
+          "type": "movie"
+        }
+      }
+    },
+    {
+      "id": "catalog.b13b81f0-a43c-497b-b7c1-d8792c9085fc",
+      "title": "Popular Shows",
+      "type": "row.classic",
+      "cacheTTL": 3600,
+      "limit": 20,
+      "presentation": {
+        "aspectRatio": "poster",
+        "badges": {
+          "providers": false,
+          "ratings": true
+        },
+        "cardStyle": "medium"
+      },
+      "dataSource": {
+        "kind": "addonCatalog",
+        "payload": {
+          "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+          "catalogId": "series::mdblist.160048",
+          "type": "series"
+        }
+      }
+    },
+    {
+      "id": "catalog.9523395b-91cd-4ce9-86fb-9e5fb082a818",
+      "title": "Popular Anime",
+      "type": "row.classic",
+      "cacheTTL": 1800,
+      "limit": 20,
+      "presentation": {
+        "aspectRatio": "poster",
+        "badges": {
+          "providers": false,
+          "ratings": true
+        },
+        "cardStyle": "medium"
+      },
+      "dataSource": {
+        "kind": "addonCatalog",
+        "payload": {
+          "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+          "catalogId": "anime::anilist.trending",
+          "type": "anime"
+        }
+      }
+    },
+    {
+      "id": "catalog.00740330-cb2a-4f23-9261-1bdc0e27109f",
+      "title": "Netflix Movies",
+      "type": "row.classic",
+      "cacheTTL": 3600,
+      "limit": 20,
+      "presentation": {
+        "aspectRatio": "poster",
+        "badges": {
+          "providers": false,
+          "ratings": true
+        },
+        "cardStyle": "medium"
+      },
+      "dataSource": {
+        "kind": "addonCatalog",
+        "payload": {
+          "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+          "catalogId": "movie::mdblist.160016",
+          "type": "movie"
+        }
+      }
+    },
+    {
+      "id": "catalog.c6ec73d3-8b38-4a8b-8754-7b2bf8340895",
+      "title": "Netflix Shows",
+      "type": "row.classic",
+      "cacheTTL": 3600,
+      "limit": 20,
+      "presentation": {
+        "aspectRatio": "poster",
+        "badges": {
+          "providers": false,
+          "ratings": true
+        },
+        "cardStyle": "medium"
+      },
+      "dataSource": {
+        "kind": "addonCatalog",
+        "payload": {
+          "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+          "catalogId": "series::mdblist.160018",
+          "type": "series"
+        }
+      }
+    },
+    {
+      "id": "catalog.38cad05b-375e-4224-86ed-b16f9a829c6b",
+      "title": "Disney+ Movies",
+      "type": "row.classic",
+      "cacheTTL": 3600,
+      "limit": 20,
+      "presentation": {
+        "aspectRatio": "poster",
+        "badges": {
+          "providers": false,
+          "ratings": true
+        },
+        "cardStyle": "medium"
+      },
+      "dataSource": {
+        "kind": "addonCatalog",
+        "payload": {
+          "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+          "catalogId": "movie::mdblist.160024",
+          "type": "movie"
+        }
+      }
+    },
+    {
+      "id": "catalog.4d926236-f964-43c7-87a5-ae678fc31824",
+      "title": "Disney+ Shows",
+      "type": "row.classic",
+      "cacheTTL": 3600,
+      "limit": 20,
+      "presentation": {
+        "aspectRatio": "poster",
+        "badges": {
+          "providers": false,
+          "ratings": true
+        },
+        "cardStyle": "medium"
+      },
+      "dataSource": {
+        "kind": "addonCatalog",
+        "payload": {
+          "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+          "catalogId": "series::mdblist.160029",
+          "type": "series"
+        }
+      }
+    },
+    {
+      "id": "catalog.f75acc6d-bda8-44f6-ac2b-1aa76fd352c8",
+      "title": "Apple TV Movies",
+      "type": "row.classic",
+      "cacheTTL": 3600,
+      "limit": 20,
+      "presentation": {
+        "aspectRatio": "poster",
+        "badges": {
+          "providers": false,
+          "ratings": true
+        },
+        "cardStyle": "medium"
+      },
+      "dataSource": {
+        "kind": "addonCatalog",
+        "payload": {
+          "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+          "catalogId": "movie::mdblist.160030",
+          "type": "movie"
+        }
+      }
+    },
+    {
+      "id": "catalog.5b9b2330-4a8e-4389-84e4-8e3af7bcbf6c",
+      "title": "Apple TV Shows",
+      "type": "row.classic",
+      "cacheTTL": 3600,
+      "limit": 20,
+      "presentation": {
+        "aspectRatio": "poster",
+        "badges": {
+          "providers": false,
+          "ratings": true
+        },
+        "cardStyle": "medium"
+      },
+      "dataSource": {
+        "kind": "addonCatalog",
+        "payload": {
+          "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+          "catalogId": "series::mdblist.160031",
+          "type": "series"
+        }
+      }
+    },
+    {
+      "id": "catalog.13b7e1c4-4491-4691-862b-0186184c1416",
+      "title": "Amazon Prime Movies",
+      "type": "row.classic",
+      "cacheTTL": 3600,
+      "limit": 20,
+      "presentation": {
+        "aspectRatio": "poster",
+        "badges": {
+          "providers": false,
+          "ratings": true
+        },
+        "cardStyle": "medium"
+      },
+      "dataSource": {
+        "kind": "addonCatalog",
+        "payload": {
+          "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+          "catalogId": "movie::mdblist.160032",
+          "type": "movie"
+        }
+      }
+    },
+    {
+      "id": "catalog.d82c9825-bc83-44f9-a684-7abad319f2f6",
+      "title": "Amazon Prime Shows",
+      "type": "row.classic",
+      "cacheTTL": 3600,
+      "limit": 20,
+      "presentation": {
+        "aspectRatio": "poster",
+        "badges": {
+          "providers": false,
+          "ratings": true
+        },
+        "cardStyle": "medium"
+      },
+      "dataSource": {
+        "kind": "addonCatalog",
+        "payload": {
+          "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+          "catalogId": "series::mdblist.160034",
+          "type": "series"
+        }
+      }
+    },
+    {
+      "id": "catalog.798fb7fa-bbc0-4790-9ac9-4c5ea71bfbe2",
+      "title": "HBO Max Movies",
+      "type": "row.classic",
+      "cacheTTL": 3600,
+      "limit": 20,
+      "presentation": {
+        "aspectRatio": "poster",
+        "badges": {
+          "providers": false,
+          "ratings": true
+        },
+        "cardStyle": "medium"
+      },
+      "dataSource": {
+        "kind": "addonCatalog",
+        "payload": {
+          "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+          "catalogId": "movie::mdblist.160035",
+          "type": "movie"
+        }
+      }
+    },
+    {
+      "id": "catalog.c4b76d03-b837-4c0b-915b-65ee1fe8c0ff",
+      "title": "HBO Max Shows",
+      "type": "row.classic",
+      "cacheTTL": 3600,
+      "limit": 20,
+      "presentation": {
+        "aspectRatio": "poster",
+        "badges": {
+          "providers": false,
+          "ratings": true
+        },
+        "cardStyle": "medium"
+      },
+      "dataSource": {
+        "kind": "addonCatalog",
+        "payload": {
+          "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+          "catalogId": "series::mdblist.160036",
+          "type": "series"
+        }
+      }
+    },
+    {
+      "id": "catalog.5914d023-7b60-4b80-bcf5-75603775b8d9",
+      "title": "Paramount+ Movies",
+      "type": "row.classic",
+      "cacheTTL": 3600,
+      "limit": 20,
+      "presentation": {
+        "aspectRatio": "poster",
+        "badges": {
+          "providers": false,
+          "ratings": true
+        },
+        "cardStyle": "medium"
+      },
+      "dataSource": {
+        "kind": "addonCatalog",
+        "payload": {
+          "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+          "catalogId": "movie::mdblist.160038",
+          "type": "movie"
+        }
+      }
+    },
+    {
+      "id": "catalog.bc69504a-e168-41eb-8675-79f1c86a02f6",
+      "title": "Paramount+ Shows",
+      "type": "row.classic",
+      "cacheTTL": 3600,
+      "limit": 20,
+      "presentation": {
+        "aspectRatio": "poster",
+        "badges": {
+          "providers": false,
+          "ratings": true
+        },
+        "cardStyle": "medium"
+      },
+      "dataSource": {
+        "kind": "addonCatalog",
+        "payload": {
+          "addonId": "https://aiometadata.jsm.id.au/stremio/1f7e1d23-aea1-4515-a415-5b8ce04a608e/manifest.json",
+          "catalogId": "series::mdblist.160039",
+          "type": "series"
+        }
+      }
+    }
+  ]
+}
