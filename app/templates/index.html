@@ -31,7 +31,7 @@
   </script>
   <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link rel="stylesheet" href="/static/css/styles.css">
+  <link rel="stylesheet" href="/static/css/styles.css?v=1.0.4">
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col font-sans antialiased selection:bg-purple-500 selection:text-white">
 
@@ -64,37 +64,36 @@
       <div class="lg:col-span-5 space-y-6">
         
         <!-- Input Method Card -->
-        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl relative overflow-hidden">
-          <div class="absolute top-0 right-0 w-32 h-32 bg-purple-500/5 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl relative">
 
-          <h2 class="text-lg font-semibold text-white mb-2 flex items-center space-x-2">
+          <h2 class="text-lg font-semibold text-white mb-1 flex items-center space-x-2">
             <i class="fa-solid fa-arrow-right-to-bracket text-purple-400"></i>
             <span>Import from Nuvio / Xperience</span>
           </h2>
           <p class="text-xs text-slate-400 mb-4">Paste your Xperience Manifest URL, upload your exported widgets, or connect via token.</p>
 
-          <!-- Tabs -->
-          <div class="flex border-b border-slate-800 mb-5 space-x-2 overflow-x-auto" id="inputTabs">
-            <button onclick="switchTab('tab-manifest')" id="btn-tab-manifest" class="tab-btn active px-3 py-2 text-sm font-medium border-b-2 border-purple-500 text-purple-400 flex items-center space-x-2">
+          <!-- Tabs Header -->
+          <div class="flex border-b border-slate-800 mb-5 space-x-1 overflow-x-auto" id="tabBar">
+            <button type="button" data-target="tab-manifest" class="tab-btn px-3 py-2 text-sm font-medium border-b-2 border-purple-500 text-purple-400 flex items-center space-x-2 cursor-pointer transition">
               <i class="fa-solid fa-link"></i>
               <span>Manifest URL</span>
             </button>
-            <button onclick="switchTab('tab-upload')" id="btn-tab-upload" class="tab-btn px-3 py-2 text-sm font-medium border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center space-x-2">
+            <button type="button" data-target="tab-upload" class="tab-btn px-3 py-2 text-sm font-medium border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center space-x-2 cursor-pointer transition">
               <i class="fa-solid fa-file-arrow-up"></i>
               <span>Upload JSON</span>
             </button>
-            <button onclick="switchTab('tab-paste')" id="btn-tab-paste" class="tab-btn px-3 py-2 text-sm font-medium border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center space-x-2">
+            <button type="button" data-target="tab-paste" class="tab-btn px-3 py-2 text-sm font-medium border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center space-x-2 cursor-pointer transition">
               <i class="fa-solid fa-code"></i>
               <span>Paste JSON</span>
             </button>
-            <button onclick="switchTab('tab-login')" id="btn-tab-login" class="tab-btn px-3 py-2 text-sm font-medium border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center space-x-2">
+            <button type="button" data-target="tab-login" class="tab-btn px-3 py-2 text-sm font-medium border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center space-x-2 cursor-pointer transition">
               <i class="fa-solid fa-key"></i>
               <span>Direct Auth</span>
             </button>
           </div>
 
-          <!-- Tab 1: Manifest URL (Default & Recommended) -->
-          <div id="tab-manifest" class="tab-content space-y-4">
+          <!-- Tab 1: Manifest URL (Default) -->
+          <div id="tab-manifest" class="tab-pane space-y-4">
             <div class="p-3 bg-purple-950/30 border border-purple-800/40 rounded-xl text-xs text-purple-200">
               <i class="fa-solid fa-circle-info text-purple-400 mr-1.5"></i>
               <strong>How to get your Manifest URL:</strong> In your Xperience / Nuvio app, click <em>"Install / Add to Stremio"</em> or <em>"Share"</em>, right-click and copy the link.
@@ -106,14 +105,14 @@
                 <i class="fa-solid fa-globe absolute left-3.5 top-3.5 text-slate-500 text-sm"></i>
               </div>
             </div>
-            <button onclick="fetchManifest()" class="w-full py-2.5 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-medium text-sm rounded-xl shadow-lg shadow-purple-600/30 transition flex items-center justify-center space-x-2">
+            <button type="button" onclick="fetchManifest()" class="w-full py-2.5 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-medium text-sm rounded-xl shadow-lg shadow-purple-600/30 transition flex items-center justify-center space-x-2 cursor-pointer">
               <i class="fa-solid fa-cloud-arrow-down"></i>
               <span>Fetch & Convert Setup</span>
             </button>
           </div>
 
           <!-- Tab 2: Upload File -->
-          <div id="tab-upload" class="tab-content hidden space-y-4">
+          <div id="tab-upload" class="tab-pane hidden space-y-4">
             <div id="dropZone" class="border-2 border-dashed border-slate-700 hover:border-purple-500/60 rounded-xl p-6 text-center cursor-pointer transition bg-slate-950/40 group">
               <input type="file" id="fileInput" accept=".json" class="hidden" onchange="handleFileSelected(event)">
               <div class="w-12 h-12 mx-auto rounded-full bg-slate-800 group-hover:bg-purple-900/30 flex items-center justify-center text-purple-400 mb-3 transition">
@@ -125,24 +124,24 @@
           </div>
 
           <!-- Tab 3: Raw Paste -->
-          <div id="tab-paste" class="tab-content hidden space-y-4">
+          <div id="tab-paste" class="tab-pane hidden space-y-4">
             <div>
               <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Paste Raw JSON</label>
               <textarea id="rawJsonInput" rows="6" placeholder='{ "exportType": "widgets", "widgets": [ ... ] }' class="w-full bg-slate-950 border border-slate-700 rounded-xl p-3 text-xs font-mono text-slate-300 focus:outline-none focus:border-purple-500 transition"></textarea>
             </div>
-            <button onclick="processRawJson()" class="w-full py-2.5 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-medium text-sm rounded-xl shadow-lg shadow-purple-600/30 transition flex items-center justify-center space-x-2">
+            <button type="button" onclick="processRawJson()" class="w-full py-2.5 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-medium text-sm rounded-xl shadow-lg shadow-purple-600/30 transition flex items-center justify-center space-x-2 cursor-pointer">
               <i class="fa-solid fa-bolt"></i>
               <span>Parse & Convert JSON</span>
             </button>
           </div>
 
           <!-- Tab 4: Direct Auth -->
-          <div id="tab-login" class="tab-content hidden space-y-4">
+          <div id="tab-login" class="tab-pane hidden space-y-4">
             <div>
               <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Nuvio / Xperience Bearer Token or Session Key</label>
               <input type="password" id="nuvioToken" placeholder="eyJhbGciOiJIUzI1NiJ9..." class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-purple-500 transition">
             </div>
-            <button onclick="fetchViaToken()" class="w-full py-2.5 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-medium text-sm rounded-xl shadow-lg shadow-purple-600/30 transition flex items-center justify-center space-x-2">
+            <button type="button" onclick="fetchViaToken()" class="w-full py-2.5 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-medium text-sm rounded-xl shadow-lg shadow-purple-600/30 transition flex items-center justify-center space-x-2 cursor-pointer">
               <i class="fa-solid fa-plug"></i>
               <span>Connect via Token</span>
             </button>
@@ -192,7 +191,7 @@
             </label>
           </div>
 
-          <button onclick="triggerConversion()" id="convertBtn" class="w-full py-3 bg-purple-600 hover:bg-purple-500 text-white font-semibold text-sm rounded-xl shadow-lg shadow-purple-600/30 transition flex items-center justify-center space-x-2">
+          <button type="button" onclick="triggerConversion()" id="convertBtn" class="w-full py-3 bg-purple-600 hover:bg-purple-500 text-white font-semibold text-sm rounded-xl shadow-lg shadow-purple-600/30 transition flex items-center justify-center space-x-2 cursor-pointer">
             <i class="fa-solid fa-wand-magic-sparkles"></i>
             <span>Generate AIOMetadata Configuration</span>
           </button>
@@ -230,11 +229,11 @@
             <p class="text-xs text-slate-400 mt-0.5">Ready for 1-click import into AIOMetadata config dashboard.</p>
           </div>
           <div class="flex items-center space-x-3">
-            <button onclick="copyToClipboard()" id="copyBtn" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-sm font-medium rounded-xl border border-slate-700 transition flex items-center space-x-1.5 disabled:opacity-50">
+            <button type="button" onclick="copyToClipboard()" id="copyBtn" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-sm font-medium rounded-xl border border-slate-700 transition flex items-center space-x-1.5 cursor-pointer">
               <i class="fa-regular fa-copy"></i>
               <span>Copy JSON</span>
             </button>
-            <button onclick="downloadJson()" id="downloadBtn" class="px-4 py-2 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-sm font-semibold rounded-xl shadow-lg shadow-purple-600/30 transition flex items-center space-x-1.5 disabled:opacity-50">
+            <button type="button" onclick="downloadJson()" id="downloadBtn" class="px-4 py-2 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-sm font-semibold rounded-xl shadow-lg shadow-purple-600/30 transition flex items-center space-x-1.5 cursor-pointer">
               <i class="fa-solid fa-download"></i>
               <span>Download .JSON</span>
             </button>
@@ -287,6 +286,364 @@
     <span id="toastMsg">Notification message</span>
   </div>
 
-  <script src="/static/js/app.js"></script>
+  <!-- Inline Core Script -->
+  <script>
+    let currentRawData = null;
+    let currentAioConfig = null;
+    let currentCatalogs = [];
+
+    // Tab Switching Logic
+    function switchTab(targetId) {
+      // Hide all panes
+      document.querySelectorAll('.tab-pane').forEach(el => el.classList.add('hidden'));
+      
+      // Deactivate all buttons
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('border-purple-500', 'text-purple-400');
+        btn.classList.add('border-transparent', 'text-slate-400');
+      });
+
+      // Show targeted pane
+      const targetPane = document.getElementById(targetId);
+      if (targetPane) targetPane.classList.remove('hidden');
+
+      // Highlight active button
+      const activeBtn = document.querySelector(`[data-target="${targetId}"]`);
+      if (activeBtn) {
+        activeBtn.classList.add('border-purple-500', 'text-purple-400');
+        activeBtn.classList.remove('border-transparent', 'text-slate-400');
+      }
+    }
+
+    // Initialize Event Listeners
+    document.addEventListener('DOMContentLoaded', () => {
+      // Attach click events to tab buttons
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          const target = btn.getAttribute('data-target');
+          if (target) switchTab(target);
+        });
+      });
+
+      setupDropZone();
+    });
+
+    // Drag & Drop Setup
+    function setupDropZone() {
+      const dropZone = document.getElementById('dropZone');
+      const fileInput = document.getElementById('fileInput');
+      if (!dropZone || !fileInput) return;
+
+      dropZone.addEventListener('click', () => fileInput.click());
+
+      ['dragenter', 'dragover'].forEach(eventName => {
+        dropZone.addEventListener(eventName, (e) => {
+          e.preventDefault();
+          dropZone.classList.add('border-purple-500', 'bg-purple-950/20');
+        });
+      });
+
+      ['dragleave', 'drop'].forEach(eventName => {
+        dropZone.addEventListener(eventName, (e) => {
+          e.preventDefault();
+          dropZone.classList.remove('border-purple-500', 'bg-purple-950/20');
+        });
+      });
+
+      dropZone.addEventListener('drop', (e) => {
+        const files = e.dataTransfer.files;
+        if (files.length > 0) {
+          fileInput.files = files;
+          handleFileSelected({ target: fileInput });
+        }
+      });
+    }
+
+    function handleFileSelected(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      document.getElementById('fileStatusText').innerHTML = `Selected: <span class="text-purple-400 font-semibold">${escapeHtml(file.name)}</span>`;
+
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        try {
+          currentRawData = JSON.parse(e.target.result);
+          showToast(`Loaded ${file.name}`, 'success');
+          triggerConversion();
+        } catch (err) {
+          showToast('Invalid JSON file format', 'error');
+        }
+      };
+      reader.readAsText(file);
+    }
+
+    function processRawJson() {
+      const rawText = document.getElementById('rawJsonInput').value.trim();
+      if (!rawText) {
+        showToast('Please paste JSON content', 'error');
+        return;
+      }
+      try {
+        currentRawData = JSON.parse(rawText);
+        showToast('Parsed JSON successfully', 'success');
+        triggerConversion();
+      } catch (err) {
+        showToast('Failed to parse JSON string', 'error');
+      }
+    }
+
+    async function fetchManifest() {
+      const url = document.getElementById('manifestUrl').value.trim();
+      if (!url) {
+        showToast('Please enter a manifest URL', 'error');
+        return;
+      }
+
+      showToast('Fetching manifest...', 'info');
+      try {
+        const res = await fetch('/api/nuvio/manifest', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            manifest_url: url,
+            addon_name: document.getElementById('optAddonName').value.trim() || 'AIOMetadata',
+            prefix_mode: document.getElementById('optPrefixMode').value
+          })
+        });
+
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.detail || 'Failed to fetch manifest');
+
+        updateResults(data);
+        showToast(`Loaded ${data.totalCatalogs} catalogs from manifest!`, 'success');
+      } catch (err) {
+        showToast(err.message, 'error');
+      }
+    }
+
+    async function fetchViaToken() {
+      const token = document.getElementById('nuvioToken').value.trim();
+      if (!token) {
+        showToast('Please enter your session token', 'error');
+        return;
+      }
+
+      showToast('Connecting via token...', 'info');
+      try {
+        const res = await fetch('/api/nuvio/token', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            token,
+            addon_name: document.getElementById('optAddonName').value.trim() || 'AIOMetadata',
+            prefix_mode: document.getElementById('optPrefixMode').value
+          })
+        });
+
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.detail || 'Failed to authenticate via token');
+
+        updateResults(data);
+        showToast(`Loaded ${data.totalCatalogs} catalogs!`, 'success');
+      } catch (err) {
+        showToast(err.message, 'error');
+      }
+    }
+
+    async function triggerConversion() {
+      if (!currentRawData) {
+        showToast('Please provide an input source first', 'error');
+        return;
+      }
+
+      const addonName = document.getElementById('optAddonName').value.trim() || 'AIOMetadata';
+      const prefixMode = document.getElementById('optPrefixMode').value;
+      const ratingPosters = document.getElementById('optRatingPosters').checked;
+      const enableAll = document.getElementById('optEnableAll').checked;
+
+      let baseConfig = null;
+      const baseFileInput = document.getElementById('baseConfigInput');
+      if (baseFileInput.files && baseFileInput.files[0]) {
+        try {
+          const baseText = await baseFileInput.files[0].text();
+          baseConfig = JSON.parse(baseText);
+        } catch (e) {
+          console.warn('Could not parse base config JSON', e);
+        }
+      }
+
+      try {
+        const res = await fetch('/api/convert', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            nuvio_data: currentRawData,
+            base_config: baseConfig,
+            addon_name: addonName,
+            prefix_mode: prefixMode,
+            force_enabled: enableAll ? true : null,
+            force_rating_posters: ratingPosters,
+            allow_duplicates: false
+          })
+        });
+
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.detail || 'Conversion failed');
+
+        updateResults(data);
+        showToast(`Successfully generated AIOMetadata configuration!`, 'success');
+      } catch (err) {
+        showToast(err.message, 'error');
+      }
+    }
+
+    function updateResults(data) {
+      currentAioConfig = data.aioConfig;
+      currentCatalogs = data.catalogs || [];
+
+      const total = currentCatalogs.length;
+      let mdblistCount = 0;
+      let traktCount = 0;
+      let othersCount = 0;
+
+      currentCatalogs.forEach(c => {
+        const s = (c.source || '').toLowerCase();
+        if (s === 'mdblist') mdblistCount++;
+        else if (s === 'trakt') traktCount++;
+        else othersCount++;
+      });
+
+      document.getElementById('statTotal').innerText = total;
+      document.getElementById('statMdblist').innerText = mdblistCount;
+      document.getElementById('statTrakt').innerText = traktCount;
+      document.getElementById('statOthers').innerText = othersCount;
+      document.getElementById('catalogCountDisplay').innerText = total;
+
+      renderCatalogsTable(currentCatalogs);
+    }
+
+    function renderCatalogsTable(catalogs) {
+      const tbody = document.getElementById('catalogsTableBody');
+      if (!catalogs || catalogs.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="5" class="px-4 py-8 text-center text-slate-500">No catalogs found.</td></tr>`;
+        return;
+      }
+
+      const sourceBadgeColors = {
+        mdblist: 'bg-purple-900/40 text-purple-300 border-purple-700/50',
+        trakt: 'bg-pink-900/40 text-pink-300 border-pink-700/50',
+        tmdb: 'bg-emerald-900/40 text-emerald-300 border-emerald-700/50',
+        anilist: 'bg-sky-900/40 text-sky-300 border-sky-700/50',
+        streaming: 'bg-amber-900/40 text-amber-300 border-amber-700/50',
+        tvdb: 'bg-cyan-900/40 text-cyan-300 border-cyan-700/50',
+      };
+
+      tbody.innerHTML = catalogs.map((cat, index) => {
+        const source = (cat.source || 'other').toLowerCase();
+        const badgeClass = sourceBadgeColors[source] || 'bg-slate-800 text-slate-300 border-slate-700';
+
+        return `
+          <tr class="hover:bg-slate-800/40 transition">
+            <td class="px-4 py-2.5 font-medium text-slate-200">${escapeHtml(cat.name || 'Untitled')}</td>
+            <td class="px-3 py-2.5">
+              <span class="inline-block uppercase text-[10px] font-bold px-2 py-0.5 rounded-full border ${badgeClass}">
+                ${escapeHtml(cat.source || 'N/A')}
+              </span>
+            </td>
+            <td class="px-3 py-2.5 text-slate-400 capitalize">${escapeHtml(cat.type || 'all')}</td>
+            <td class="px-3 py-2.5 font-mono text-[11px] text-slate-400">${escapeHtml(cat.id || '')}</td>
+            <td class="px-3 py-2.5 text-center">
+              <input type="checkbox" ${cat.enabled ? 'checked' : ''} onchange="toggleCatalogActive(${index}, this.checked)" class="w-3.5 h-3.5 accent-purple-500 rounded cursor-pointer">
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function toggleCatalogActive(index, isChecked) {
+      if (currentCatalogs[index]) {
+        currentCatalogs[index].enabled = isChecked;
+      }
+      if (currentAioConfig && currentAioConfig.config && currentAioConfig.config.catalogs) {
+        currentAioConfig.config.catalogs[index].enabled = isChecked;
+        const enabledCount = currentCatalogs.filter(c => c.enabled).length;
+        currentAioConfig.metadata.enabledCatalogs = enabledCount;
+      }
+    }
+
+    function filterCatalogsTable() {
+      const query = document.getElementById('catalogSearch').value.toLowerCase();
+      const filtered = currentCatalogs.filter(c => {
+        return (c.name || '').toLowerCase().includes(query) ||
+               (c.id || '').toLowerCase().includes(query) ||
+               (c.source || '').toLowerCase().includes(query) ||
+               (c.type || '').toLowerCase().includes(query);
+      });
+      renderCatalogsTable(filtered);
+    }
+
+    function copyToClipboard() {
+      if (!currentAioConfig) {
+        showToast('Generate configuration first', 'error');
+        return;
+      }
+      navigator.clipboard.writeText(JSON.stringify(currentAioConfig, null, 2))
+        .then(() => showToast('Copied AIOMetadata JSON to clipboard!', 'success'))
+        .catch(() => showToast('Failed to copy to clipboard', 'error'));
+    }
+
+    function downloadJson() {
+      if (!currentAioConfig) {
+        showToast('Generate configuration first', 'error');
+        return;
+      }
+      const str = JSON.stringify(currentAioConfig, null, 2);
+      const blob = new Blob([str], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      const dateStr = new Date().toISOString().slice(0, 10);
+      a.download = `aiometadata-config-${dateStr}.json`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      showToast('Download started!', 'success');
+    }
+
+    function showToast(msg, type = 'info') {
+      const toast = document.getElementById('toast');
+      const toastMsg = document.getElementById('toastMsg');
+      const toastIcon = document.getElementById('toastIcon');
+
+      if (!toast || !toastMsg) return;
+
+      toastMsg.innerText = msg;
+      toast.className = 'fixed bottom-6 right-6 px-4 py-3 rounded-xl shadow-2xl text-sm font-medium flex items-center space-x-2 z-50 transform transition-all duration-300 translate-y-0 opacity-100';
+
+      if (type === 'success') {
+        toast.classList.add('bg-emerald-600', 'text-white');
+        toastIcon.className = 'fa-solid fa-circle-check';
+      } else if (type === 'error') {
+        toast.classList.add('bg-rose-600', 'text-white');
+        toastIcon.className = 'fa-solid fa-triangle-exclamation';
+      } else {
+        toast.classList.add('bg-purple-600', 'text-white');
+        toastIcon.className = 'fa-solid fa-circle-info';
+      }
+
+      setTimeout(() => {
+        toast.classList.add('opacity-0', 'translate-y-4');
+      }, 3500);
+    }
+
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.innerText = text;
+      return div.innerHTML;
+    }
+  </script>
 </body>
 </html>
