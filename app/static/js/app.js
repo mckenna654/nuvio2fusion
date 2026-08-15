@@ -123,31 +123,35 @@ async function fetchManifest() {
   }
 }
 
-// Login Nuvio
-async function loginNuvio() {
-  const email = document.getElementById('nuvioEmail').value.trim();
-  const password = document.getElementById('nuvioPassword').value;
-
-  if (!email || !password) {
-    showToast('Please enter Nuvio email and password', 'error');
+// Fetch via Token
+async function fetchViaToken() {
+  const token = document.getElementById('nuvioToken').value.trim();
+  if (!token) {
+    showToast('Please enter your session token', 'error');
     return;
   }
 
-  showToast('Connecting to Nuvio account...', 'info');
+  showToast('Connecting via token...', 'info');
   try {
-    const res = await fetch('/api/nuvio/login', {
+    const res = await fetch('/api/nuvio/token', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        email,
-        password,
+        token,
         addon_name: document.getElementById('optAddonName').value.trim() || 'AIOMetadata',
         prefix_mode: document.getElementById('optPrefixMode').value
       })
     });
 
     const data = await res.json();
-    if (!res.ok) throw new Error(data.detail || 'Failed to login to Nuvio');
+    if (!res.ok) throw new Error(data.detail || 'Failed to authenticate via token');
+
+    updateResults(data);
+    showToast(`Loaded ${data.totalCatalogs} catalogs!`, 'success');
+  } catch (err) {
+    showToast(err.message, 'error');
+  }
+}
 
     updateResults(data);
     showToast(`Successfully pulled ${data.totalCatalogs} catalogs from Nuvio!`, 'success');
