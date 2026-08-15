@@ -71,8 +71,8 @@ graph LR
 3. Or click **Add Container** and enter:
    - **Name**: `xp2aiom`
    - **Repository**: `ghcr.io/mckenna654/xp2aiom:latest`
-   - **Port**: `8080` (Container) ➔ `8080` (Host)
-   - **WebUI**: `http://[IP]:[PORT:8080]/`
+   - **Port**: `7088` (Container) ➔ `7088` (Host)
+   - **WebUI**: `http://[IP]:[PORT:7088]/`
 4. Click **Apply**. Open the Web UI by clicking the container icon and selecting **WebUI**.
 
 ---
@@ -90,9 +90,9 @@ services:
     container_name: xp2aiom
     restart: unless-stopped
     ports:
-      - "8080:8080"
+      - "7088:7088"
     environment:
-      - PORT=8080
+      - PORT=7088
       - HOST=0.0.0.0
 ```
 
@@ -106,7 +106,7 @@ docker compose up -d
 ```bash
 docker run -d \
   --name xp2aiom \
-  -p 8080:8080 \
+  -p 7088:7088 \
   --restart unless-stopped \
   ghcr.io/mckenna654/xp2aiom:latest
 ```
@@ -124,15 +124,15 @@ cd xp2aiom
 pip install -r requirements.txt
 
 # 3. Start the server
-uvicorn app.main:app --host 0.0.0.0 --port 8080 --reload
+python run.py
 ```
-Navigate to `http://localhost:8080`.
+Navigate to `http://localhost:7088`.
 
 ---
 
 ## 📖 How to Use
 
-1. Open **XP2AIOM** (`http://<your-server-ip>:8080`).
+1. Open **XP2AIOM** (`http://<your-server-ip>:7088`).
 2. Choose your preferred input method:
    - Click **Nuvio Login** and enter your credentials, OR
    - Drag & drop your `fusion-widgets.json` file into the upload zone.

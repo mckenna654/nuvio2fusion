@@ -15,7 +15,7 @@
     Self-hosted WebGUI application that connects to your Nuvio/Xperience account or imports widget/manifest JSON exports and converts them into 1-click importable AIOMetadata catalog configurations for Stremio.
   </Overview>
   <Category>MediaApp:Video MediaServer:Other Tools:Utilities</Category>
-  <WebUI>http://[IP]:[PORT:8080]/</WebUI>
+  <WebUI>http://[IP]:[PORT:7088]/</WebUI>
   <TemplateURL>https://raw.githubusercontent.com/mckenna654/xp2aiom/main/unraid-template.xml</TemplateURL>
   <Icon>https://raw.githubusercontent.com/mckenna654/xp2aiom/main/app/static/icon.png</Icon>
   <ExtraParams/>
@@ -31,22 +31,16 @@
     <Mode>bridge</Mode>
     <Publish>
       <Port>
-        <HostPort>8080</HostPort>
-        <ContainerPort>8080</ContainerPort>
+        <HostPort>7088</HostPort>
+        <ContainerPort>7088</ContainerPort>
         <Protocol>tcp</Protocol>
       </Port>
     </Publish>
   </Networking>
-  <Data>
-    <Volume>
-      <HostDir/>
-      <ContainerDir/>
-      <Mode/>
-    </Volume>
-  </Data>
+  <Data/>
   <Environment>
     <Variable>
-      <Value>8080</Value>
+      <Value>7088</Value>
       <Name>PORT</Name>
       <Mode/>
     </Variable>
@@ -57,5 +51,5 @@
     </Variable>
   </Environment>
   <Labels/>
-  <Config Name="WebUI Port" Target="8080" Default="8080" Mode="tcp" Description="Port for the XP2AIOM Web UI" Type="Port" Display="always" Required="true" Mask="false">8080</Config>
+  <Config Name="WebUI Port" Target="7088" Default="7088" Mode="tcp" Description="Port for the XP2AIOM Web UI" Type="Port" Display="always" Required="true" Mask="false">7088</Config>
 </Container>

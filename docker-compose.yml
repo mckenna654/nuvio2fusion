@@ -2,16 +2,11 @@ version: "3.8"
 
 services:
   xp2aiom:
-    build: .
-    container_name: xp2aiom-bridge
+    image: ghcr.io/mckenna654/xp2aiom:latest
+    container_name: xp2aiom
     restart: unless-stopped
     ports:
-      - "8080:8080"
+      - "7088:7088"
     environment:
-      - PORT=8080
+      - PORT=7088
       - HOST=0.0.0.0
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8080/api/health"]
-      interval: 30s
-      timeout: 5s
-      retries: 3
