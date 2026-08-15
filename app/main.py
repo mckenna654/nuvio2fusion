@@ -6,9 +6,8 @@ import json
 import os
 from typing import Any
 from fastapi import FastAPI, File, Form, HTTPException, Request, UploadFile
-from fastapi.responses import HTMLResponse
+from fastapi.responses import FileResponse, HTMLResponse
 from fastapi.staticfiles import StaticFiles
-from fastapi.templating import Jinja2Templates
 from pydantic import BaseModel
 
 from app.converter import (
@@ -21,15 +20,15 @@ from app.nuvio_client import NuvioClient
 app = FastAPI(
     title="Nuvio / Xperience to AIOMetadata Bridge",
     description="Web GUI to import layouts and catalogs from Nuvio and export to AIOMetadata.",
-    version="1.0.0",
+    version="1.0.2",
 )
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 static_dir = os.path.join(current_dir, "static")
 templates_dir = os.path.join(current_dir, "templates")
+index_html_path = os.path.join(templates_dir, "index.html")
 
 app.mount("/static", StaticFiles(directory=static_dir), name="static")
-templates = Jinja2Templates(directory=templates_dir)
 nuvio_client = NuvioClient()
 
 
@@ -63,10 +62,10 @@ class NuvioManifestRequest(BaseModel):
     prefix_mode: str = "category"
 
 
-@app.get("/", response_class=HTMLResponse)
-async def serve_index(request: Request) -> HTMLResponse:
+@app.get("/", response_class=FileResponse)
+async def serve_index() -> FileResponse:
     """Renders the main single-page web GUI."""
-    return templates.TemplateResponse("index.html", {"request": request})
+    return FileResponse(index_html_path, media_type="text/html")
 
 
 @app.get("/api/health")
