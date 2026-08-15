@@ -23,6 +23,9 @@
 
 **XP2AIOM** bridges the gap: it allows you to log into your Nuvio account (or drop in your widget/manifest export JSON) and outputs a valid, formatted AIOMetadata configuration file ready for 1-click import into AIOMetadata's configuration dashboard.
 
+> ### 💭 Why I Built This
+> I created **XP2AIOM** because I really enjoy the **ease of use and layout design of Xperience/Nuvio**, while also strongly preferring the **power, privacy, and customization of self-hosting AIOMetadata**. This bridge gives you the best of both worlds—design your layout with Xperience, and host it effortlessly on your own AIOMetadata instance!
+
 ```mermaid
 graph LR
     A[Nuvio / Xperience<br/>Account or Export] -->|Connect / Upload| B[XP2AIOM Bridge<br/>Web GUI]
