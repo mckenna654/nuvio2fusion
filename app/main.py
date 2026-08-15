@@ -18,9 +18,9 @@ from app.converter import (
 from app.nuvio_client import NuvioClient
 
 app = FastAPI(
-    title="Nuvio / Xperience to AIOMetadata Bridge",
-    description="Web GUI to import layouts and catalogs from Nuvio and export to AIOMetadata.",
-    version="1.0.5",
+    title="Xperience to AIOMetadata Bridge",
+    description="Web GUI to export Xperience configurations, layouts, and widgets to AIOMetadata.",
+    version="1.0.0",
 )
 
 current_dir = os.path.dirname(os.path.abspath(__file__))

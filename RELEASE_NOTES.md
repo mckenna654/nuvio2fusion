@@ -31,5 +31,5 @@ services:
     container_name: xp2aiom
     restart: unless-stopped
     ports:
-      - "8080:8080"
+      - "7088:7088"
 ```
