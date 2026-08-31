@@ -1,5 +1,17 @@
 # Nuvio2Fusion release notes
 
+## 2.0.5 · 31 August 2026
+
+Protect collection folders from mixed-type catalog sources. Native Fusion inspection showed folders containing an `all` catalog importing as **No source**, while folders containing only movie/series catalogs retained their source lists.
+
+- Export only verified movie/series addon payloads in collection folders as well as classic rows. Omit incompatible references individually so the folder's other catalogs survive.
+- Report incompatible media types, omitted references and folders left empty. Optional addons and these omissions remain warnings, with no approval checkbox.
+- Do not relabel mixed catalogs as movie/series or invent replacement catalog requests.
+- Repair converter-produced Fusion JSON that still contains the original sources, as well as native Nuvio input. JSON exported from Fusion after it discarded sources cannot recover them.
+- Add regression tests for mixed valid/invalid sources, incompatible-only folders, existing-export repair and unused addon requirements.
+
+Update Unraid's Repository field to `ghcr.io/mckenna654/nuvio2fusion:2.0.5` and apply, or re-pull `latest` after its build succeeds. Re-pulling the pinned `2.0.4` image will not install this fix. Back up Fusion before testing a corrected import; catalog playback and the corrected native import still need verification. All 46 automated tests pass locally; CI also checks Python 3.11/3.14 and the published container.
+
 ## 2.0.4 · 31 August 2026
 
 Public Unraid release with the complete Nuvio-to-Fusion workflow and optional-addon support from 2.0.3.

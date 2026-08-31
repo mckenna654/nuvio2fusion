@@ -13,6 +13,9 @@ from urllib.parse import urlsplit, urlunsplit
 
 SHAPES = {'POSTER': 'poster', 'LANDSCAPE': 'wide', 'SQUARE': 'square'}
 CLASSIC_TYPES = {'row.classic', 'row.classic.numbered'}
+# These are the verified widget-payload types, not every type an addon manifest
+# can advertise. Fusion can discard a whole folder's sources if one uses `all`.
+FUSION_MEDIA_TYPES = {'movie', 'series'}
 TYPE_ALIASES = {'movies': 'movie', 'tv': 'series', 'show': 'series', 'shows': 'series'}
 
 
@@ -62,6 +65,7 @@ class FusionConversion:
         self.required = {}
         self.empty_folders = 0
         self.skipped_widgets = 0
+        self.incompatible_catalogs = 0
 
     def issue(self, path, code, message, fields=None):
         self.issues.append({'path': path, 'code': code, 'message': message,
@@ -142,6 +146,10 @@ class FusionConversion:
                 return self.record(raw, path, title, 'unsupported', 'Catalog prefix and media type disagree; resolve the type before exporting.')
         if not cid or not re.fullmatch(r'[a-z0-9_-]+', typ):
             return self.record(raw, path, title, 'unsupported', 'Invalid catalog ID or media type.')
+        if typ not in FUSION_MEDIA_TYPES:
+            self.incompatible_catalogs += 1
+            return self.record(raw, path, title, 'unsupported',
+                'Fusion widget import is verified only for movie and series. Mixed/all or custom media types can make Fusion discard a folder\'s entire source list. This source was omitted; its query was not rewritten. Use a movie/series catalog supplied by the same addon to replace it.')
         if raw.get('genre') is not None and not isinstance(raw['genre'], str):
             return self.record(raw, path, title, 'unsupported', 'Genre must be text.')
         payload = copy.deepcopy(raw) if fusion else {}
@@ -247,14 +255,6 @@ class FusionConversion:
                     self.empty_folders += 1
                     self.issue(fp, 'empty_folder', 'Folder retained without usable sources.')
         else:
-            # Fusion classic addon rows require movie/series. Reject before
-            # recording success or adding an unused required addon.
-            if (isinstance(ds, dict) and ds.get('kind') == 'addonCatalog' and
-                    isinstance(ds.get('payload'), dict) and
-                    TYPE_ALIASES.get(string(ds['payload'].get('type')).lower(), string(ds['payload'].get('type')).lower()) not in {'movie', 'series'}):
-                self.record(ds['payload'], path + '.source', widget['title'], 'unsupported', 'Fusion classic rows require movie or series. Place this catalog in a collection folder.')
-                self.skipped_widgets += 1
-                return None
             source = self.fusion_source(ds, path + '.source', widget['title'])
             if not source:
                 self.skipped_widgets += 1
@@ -314,8 +314,10 @@ class FusionConversion:
             warnings.append('Nuvio focus GIFs, hero artwork/video, title logos and collection view settings have no verified v1 mapping; see the per-entry issues.')
         if self.missing:
             warnings.append(f'{len(self.missing)} addons are not connected; {sum(self.missing.values())} catalog references are omitted. Connecting these addons is optional. Sources from connected addons remain exportable.')
+        if self.incompatible_catalogs:
+            warnings.append(f'{self.incompatible_catalogs} catalog references use media types outside the verified movie/series widget format. They are omitted so an incompatible source cannot erase the other catalogs in its Fusion folder. Mixed/all sources are not relabelled as movie or series; choose compatible catalogs from your addon for these entries.')
         if self.empty_folders:
-            warnings.append(f'{self.empty_folders} folders have no usable sources. Installing an addon later cannot restore omitted catalog references; repair the original Nuvio export and convert again.')
+            warnings.append(f'{self.empty_folders} folders have no usable sources. Review their omitted-source reasons: connect any wanted addons or replace incompatible catalogs in the original layout, then convert again. Installing an addon in Fusion alone cannot restore omitted references.')
         block_reason = ''
         if not counts['preserved']:
             block_reason = 'No usable catalog sources remain. Use the original Nuvio collections export and resolve the source issues; a layout-only Fusion file cannot recover missing catalogs.'
@@ -333,6 +335,7 @@ class FusionConversion:
                     'requiresPartialApproval': False,  # Compatibility field; omissions are warnings only.
                     'widgets': len(widgets), 'folders': folders, 'emptyFolders': self.empty_folders,
                     'skippedWidgets': self.skipped_widgets, 'sourceReferences': len(self.records),
+                    'incompatibleCatalogs': self.incompatible_catalogs,
                     'counts': {k: counts[k] for k in ('preserved', 'unsupported')},
                     'requiredAddonCount': len(self.required),
                     'requiredAddonHosts': list(dict.fromkeys(urlsplit(u).hostname for u in self.required)),

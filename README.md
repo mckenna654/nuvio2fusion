@@ -31,7 +31,7 @@ Nuvio2Fusion preserves the layout and references to your original catalog source
 
 ## Quick start
 
-**Installing on Unraid?** Use the [Unraid installation guide](docs/UNRAID.md) and the [v2.0.4 release downloads](https://github.com/mckenna654/nuvio2fusion/releases/tag/v2.0.4). The public image is `ghcr.io/mckenna654/nuvio2fusion:2.0.4`; no registry login is needed.
+**Installing on Unraid?** Use the [Unraid installation guide](docs/UNRAID.md) and the [v2.0.5 release downloads](https://github.com/mckenna654/nuvio2fusion/releases/tag/v2.0.5). The public image is `ghcr.io/mckenna654/nuvio2fusion:2.0.5`; no registry login is needed.
 
 ### Run with Python
 
@@ -75,7 +75,7 @@ docker run -d \
   --name nuvio2fusion \
   --restart unless-stopped \
   -p 127.0.0.1:7088:7088 \
-  ghcr.io/mckenna654/nuvio2fusion:2.0.4
+  ghcr.io/mckenna654/nuvio2fusion:2.0.5
 ```
 
 `latest` follows successful builds of `main`; `sha-<commit>` identifies a particular build. Version tags are generated when a matching `v<version>` Git tag is published. Builds target Linux `amd64` and `arm64`. Check [Actions](https://github.com/mckenna654/nuvio2fusion/actions) before assuming a particular image tag exists.
@@ -128,8 +128,9 @@ Mappings may override an obsolete embedded URL. Configuration path segments and 
 | Titles and hidden folder titles | Preserved |
 | Cover image URLs | Preserved as remote HTTP(S) artwork references |
 | Poster / landscape / square tiles | Mapped to Fusion poster / wide / square |
-| Multiple addon sources per folder | Preserved in order |
+| Multiple addon sources per folder | Compatible sources preserved in order |
 | Catalog IDs and genre selections | Preserved with Fusion's `type::catalogId` representation |
+| Mixed `all` or custom catalog media type | Omitted with a warning to protect the folder's other sources; never guessed as movie/series |
 | Both `sources` and `catalogSources` | `sources` is authoritative; the legacy mirror is not duplicated |
 | Missing addon URL | Its sources are omitted with a warning; connected addons remain exportable |
 | Nuvio-native TMDB or Trakt query | Reported as unsupported; no speculative Fusion payload is invented |
@@ -139,7 +140,7 @@ Mappings may override an obsolete embedded URL. Configuration path segments and 
 | Existing Fusion-native source | Payload retained; account/library contents are not copied |
 | Unknown widget type | Omitted and reported |
 
-Classic addon rows require `movie` or `series`. Other catalog types can be retained inside collection folders; incompatible classic rows are reported. Empty folders remain visible in the preview. A file with no usable sources cannot be downloaded. Missing or duplicate layout IDs receive deterministic replacements and an issue entry.
+Addon sources in both classic rows and collection folders are limited to the verified `movie` and `series` widget payloads. A mixed `all` source can cause Fusion to discard a folder's entire source list on import, even when the other sources are valid. Incompatible sources are omitted individually and reported; their catalog IDs and types are never rewritten to guess a replacement. Empty folders remain visible in the preview. A file with no usable sources cannot be downloaded. Missing or duplicate layout IDs receive deterministic replacements and an issue entry.
 
 See [the format contract and implementation notes](docs/FUSION.md) for field mappings and evidence.
 
@@ -147,10 +148,13 @@ See [the format contract and implementation notes](docs/FUSION.md) for field map
 
 - **Sources kept:** source references represented in the output. Several folders may refer to the same catalog.
 - **Sources omitted:** references that need a URL, a compatible source, or another repair.
+- **Incompatible catalog types:** mixed `all` or custom-type references excluded from widget payloads. Other movie/series catalogs in the same folder remain exportable.
 - **Layout issues:** settings without a verified mapping, repaired IDs/titles, or empty folders.
 - **Complete:** no detected omission, repair, empty folder or unmapped setting. It is not a guarantee of live catalog access or pixel-identical rendering.
 
 A partial conversion downloads as `fusion-widgets-partial.json`. A complete conversion downloads as `fusion-widgets.json`. The separate `fusion-compatibility-report.json` explains the result. Missing addon URLs, omitted sources and empty folders produce warnings without an acknowledgement checkbox. You can download as long as usable sources and supported widgets remain. Folders relying only on skipped addons retain their tiles but have no catalogs.
+
+**Fusion shows “No source” for some folders after importing a 2.0.4 or earlier export:** check whether those folders contain a catalog with type `all`. Earlier converter versions retained that type, which can make Fusion discard all of the folder's sources. Reconvert the original Nuvio export, or the converter's original Fusion JSON before Fusion discarded its sources, using version 2.0.5 or later. Compatible movie/series sources are kept; mixed/custom sources are listed as omitted. A folder containing only incompatible sources needs movie/series catalogs supplied by your addon. A new export from Fusion cannot recover sources it already discarded. See the [release notes](RELEASE_NOTES.md); re-pulling the pinned 2.0.4 image does not install this correction.
 
 **Recovering an empty file from version 2.0.0:** start again with the original Nuvio export. That version allowed downloads containing folders but no catalog links. Installing AIOMetadata in Fusion afterward cannot reconnect them, and re-importing the empty Fusion file cannot recover the missing IDs. Supply the original addon URLs during conversion, confirm the source counts, then import the corrected widgets. Back up your Fusion layout before replacing the empty copies.
 

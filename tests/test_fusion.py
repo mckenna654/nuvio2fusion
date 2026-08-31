@@ -164,9 +164,59 @@ class FusionTests(unittest.TestCase):
         self.assertEqual(result['previewWidgets'], [])
         self.assertEqual(result['report']['skippedWidgets'], 1)
 
-    def test_custom_media_type_supported_in_collection(self):
-        result = convert_to_fusion(collection(source(typ='anime')), {'my.addon': MANIFEST})
-        self.assertEqual(item(result)['dataSources'][0]['payload']['type'], 'anime')
+    def test_incompatible_type_does_not_poison_other_folder_sources(self):
+        for typ in ('all', 'ALL', 'anime'):
+            with self.subTest(typ=typ):
+                raw = collection(source(cid='movies'), source(cid='mixed', typ=typ),
+                                 source(cid='shows', typ='series'))
+                original = copy.deepcopy(raw)
+                result = convert_to_fusion(raw, {'my.addon': MANIFEST})
+                self.assertEqual([s['payload']['catalogId'] for s in item(result)['dataSources']],
+                                 ['movie::movies', 'series::shows'])
+                self.assertEqual(result['report']['counts'], {'preserved': 2, 'unsupported': 1})
+                self.assertEqual(result['report']['incompatibleCatalogs'], 1)
+                self.assertEqual(result['report']['emptyFolders'], 0)
+                self.assertTrue(result['report']['canExport'])
+                self.assertFalse(result['report']['sourceCoverageComplete'])
+                self.assertFalse(result['report']['requiresPartialApproval'])
+                self.assertIn('query was not rewritten', result['report']['items'][1]['reason'])
+                self.assertTrue(any('incompatible source' in w for w in result['report']['warnings']))
+                self.assertEqual(raw, original)
+
+    def test_incompatible_only_folder_stays_visible_without_an_unused_addon(self):
+        raw = collection(source(typ='all', genre='None'))
+        result = convert_to_fusion(raw, {'my.addon': MANIFEST})
+        self.assertIsNone(result['fusionConfig'])
+        self.assertEqual(item(result)['dataSources'], [])
+        self.assertEqual(item(result)['title'], 'Weekend')
+        self.assertEqual(result['report']['requiredAddonCount'], 0)
+        self.assertEqual(result['report']['emptyFolders'], 1)
+        self.assertEqual(result['report']['incompatibleCatalogs'], 1)
+        self.assertNotIn('TOKEN', json.dumps(result['report']))
+
+    def test_older_fusion_export_can_be_repaired_before_native_import(self):
+        raw = {'exportType': 'fusionWidgets', 'exportVersion': 1, 'requiredAddons': [MANIFEST],
+               'widgets': [{'id': 'home', 'title': 'Home', 'type': 'collection.row',
+                   'dataSource': {'kind': 'collection', 'payload': {'items': [
+                       {'id': 'mixed', 'title': 'Mixed folder', 'imageAspect': 'wide',
+                        'dataSources': [
+                            {'kind': 'addonCatalog', 'payload': {'addonId': MANIFEST, 'type': 'movie', 'catalogId': 'movie::movies', 'genre': 'None'}},
+                            {'kind': 'addonCatalog', 'payload': {'addonId': MANIFEST, 'type': 'all', 'catalogId': 'all::mixed'}},
+                            {'kind': 'addonCatalog', 'payload': {'addonId': MANIFEST, 'type': 'series', 'catalogId': 'series::shows'}},
+                            {'kind': 'localWatchlist', 'payload': {}}]}]}}}]}
+        expected = copy.deepcopy(raw)
+        del expected['widgets'][0]['dataSource']['payload']['items'][0]['dataSources'][1]
+        result = convert_to_fusion(raw)
+        self.assertEqual(result['fusionConfig'], expected)
+        self.assertEqual(result['report']['incompatibleCatalogs'], 1)
+        self.assertTrue(result['report']['canExport'])
+
+    def test_incompatible_only_addon_not_required_when_other_sources_survive(self):
+        raw = collection(source(), source('mixed.addon', typ='all'))
+        result = convert_to_fusion(raw, {'my.addon': MANIFEST,
+                                       'mixed.addon': 'https://mixed.example/manifest.json'})
+        self.assertEqual(result['fusionConfig']['requiredAddons'], [MANIFEST])
+        self.assertEqual(len(item(result)['dataSources']), 1)
 
     def test_unknown_widget_is_not_marked_complete(self):
         result = convert_to_fusion({'widgets': [{'id': 'future', 'type': 'future.widget'}]})
@@ -197,7 +247,7 @@ class FusionTests(unittest.TestCase):
         # The native Nuvio export records logical IDs but drops install URLs.
         # Keep two instances separate even when one supplies almost every source.
         raw = collection(*[source('aio-metadata', f'list.{i}', genre='None') for i in range(341)],
-                         *[source('com.example.second.nuvio', f'custom.{i}', typ='all') for i in range(6)])
+                         *[source('com.example.second.nuvio', f'custom.{i}', typ='series') for i in range(6)])
         original = copy.deepcopy(raw)
         missing = convert_to_fusion(raw)
         self.assertEqual(missing['report']['missingAddons'], [
