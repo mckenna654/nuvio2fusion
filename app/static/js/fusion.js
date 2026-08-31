@@ -220,7 +220,7 @@ function render() {
   $('resultSummary').textContent = `${report.inputFormat} → Fusion widget v1 · ${report.requiredAddonCount} required addons · ${report.issues.length} layout issues.`;
   $('bridgeResult').hidden = !result.bridge;
   $('bridgeManifest').value = result.bridge?.manifestUrl || '';
-  if (result.bridge) $('bridgeSummary').textContent = `${result.bridge.sourceReferences} original mixed references are retained through ${result.bridge.catalogs} movie/series feeds. Keep this Nuvio2Fusion service running; ordinary catalogs still use their original addons directly.`;
+  if (result.bridge) $('bridgeSummary').textContent = `${result.bridge.sourceReferences} original catalog references are retained through ${result.bridge.catalogs} compatible movie/series feeds. Keep this Nuvio2Fusion service running; ordinary unfiltered catalogs still use their original addons directly.`;
   $('coverage').textContent = !report.canExport ? report.exportBlockReason : report.complete
     ? 'All source references and supported layout fields were carried across. Live addon availability and import into your Fusion version still need checking.'
     : `${report.counts.unsupported} sources omitted; ${report.omittedEmptyFolders || 0} empty folders hidden; ${report.emptyFolders - (report.omittedEmptyFolders || 0)} empty folders retained; ${report.skippedWidgets} widgets omitted. Review the issues below. The download is marked partial.`;

@@ -65,7 +65,7 @@ jobs:
             type=sha,format=short
           labels: |
             org.opencontainers.image.title=Nuvio2Fusion
-            org.opencontainers.image.description=Nuvio collections converter and mixed-catalog compatibility addon
+            org.opencontainers.image.description=Nuvio collections converter and catalog compatibility addon
       - name: Build and publish Linux images
         id: build
         uses: docker/build-push-action@v6

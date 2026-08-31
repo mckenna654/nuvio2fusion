@@ -1,5 +1,20 @@
 # Nuvio2Fusion release notes
 
+## 2.1.1 · 1 September 2026
+
+Fix compatibility-backed collections that imported with sources but opened blank in native Fusion. A neutral diagnostic addon confirmed that Fusion adds `limit` and `extra` to its initial catalog request. Version 2.1.0 rejected those parameters before it queried the original addon.
+
+- Accept Fusion's bounded `limit` and empty/default `extra` request shape, while continuing to reject arbitrary upstream query fields. Path and query `skip` pagination remain supported.
+- Honor requested page sizes from 1 through 100 and keep the existing item, byte, scan and timeout limits.
+- Protect meaningful standalone genre selections with a fixed movie or series compatibility feed. Native Fusion re-export showed that widget import drops `payload.genre`; the `None` sentinel remains an ordinary unfiltered direct source.
+- Keep existing 2.1.0 mixed-feed profiles compatible after the container update. New conversions add constrained output metadata only when a fixed-type genre query needs it.
+- Warn that Fusion appends widget imports instead of updating matching IDs. Back up and remove earlier Nuvio-imported rows before importing the regenerated file once, so stale and corrected copies do not coexist.
+- Add regression coverage for the exact native request shape, bounded query rejection, fixed-type profiles, genre preservation and the `None` sentinel. The full suite now contains 69 passing tests.
+
+**Upgrade:** set the Unraid Repository to `ghcr.io/mckenna654/nuvio2fusion:2.1.1`, keep the existing `/data` mapping, and apply. Existing compatibility links benefit from the catalog-request fix immediately. Reconvert the **original Nuvio export** to protect standalone genre filters, using the same reachable server address. Back up Fusion, remove the previous Nuvio-imported collection rows, then import the new file once. Keep the Nuvio2Fusion container and original metadata addon available.
+
+**Validation:** the native diagnosis used a local neutral addon and one disposable test widget; both movie and series items rendered in Fusion when the generic request parameters were accepted. A clean native re-export also proved that source arrays survive the corrected movie/series layout while standalone genre fields do not. The private original export produces 12 rows, 153 nonempty folders and all 341 connected references; 24 references use 45 compatibility catalogs, while six optional-addon references remain explicitly omitted. Private collection files, addon URLs and profile tokens remain outside the repository.
+
 ## 2.1.0 · 31 August 2026
 
 Restore mixed-only collection folders with a persistent compatibility addon. The 2.0.5 safeguard removed `all` references to prevent Fusion rejecting entire folders, but left folders with no movie/series alternative empty. This release serves the original mixed feed as separate, correctly filtered movie and series catalogs.

@@ -78,6 +78,21 @@ class BridgeTests(unittest.TestCase):
         self.assertEqual(self.profile()[1], token)
         self.assertEqual(os.stat(Path(self.temp.name) / 'bridge.sqlite3').st_mode & 0o777, 0o600)
 
+    def test_fixed_type_profile_preserves_a_separate_genre_query(self):
+        plan = self.plan()
+        sources = plan.add(MANIFEST, 'series', 'anime', 'Action', 'Naruto', output_types=('series',))
+        info = plan.finish()
+        token = info['manifestUrl'].split('/')[-2]
+        cid = sources[0]['payload']['catalogId'].split('::')[1]
+        service = BridgeService(self.store, lambda _: {'metas': []})
+        manifest = service.manifest(token)
+        self.assertEqual([(c['type'], c['id']) for c in manifest['catalogs']], [('series', cid)])
+        self.assertEqual(info['catalogs'], 1)
+        self.assertEqual(service.catalog(token, 'series', cid, limit=100), {'metas': []})
+        with self.assertRaises(KeyError):
+            service.catalog(token, 'movie', cid)
+        self.assertIn('genre=Action', service.upstream_url(self.store.load(token)['sources'][0], 0))
+
     def test_pagination_scans_past_pages_with_no_requested_type(self):
         calls = []
         pages = [
@@ -191,7 +206,14 @@ class BridgeTests(unittest.TestCase):
         self.assertEqual(client.get(endpoint + '.json').json(), {'metas': []})
         self.assertEqual(client.get(endpoint + '/skip=0.json').status_code, 200)
         self.assertEqual(client.get(endpoint + '.json?skip=0').status_code, 200)
-        for suffix in ('/skip=-1.json', '/url=https%3A%2F%2Fexample.com.json', '.json?skip=0&skip=1'):
+        # Fusion's native catalog client sends these generic query parameters
+        # on its initial request. The fixed adapter must accept them without
+        # allowing arbitrary upstream query options.
+        self.assertEqual(client.get(endpoint + '.json?limit=100&extra=%7B%7D').status_code, 200)
+        self.assertEqual(client.get(endpoint + '.json?limit=20&extra=%7B%22skip%22%3A0%7D').status_code, 200)
+        for suffix in ('/skip=-1.json', '/url=https%3A%2F%2Fexample.com.json',
+                       '.json?skip=0&skip=1', '.json?limit=0', '.json?limit=101',
+                       '.json?extra=%7B%22genre%22%3A%22Action%22%7D'):
             self.assertIn(client.get(endpoint + suffix).status_code, (400, 404))
         self.assertEqual(client.get('/bridge/' + 'a' * 32 + '/manifest.json').status_code, 404)
 

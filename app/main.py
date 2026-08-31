@@ -14,13 +14,13 @@ from pydantic import BaseModel, ConfigDict, Field
 from fastapi.exceptions import RequestValidationError
 
 from app.fusion import convert_to_fusion
-from app.bridge import BridgeError, BridgePlan, BridgeService, ProfileStore
+from app.bridge import BridgeError, BridgePlan, BridgeService, PAGE_SIZE, ProfileStore
 from app.upstream import UpstreamError
 from urllib.parse import parse_qsl
 
 ROOT = Path(__file__).parent
 MAX_REQUEST_BYTES = 10 * 1024 * 1024
-VERSION = '2.1.0'
+VERSION = '2.1.1'
 app = FastAPI(title='Nuvio2Fusion', version=VERSION,
               description='Convert Nuvio collections into Fusion widget JSON.',
               docs_url=None, redoc_url=None)
@@ -127,19 +127,41 @@ def bridge_manifest(token: str, request: Request):
 
 
 @app.get('/bridge/{token}/catalog/{typ}/{cid}.json')
-@app.get('/bridge/{token}/catalog/{typ}/{cid}/{extra}.json')
-def bridge_catalog(token: str, typ: str, cid: str, request: Request, extra: str = ''):
+@app.get('/bridge/{token}/catalog/{typ}/{cid}/{path_extra}.json')
+def bridge_catalog(token: str, typ: str, cid: str, request: Request, path_extra: str = ''):
     try:
-        pairs = parse_qsl(extra, keep_blank_values=True, strict_parsing=True) if extra else []
-        pairs += list(request.query_params.multi_items())
-        if any(k != 'skip' for k, _ in pairs) or len(pairs) != len(dict(pairs)):
+        path_pairs = parse_qsl(path_extra, keep_blank_values=True, strict_parsing=True) if path_extra else []
+        query_pairs = list(request.query_params.multi_items())
+        if (any(k != 'skip' for k, _ in path_pairs) or
+                any(k not in {'skip', 'limit', 'extra'} for k, _ in query_pairs) or
+                len(path_pairs) != len(dict(path_pairs)) or
+                len(query_pairs) != len(dict(query_pairs))):
             raise ValueError
-        offset = dict(pairs).get('skip', '0')
-        if not offset.isdigit() or len(offset) > 6:
+        values = dict(path_pairs)
+        query = dict(query_pairs)
+        if 'skip' in query:
+            if 'skip' in values:
+                raise ValueError
+            values['skip'] = query['skip']
+        # Fusion sends its generic catalog client options on the first request
+        # as ?limit=N&extra={}. This fixed profile accepts only an empty extra
+        # object or a numeric skip within it; arbitrary upstream options remain
+        # blocked so the route cannot become an open proxy.
+        if query.get('extra'):
+            embedded = json.loads(query['extra'])
+            if not isinstance(embedded, dict) or any(k != 'skip' for k in embedded):
+                raise ValueError
+            if 'skip' in embedded:
+                if 'skip' in values or type(embedded['skip']) not in {int, str}:
+                    raise ValueError
+                values['skip'] = str(embedded['skip'])
+        offset = values.get('skip', '0')
+        limit = query.get('limit', str(PAGE_SIZE))
+        if not offset.isdigit() or len(offset) > 6 or not limit.isdigit() or len(limit) > 3:
             raise ValueError
-        return request.app.state.bridge.catalog(token, typ, cid, int(offset))
-    except ValueError:
-        raise HTTPException(400, 'Only a non-negative skip offset is supported by this fixed catalog.') from None
+        return request.app.state.bridge.catalog(token, typ, cid, int(offset), int(limit))
+    except (ValueError, json.JSONDecodeError):
+        raise HTTPException(400, 'Only a bounded page size and non-negative skip offset are supported by this fixed catalog.') from None
     except KeyError:
         raise HTTPException(404, 'Unknown compatibility profile or catalog.') from None
 

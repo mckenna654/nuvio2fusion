@@ -1,4 +1,4 @@
-"""Persistent, catalog-only compatibility addon for mixed media feeds.
+"""Persistent, catalog-only compatibility addon for imported catalog queries.
 
 Profiles contain original URLs on disk. Public addon URLs carry random bearer
 tokens, never the upstream configuration itself. Profiles survive restarts;
@@ -136,12 +136,23 @@ class BridgePlan:
             self.existing_requirements[manifest] = list(dict.fromkeys(s['manifest'] for s in profile['sources']))
         return self.existing_requirements[manifest]
 
-    def add(self, manifest, typ, catalog_id, genre, name):
+    def add(self, manifest, typ, catalog_id, genre, name, output_types=None):
         identity = source_identity(manifest, typ, catalog_id, genre)
         cid = 'nf.' + hashlib.sha256(canonical(identity).encode()).hexdigest()[:24]
-        self.sources.setdefault(cid, {'id': cid, 'name': name[:160], **identity})
+        outputs = tuple(output_types or MEDIA_TYPES)
+        if not outputs or any(t not in MEDIA_TYPES for t in outputs) or len(outputs) != len(set(outputs)):
+            raise ValueError('Unsupported compatibility output type.')
+        source = {'id': cid, 'name': name[:160], **identity}
+        # Keep the original v2.1.0 profile identity for mixed sources. A
+        # constrained output list is stored only when the bridge protects a
+        # fixed movie/series query such as a separate genre selection.
+        if output_types is not None:
+            source['outputTypes'] = list(outputs)
+        existing = self.sources.setdefault(cid, source)
+        if tuple(existing.get('outputTypes', MEDIA_TYPES)) != outputs:
+            raise ValueError('Conflicting compatibility output types.')
         output = []
-        for media_type in MEDIA_TYPES:
+        for media_type in outputs:
             payload = {'addonId': '', 'catalogId': f'{media_type}::{cid}', 'type': media_type}
             self.payloads.append(payload)
             output.append({'kind': 'addonCatalog', 'payload': payload})
@@ -156,7 +167,8 @@ class BridgePlan:
         for payload in self.payloads:
             payload['addonId'] = manifest
         return {'manifestUrl': manifest, 'sourceReferences': self.references,
-                'catalogs': len(self.sources) * 2, 'persistent': True}
+                'catalogs': sum(len(s.get('outputTypes', MEDIA_TYPES)) for s in self.sources.values()),
+                'persistent': True}
 
 
 class CatalogState:
@@ -183,10 +195,10 @@ class BridgeService:
         catalogs = [{'id': s['id'], 'type': typ,
                      'name': s['name'] + (' · Movies' if typ == 'movie' else ' · Series'),
                      'extra': [{'name': 'skip', 'isRequired': False}]}
-                    for s in profile['sources'] for typ in MEDIA_TYPES]
+                    for s in profile['sources'] for typ in s.get('outputTypes', MEDIA_TYPES)]
         return {'id': 'dev.nuvio2fusion.' + hashlib.sha256(token.encode()).hexdigest()[:12],
-                'name': 'Nuvio2Fusion compatibility', 'version': '2.1.0',
-                'description': 'Original mixed catalogs, separated into movies and series. Keep Nuvio2Fusion and the original addons available.',
+                'name': 'Nuvio2Fusion compatibility', 'version': '2.1.1',
+                'description': 'Original catalog queries adapted for Fusion. Keep Nuvio2Fusion and the original addons available.',
                 'resources': ['catalog'], 'types': list(MEDIA_TYPES), 'catalogs': catalogs}
 
     def _state(self, source):
@@ -209,18 +221,22 @@ class BridgeService:
                 quote(source['catalog'], safe='') + '/' + urlencode(extras, quote_via=quote) + '.json')
         return urlunsplit(p._replace(path=path))
 
-    def catalog(self, token, typ, cid, skip=0):
-        if typ not in MEDIA_TYPES or type(skip) is not int or not 0 <= skip <= MAX_CACHED_ITEMS:
-            raise ValueError('Invalid catalog type or pagination offset.')
+    def catalog(self, token, typ, cid, skip=0, limit=PAGE_SIZE):
+        if (typ not in MEDIA_TYPES or type(skip) is not int or type(limit) is not int or
+                not 0 <= skip <= MAX_CACHED_ITEMS or not 1 <= limit <= 100 or
+                skip + limit > MAX_CACHED_ITEMS):
+            raise ValueError('Invalid catalog type, pagination offset or page size.')
         profile = self.store.load(token)
         source = next((s for s in profile['sources'] if s['id'] == cid), None)
         if source is None:
+            raise KeyError('Unknown compatibility catalog.')
+        if typ not in source.get('outputTypes', MEDIA_TYPES):
             raise KeyError('Unknown compatibility catalog.')
         state = self._state(source)
         if not state.lock.acquire(timeout=5):
             raise UpstreamError('This catalog is being refreshed. Retry shortly.')
         try:
-            target = skip + PAGE_SIZE
+            target = skip + limit
             deadline = time.monotonic() + 25
             for _ in range(MAX_SCAN_PAGES):
                 if state.complete or len(state.items[typ]) >= target:

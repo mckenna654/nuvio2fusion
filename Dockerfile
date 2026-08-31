@@ -1,7 +1,7 @@
 FROM python:3.11-slim
 
 LABEL maintainer="mckenna654"
-LABEL description="Nuvio2Fusion: collection converter and mixed-catalog compatibility addon"
+LABEL description="Nuvio2Fusion: collection converter and catalog compatibility addon"
 
 WORKDIR /app
 

@@ -151,6 +151,8 @@ class FusionConversion:
             return self.record(raw, path, title, 'unsupported', 'Invalid catalog ID or media type.')
         if raw.get('genre') is not None and not isinstance(raw['genre'], str):
             return self.record(raw, path, title, 'unsupported', 'Genre must be text.')
+        genre = string(raw.get('genre'))
+        meaningful_genre = genre if genre.casefold() not in {'', 'none'} else ''
         if typ not in FUSION_MEDIA_TYPES:
             if self.bridge and allow_bridge:
                 try:
@@ -164,10 +166,20 @@ class FusionConversion:
             self.incompatible_catalogs += 1
             return self.record(raw, path, title, 'unsupported',
                 'Fusion widget import is verified only for movie and series. This source was omitted; its query was not rewritten. Enable the compatibility addon for mixed catalogs inside collection folders, or use a compatible upstream catalog.')
+        if meaningful_genre and self.bridge and allow_bridge:
+            try:
+                sources = self.bridge.add(url, typ, cid, meaningful_genre,
+                                          string(raw.get('catalogName')) or title,
+                                          output_types=(typ,))
+            except ValueError:
+                return self.record(raw, path, title, 'unsupported', 'This genre-filtered catalog has unsupported encoded options and cannot be adapted without changing its query.')
+            self.required[url] = None
+            return self.record(raw, path, title, 'preserved',
+                'Original genre-filtered catalog retained through the compatibility addon because Fusion drops separate genre fields during widget import.', sources)
         payload = copy.deepcopy(raw) if fusion else {}
         payload.update(addonId=url, catalogId=f'{typ}::{cid}', type=typ)
-        if not fusion and string(raw.get('genre')):
-            payload['genre'] = raw['genre']
+        if not fusion and meaningful_genre:
+            payload['genre'] = meaningful_genre
         if self.bridge:
             for upstream in self.bridge.upstream_addons(url):
                 self.required[upstream] = None
@@ -353,7 +365,7 @@ class FusionConversion:
         bridge_info = self.bridge.finish() if can_export and self.bridge else None
         if bridge_info:
             self.required[bridge_info['manifestUrl']] = None
-            warnings.append(f'{bridge_info["sourceReferences"]} mixed catalog references use the Nuvio2Fusion compatibility addon. Keep this service running at the exported address and preserve its appdata. Movie/series order is preserved within each feed; their original interleaving is separated. Original addon URLs are saved privately on this server.')
+            warnings.append(f'{bridge_info["sourceReferences"]} catalog references use the Nuvio2Fusion compatibility addon for mixed media or separate genre filters. Keep this service running at the exported address and preserve its appdata. Movie/series order is preserved within each mixed feed; their original interleaving is separated. Original addon URLs are saved privately on this server.')
         complete = can_export and counts['unsupported'] == 0 and not self.issues and self.skipped_widgets == 0
         return {'success': True, 'fusionConfig': {'exportType': 'fusionWidgets', 'exportVersion': 1,
                     'requiredAddons': list(self.required), 'widgets': widgets} if can_export else None,

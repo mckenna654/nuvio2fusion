@@ -17,11 +17,11 @@
 
 Export your configured collections from Nuvio, open the JSON in Nuvio2Fusion, resolve any missing addon URLs, and download a Fusion widget file. Existing Fusion widget exports can also be checked and re-exported.
 
-Nuvio2Fusion preserves the layout and references to your original catalog sources. Ordinary catalogs stay connected directly to their addons. The optional compatibility addon serves mixed catalogs as separate movie and series feeds, keeping the original provider and query. Keep Nuvio2Fusion running when using that addon, and keep your original addons installed for metadata. Accounts and provider configurations are not migrated.
+Nuvio2Fusion preserves the layout and references to your original catalog sources. Ordinary catalogs stay connected directly to their addons. The optional compatibility addon serves mixed catalogs as separate movie and series feeds and protects separate genre selections that Fusion's importer otherwise drops. It keeps the original provider and query. Keep Nuvio2Fusion running when using that addon, and keep your original addons installed for metadata. Accounts and provider configurations are not migrated.
 
 - Preserve collection and folder order, titles, covers, tile shapes and hidden folder titles.
 - Keep multiple catalog sources in each folder, including their genre selections.
-- Restore mixed-only folders through persistent compatibility profiles, instead of dropping their `all` sources.
+- Restore mixed-only folders and genre-filtered sources through persistent compatibility profiles.
 - Resolve addon IDs to their full manifest URLs without guessing another provider.
 - Preserve supported classic rows and native sources when the input is already a Fusion export.
 - Review every omitted source, missing URL and unmapped visual setting before importing.
@@ -32,7 +32,7 @@ Nuvio2Fusion preserves the layout and references to your original catalog source
 
 ## Quick start
 
-**Installing on Unraid?** Use the [Unraid installation guide](docs/UNRAID.md) and the [v2.1.0 release downloads](https://github.com/mckenna654/nuvio2fusion/releases/tag/v2.1.0). The public image is `ghcr.io/mckenna654/nuvio2fusion:2.1.0`; no registry login is needed. **Upgrading from 2.0.x requires an appdata path mapped to `/data` if you enable mixed-catalog support.**
+**Installing on Unraid?** Use the [Unraid installation guide](docs/UNRAID.md) and the [v2.1.1 release downloads](https://github.com/mckenna654/nuvio2fusion/releases/tag/v2.1.1). The public image is `ghcr.io/mckenna654/nuvio2fusion:2.1.1`; no registry login is needed. **Compatibility mode requires an appdata path mapped to `/data`.**
 
 ### Run with Python
 
@@ -77,7 +77,7 @@ docker run -d \
   --restart unless-stopped \
   -p 127.0.0.1:7088:7088 \
   -v nuvio2fusion-data:/data \
-  ghcr.io/mckenna654/nuvio2fusion:2.1.0
+  ghcr.io/mckenna654/nuvio2fusion:2.1.1
 ```
 
 `latest` follows successful builds of `main`; `sha-<commit>` identifies a particular build. Version tags are generated when a matching `v<version>` Git tag is published. Builds target Linux `amd64` and `arm64`. Check [Actions](https://github.com/mckenna654/nuvio2fusion/actions) before assuming a particular image tag exists.
@@ -90,9 +90,9 @@ For Unraid, the [installation guide](docs/UNRAID.md) covers the [versioned XML t
 2. **Export collections from Nuvio.** Use its collection-management export. The usual result is a JSON array of collections, not a manifest URL or account backup.
 3. **Upload or paste the JSON** into Nuvio2Fusion. The **Addon to connect** menu lists addon IDs found in your file, with their catalog counts.
 4. **Connect only the addons you use.** Choose an addon, paste its normal URL in **Addon manifest URL**, and click **Connect addon**, then select **Convert to Fusion**. For `aio-metadata`, use your own configuration's full install URL, not its homepage. Leave optional addons such as Bingecat blank: their sources are omitted with a warning, while connected sources remain exportable. You can also convert first and fill the optional missing-URL fields. No JSON formatting is needed.
-5. **Keep mixed catalogs enabled.** Set **Nuvio2Fusion address reachable from Fusion** to your server's LAN URL, such as `http://192.168.1.10:7088`. Do not use localhost for another device. Leave **Hide folders with no usable sources** enabled to omit optional-addon-only tiles. Convert and review the results.
+5. **Keep catalog compatibility enabled.** Set **Nuvio2Fusion address reachable from Fusion** to your server's LAN URL, such as `http://192.168.1.10:7088`. Do not use localhost for another device. This preserves mixed feeds and separate genre filters. Leave **Hide folders with no usable sources** enabled to omit optional-addon-only tiles. Convert and review the results.
 6. **Download Fusion widgets.** The compatibility report is a separate download for your review; it is not a Fusion import file.
-7. **Import through Fusion's widget import.** Install the listed compatibility addon if prompted; its private manifest URL is also shown below the results. Keep both Nuvio2Fusion and the original metadata addons available. Test a few folders after import.
+7. **Replace the earlier converted rows, then import once.** Fusion appends imports instead of updating matching widget IDs. After making a backup, remove your earlier Nuvio-imported collection rows before importing the corrected file; otherwise old and corrected copies coexist. Install the listed compatibility addon if prompted, keep both Nuvio2Fusion and the original metadata addons available, and test a few folders after import.
 
 If your Fusion device only offers URL import, use a Fusion client that accepts the file/text or a private hosting method you control. Widget files can contain account-specific install URLs: **do not publish them to a public gist or repository**.
 
@@ -131,7 +131,8 @@ Mappings may override an obsolete embedded URL. Configuration path segments and 
 | Cover image URLs | Preserved as remote HTTP(S) artwork references |
 | Poster / landscape / square tiles | Mapped to Fusion poster / wide / square |
 | Multiple addon sources per folder | Compatible sources preserved in order |
-| Catalog IDs and genre selections | Preserved with Fusion's `type::catalogId` representation |
+| Catalog IDs | Preserved with Fusion's `type::catalogId` representation |
+| Separate genre selection | Compatibility addon keeps the original query because native Fusion import drops `payload.genre`; without compatibility, the field is emitted but may be lost on import |
 | Mixed `all` or custom catalog media type in a folder | Compatibility addon fetches the original feed and separates actual movie/series items; omitted with a warning if disabled |
 | Both `sources` and `catalogSources` | `sources` is authoritative; the legacy mirror is not duplicated |
 | Missing addon URL | Its sources are omitted with a warning; connected addons remain exportable |
@@ -142,7 +143,7 @@ Mappings may override an obsolete embedded URL. Configuration path segments and 
 | Existing Fusion-native source | Payload retained; account/library contents are not copied |
 | Unknown widget type | Omitted and reported |
 
-Fusion widget payloads use `movie` and `series`. A raw `all` source can make Fusion discard a folder's source list. The compatibility addon requests the original catalog using its original type, ID and genre, then filters returned items by their actual type. It does not simply rename `all` to `movie`. Both feeds stay in the same folder. Original ordering is preserved within each type, but movie/series interleaving becomes two feeds. Mixed classic rows still need to be placed in collection folders. Unsupported item types cannot be guessed. A file with no usable sources cannot be downloaded.
+Fusion widget payloads use `movie` and `series`. A raw `all` source can make Fusion discard a folder's source list. Native import also removes a separate `payload.genre` value. The compatibility addon keeps both query forms on the server: it filters a mixed result into movie and series feeds, while a fixed-type genre query remains one feed of its original type. It never substitutes a new upstream catalog ID. Original ordering is preserved within each mixed type, but movie/series interleaving becomes two feeds. Mixed classic rows still need to be placed in collection folders. Unsupported item types cannot be guessed. A file with no usable sources cannot be downloaded.
 
 See [the format contract and implementation notes](docs/FUSION.md) for field mappings and evidence.
 
@@ -150,14 +151,16 @@ See [the format contract and implementation notes](docs/FUSION.md) for field map
 
 - **Sources kept:** source references represented in the output. Several folders may refer to the same catalog.
 - **Sources omitted:** references that need a URL, a compatible source, or another repair.
-- **Compatibility addon:** mixed references retained as two filtered feeds per original catalog. `bridgedSourceReferences` counts original references, not the expanded payload count.
+- **Compatibility addon:** mixed references become two filtered feeds; fixed-type genre references remain one feed. `bridgedSourceReferences` counts original references, not expanded payloads.
 - **Incompatible catalog types:** references excluded when compatibility is disabled, or when a classic row cannot hold them.
 - **Layout issues:** settings without a verified mapping, repaired IDs/titles, or empty folders.
 - **Complete:** no detected omission, repair, empty folder or unmapped setting. It is not a guarantee of live catalog access or pixel-identical rendering.
 
 A partial conversion downloads as `fusion-widgets-partial.json`. A complete conversion downloads as `fusion-widgets.json`. The separate `fusion-compatibility-report.json` explains the result. Missing addon URLs, omitted sources and empty folders produce warnings without an acknowledgement checkbox. You can download as long as usable sources and supported widgets remain. The browser hides empty folders by default; switch this off to retain their tiles. API callers retain empty tiles unless `omit_empty_folders` is true.
 
-**Empty mixed-only folders from 2.0.x:** start from the original Nuvio export in 2.1.0 with compatibility enabled. Version 2.0.5 removed mixed sources to protect valid siblings, but could not restore mixed-only folders. An already-partial export no longer contains those references. A converter export from before removal can also be repaired; an export from Fusion after it discarded sources cannot recover them.
+**Empty mixed-only folders from 2.0.x:** start from the original Nuvio export in 2.1.1 with compatibility enabled. Version 2.0.5 removed mixed sources to protect valid siblings, but could not restore mixed-only folders. An already-partial export no longer contains those references. A converter export from before removal can also be repaired; an export from Fusion after it discarded sources cannot recover them.
+
+**Updating an imported layout:** Fusion's widget import appends rows, even when IDs match. Back up the current widget export, remove the earlier Nuvio-imported collection rows, then import the newly generated file once. Repeated imports can leave an old row selected while a corrected duplicate exists.
 
 ### Keeping compatibility links working
 
@@ -220,7 +223,7 @@ The machine-readable API schema is available at `/openapi.json` on your local in
 | `POST` | `/api/fusion/convert` | Convert JSON and return `fusionConfig` plus `report` |
 | `GET` | `/api/bridge/settings` | Default server address and LAN-upstream policy |
 | `GET` | `/bridge/{token}/manifest.json` | Registered compatibility profile manifest |
-| `GET` | `/bridge/{token}/catalog/{type}/{id}/skip={offset}.json` | Filtered page; skip is optional and also accepted as a query parameter |
+| `GET` | `/bridge/{token}/catalog/{type}/{id}/skip={offset}.json` | Filtered page; bounded `limit` and empty/default `extra` options used by Fusion are accepted |
 
 Example request:
 
@@ -258,7 +261,7 @@ curl --fail-with-body http://127.0.0.1:7088/api/fusion/convert \
 
 `export_data` accepts a Nuvio collection array, a single collection, `{ "collections": [...] }`, a Fusion widget array, or a Fusion widget v1 envelope. Full-backup fields outside `collections` are not transferred and are reported. Manifests and unrecognized structures are rejected.
 
-To enable compatibility, add `"bridge_url": "http://YOUR-UNRAID-IP:7088"` and optionally `"omit_empty_folders": true` to the request. Omitting `bridge_url` keeps stateless 2.0.5 behavior. The response's separate `bridge` object contains the private manifest URL and feed counts; only `fusionConfig` should be imported into Fusion. Storage failures return 503. Catalog upstream failures return 502, unknown profiles 404, and invalid pagination 400.
+To enable compatibility, add `"bridge_url": "http://YOUR-UNRAID-IP:7088"` and optionally `"omit_empty_folders": true` to the request. Omitting `bridge_url` keeps stateless direct behavior. The response's separate `bridge` object contains the private manifest URL and feed counts; only `fusionConfig` should be imported into Fusion. Storage failures return 503. Catalog upstream failures return 502, unknown profiles 404, and invalid pagination 400.
 
 Responses contain `success`, `fusionConfig`, `previewWidgets` and `report`. `success` means the input was analyzed; check **`report.canExport`** before saving an import. Missing addons are warnings and do not block connected sources. If no usable sources or supported widgets remain, `fusionConfig` is `null`, `previewWidgets` contains the diagnostic layout, and `report.exportBlockReason` explains the repair. Once exportable, save **only `fusionConfig`**. `report.requiresPartialApproval` is retained for compatibility and is always `false`; omissions are listed in `report.missingAddons`, source records and warnings. Invalid structures/mappings return HTTP 400, invalid request fields 422, cross-origin posts 403, and oversized requests 413.
 
@@ -271,6 +274,8 @@ Responses contain `success`, `fusionConfig`, `previewWidgets` and `report`. `suc
 | Empty folders from a 2.0.0 download | Reconvert the original Nuvio JSON with URLs for the addons you want to keep. Manually installing an addon cannot restore omitted catalog references. |
 | Download blocked | No usable sources or supported widgets remain. Connect at least one addon you use, or review the source report for unsupported queries. |
 | Tiles appear, but catalogs fail | Confirm the referenced addon is installed, accessible and still serves those catalog IDs. Conversion does not test the service. |
+| Compatibility tile opens blank on 2.1.0 | Update the container to 2.1.1. Fusion sends `limit` and `extra` on its initial catalog request; 2.1.0 rejected that valid request. Existing persistent profile links continue to work after the update. |
+| Old and corrected rows both appear | Fusion appends widget imports. Back up, remove the previous Nuvio-imported rows, then import the corrected file once. |
 | Artwork is missing | The original URL must remain reachable. Example URLs intentionally do not resolve. |
 | File is marked partial with all sources kept | Review unmapped visual settings or repaired layout IDs. Source coverage and layout fidelity are separate. |
 | Invalid JSON | Export collections again and avoid copying Markdown code fences into the input. |

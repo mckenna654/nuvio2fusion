@@ -33,10 +33,10 @@
           <label for="addonUrls">Addon URL mappings (JSON object)</label><textarea id="addonUrls" rows="5" spellcheck="false" autocomplete="off" placeholder='{"my.addon":"https://your-addon/config/manifest.json"}'></textarea>
           <p class="hint">Use the original addon ID as the key. Separate addons need separate URLs. Do not substitute a different provider’s URL unless its catalog IDs match.</p>
         </details>
-        <details open><summary>Mixed catalogs &amp; compatibility addon</summary>
-          <label class="check"><input id="useBridge" type="checkbox" checked>Keep mixed catalogs using the compatibility addon</label>
+        <details open><summary>Catalog compatibility addon</summary>
+          <label class="check"><input id="useBridge" type="checkbox" checked>Keep mixed catalogs and genre filters using the compatibility addon</label>
           <div id="bridgeOptions"><label for="bridgeUrl">Nuvio2Fusion address reachable from Fusion</label><input id="bridgeUrl" type="url" autocomplete="off" placeholder="http://YOUR-UNRAID-IP:7088">
-          <p class="hint">Use your Unraid LAN address, not localhost, for other devices. Mixed catalogs become movie and series feeds in the same folder. Keep this container running and map persistent appdata to <code>/data</code>; private upstream URLs are stored there. The addon fetches catalog pages when Fusion browses them.</p></div>
+          <p class="hint">Use your Unraid LAN address, not localhost, for other devices. Mixed catalogs become movie and series feeds; separate genre selections stay filtered after import. Keep this container running and map persistent appdata to <code>/data</code>; private upstream URLs are stored there. The addon fetches catalog pages when Fusion browses them.</p></div>
           <label class="check"><input id="omitEmptyFolders" type="checkbox" checked>Hide folders with no usable sources</label>
           <p class="hint">Optional-addon-only folders are omitted with a warning. Turn this off to keep their empty tiles.</p>
         </details>
@@ -52,7 +52,7 @@
           <div id="stats" class="stats"></div><p id="resultSummary"></p><p id="coverage" class="notice"></p>
           <div id="bridgeResult" class="notice" hidden><strong>Compatibility addon required</strong><p id="bridgeSummary"></p><label for="bridgeManifest">Private addon manifest URL</label><input id="bridgeManifest" type="text" readonly><p class="hint">This URL is also included in the widget file's required addons. Install it in Fusion if prompted, alongside your original metadata addon. Keep it private. Preserve appdata and the server address across updates.</p></div>
           <div class="downloads"><button id="downloadFusion" type="button" class="primary">Download Fusion widgets</button><button id="downloadReport" type="button">Compatibility report</button></div>
-          <p class="hint">Back up your Fusion widgets, then import the downloaded JSON. Only connected addons are included. Missing addons show warnings; downloads are blocked only when no usable sources or widgets remain.</p>
+          <p class="hint">Back up your Fusion widgets and remove earlier Nuvio-imported rows before importing this file once. Fusion appends imports instead of updating rows with the same IDs, so importing over an older conversion leaves old and corrected rows together. Only connected addons are included. Missing addons show warnings; downloads are blocked only when no usable sources or widgets remain.</p>
           <details open><summary>Warnings & requirements</summary><ul id="warnings"></ul></details>
           <details id="issuesSection" open><summary>Settings that need attention</summary><ul id="issues"></ul></details>
           <div class="filters"><label class="sr-only" for="search">Search sources</label><input id="search" type="search" placeholder="Find a folder, catalog or issue…"><label class="sr-only" for="statusFilter">Filter results</label><select id="statusFilter"><option value="all">All sources</option><option value="preserved">Preserved</option><option value="unsupported">Needs attention</option></select></div>

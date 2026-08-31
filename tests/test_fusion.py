@@ -1,5 +1,6 @@
 import copy
 import json
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -42,6 +43,28 @@ class FusionTests(unittest.TestCase):
         self.assertEqual([s['payload']['catalogId'] for s in folder['dataSources']], ['movie::private_AI_recipe', 'series::tmdb.top'])
         self.assertEqual(folder['dataSources'][0]['payload']['genre'], 'Science Fiction')
         self.assertTrue(result['report']['complete'])
+
+    def test_genre_query_uses_fixed_type_bridge_when_available(self):
+        with tempfile.TemporaryDirectory() as directory:
+            from app.bridge import BridgePlan, ProfileStore
+            plan = BridgePlan(ProfileStore(directory), 'http://192.168.1.10:7088')
+            result = convert_to_fusion(collection(source(typ='series', cid='anime', genre='Action')),
+                                       {'my.addon': MANIFEST}, plan)
+            data_sources = item(result)['dataSources']
+            self.assertEqual(len(data_sources), 1)
+            self.assertEqual(data_sources[0]['payload']['type'], 'series')
+            self.assertNotIn('genre', data_sources[0]['payload'])
+            self.assertEqual(result['report']['bridgedSourceReferences'], 1)
+            self.assertEqual(result['bridge']['catalogs'], 1)
+            self.assertIn('genre-filtered', result['report']['items'][0]['reason'])
+
+    def test_none_genre_sentinel_remains_a_direct_unfiltered_source(self):
+        with tempfile.TemporaryDirectory() as directory:
+            from app.bridge import BridgePlan, ProfileStore
+            plan = BridgePlan(ProfileStore(directory), 'http://192.168.1.10:7088')
+            result = convert_to_fusion(collection(source(genre='None')), {'my.addon': MANIFEST}, plan)
+            self.assertEqual(result['report']['bridgedSourceReferences'], 0)
+            self.assertNotIn('genre', item(result)['dataSources'][0]['payload'])
 
     def test_missing_url_is_reported_with_a_repair_key(self):
         result = convert_to_fusion(collection(source(), source('other')))
