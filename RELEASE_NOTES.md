@@ -1,5 +1,16 @@
 # Nuvio2Fusion release notes
 
+## 2.0.4 · 31 August 2026
+
+Public Unraid release with the complete Nuvio-to-Fusion workflow and optional-addon support from 2.0.3.
+
+- Publish versioned Linux `amd64` and `arm64` images, a pinned Unraid template, Compose file, install guide and checksummed install bundle.
+- Fix the new container smoke test to retry connection resets and early HTTP disconnects during startup, with a bounded deadline. Conversion behavior is unchanged.
+- Add startup-retry regression tests; 43 automated tests run on Python 3.11 and 3.14 before image publication.
+- Verify the published container's non-root user, health endpoint, page and example conversion on the CI runner.
+
+The 2.0.3 image built, but its initial startup-check workflow failed before readiness. This release corrects that validation issue without moving the earlier tag. Use `ghcr.io/mckenna654/nuvio2fusion:2.0.4` and the [Unraid guide](docs/UNRAID.md).
+
 ## 2.0.3 · 31 August 2026
 
 Optional addons no longer block exports. Connect only the addons you use; missing instances such as Bingecat are reported without preventing export of connected AIOMetadata catalogs.

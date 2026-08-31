@@ -31,7 +31,7 @@ Nuvio2Fusion preserves the layout and references to your original catalog source
 
 ## Quick start
 
-**Installing on Unraid?** Use the [Unraid installation guide](docs/UNRAID.md) and the [v2.0.3 release downloads](https://github.com/mckenna654/nuvio2fusion/releases/tag/v2.0.3). The public image is `ghcr.io/mckenna654/nuvio2fusion:2.0.3`; no registry login is needed.
+**Installing on Unraid?** Use the [Unraid installation guide](docs/UNRAID.md) and the [v2.0.4 release downloads](https://github.com/mckenna654/nuvio2fusion/releases/tag/v2.0.4). The public image is `ghcr.io/mckenna654/nuvio2fusion:2.0.4`; no registry login is needed.
 
 ### Run with Python
 
@@ -75,7 +75,7 @@ docker run -d \
   --name nuvio2fusion \
   --restart unless-stopped \
   -p 127.0.0.1:7088:7088 \
-  ghcr.io/mckenna654/nuvio2fusion:2.0.3
+  ghcr.io/mckenna654/nuvio2fusion:2.0.4
 ```
 
 `latest` follows successful builds of `main`; `sha-<commit>` identifies a particular build. Version tags are generated when a matching `v<version>` Git tag is published. Builds target Linux `amd64` and `arm64`. Check [Actions](https://github.com/mckenna654/nuvio2fusion/actions) before assuming a particular image tag exists.

@@ -1,5 +1,6 @@
 """Exercise a running release container with neutral data and no provider calls."""
 import json
+import http.client
 import sys
 import time
 import urllib.error
@@ -19,7 +20,7 @@ def check(base):
         try:
             health = request('/api/health')
             break
-        except (urllib.error.URLError, TimeoutError):
+        except (OSError, http.client.HTTPException):
             if time.monotonic() >= deadline:
                 raise RuntimeError('Container did not become ready within 45 seconds.') from None
             time.sleep(1)

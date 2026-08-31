@@ -16,7 +16,7 @@ from app.fusion import convert_to_fusion
 
 ROOT = Path(__file__).parent
 MAX_REQUEST_BYTES = 10 * 1024 * 1024
-app = FastAPI(title='Nuvio2Fusion', version='2.0.3',
+app = FastAPI(title='Nuvio2Fusion', version='2.0.4',
               description='Convert Nuvio collections into Fusion widget JSON.',
               docs_url=None, redoc_url=None)
 app.mount('/static', StaticFiles(directory=ROOT / 'static'), name='static')
@@ -89,7 +89,7 @@ async def index():
 
 @app.get('/api/health')
 async def health():
-    return {'status': 'ok', 'app': 'Nuvio2Fusion', 'version': '2.0.3'}
+    return {'status': 'ok', 'app': 'Nuvio2Fusion', 'version': '2.0.4'}
 
 
 @app.get('/api/presets/{name}')
