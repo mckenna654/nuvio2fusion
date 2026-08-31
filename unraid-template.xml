@@ -1,23 +1,23 @@
 <?xml version="1.0"?>
 <Container version="2">
-  <Name>XP2AIOM</Name>
-  <Repository>ghcr.io/mckenna654/xp2aiom:latest</Repository>
-  <Registry>https://github.com/mckenna654/xp2aiom/pkgs/container/xp2aiom</Registry>
+  <Name>Nuvio2Fusion</Name>
+  <Repository>ghcr.io/mckenna654/nuvio2fusion:latest</Repository>
+  <Registry>https://github.com/mckenna654/nuvio2fusion/pkgs/container/nuvio2fusion</Registry>
   <Network>bridge</Network>
   <MyIP/>
   <Shell>sh</Shell>
   <Privileged>false</Privileged>
-  <Support>https://github.com/mckenna654/xp2aiom/issues</Support>
-  <Project>https://github.com/mckenna654/xp2aiom</Project>
+  <Support>https://github.com/mckenna654/nuvio2fusion/issues</Support>
+  <Project>https://github.com/mckenna654/nuvio2fusion</Project>
   <Overview>
-    Nuvio / Xperience ➔ AIOMetadata Bridge
+    Nuvio ➔ Fusion layout converter
     
-    Self-hosted WebGUI application that connects to your Nuvio/Xperience account or imports widget/manifest JSON exports and converts them into 1-click importable AIOMetadata catalog configurations for Stremio.
+    Convert configured Nuvio collections into Fusion widget JSON while preserving addon sources. No account login. Keep on a trusted network; exported addon URLs may contain secrets.
   </Overview>
   <Category>MediaApp:Video MediaServer:Other Tools:Utilities</Category>
   <WebUI>http://[IP]:[PORT:7088]/</WebUI>
-  <TemplateURL>https://raw.githubusercontent.com/mckenna654/xp2aiom/main/unraid-template.xml</TemplateURL>
-  <Icon>https://raw.githubusercontent.com/mckenna654/xp2aiom/main/app/static/icon.png</Icon>
+  <TemplateURL>https://raw.githubusercontent.com/mckenna654/nuvio2fusion/main/unraid-template.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/mckenna654/nuvio2fusion/main/app/static/brand/icon.png</Icon>
   <ExtraParams/>
   <PostArgs/>
   <CPUset/>
@@ -25,7 +25,7 @@
   <DonateText/>
   <DonateLink/>
   <Description>
-    Self-hosted bridge connecting Nuvio/Xperience layouts to AIOMetadata.
+    Local Nuvio-to-Fusion layout converter.
   </Description>
   <Networking>
     <Mode>bridge</Mode>
@@ -51,5 +51,5 @@
     </Variable>
   </Environment>
   <Labels/>
-  <Config Name="WebUI Port" Target="7088" Default="7088" Mode="tcp" Description="Port for the XP2AIOM Web UI" Type="Port" Display="always" Required="true" Mask="false">7088</Config>
+  <Config Name="WebUI Port" Target="7088" Default="7088" Mode="tcp" Description="Port for the Nuvio2Fusion Web UI" Type="Port" Display="always" Required="true" Mask="false">7088</Config>
 </Container>

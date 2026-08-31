@@ -1,0 +1,46 @@
+[
+  {
+    "id": "weekend",
+    "title": "Weekend picks",
+    "folders": [
+      {
+        "id": "movies",
+        "title": "Movies",
+        "tileShape": "LANDSCAPE",
+        "hideTitle": true,
+        "coverImageUrl": "https://art.example.invalid/movies.jpg",
+        "sources": [
+          {
+            "provider": "addon",
+            "addonId": "my.metadata",
+            "addonBaseUrl": "https://metadata.example.invalid/my-config",
+            "type": "movie",
+            "catalogId": "popular"
+          },
+          {
+            "provider": "addon",
+            "addonId": "my.metadata",
+            "addonBaseUrl": "https://metadata.example.invalid/my-config",
+            "type": "movie",
+            "catalogId": "top",
+            "genre": "Science Fiction"
+          }
+        ]
+      },
+      {
+        "id": "shows",
+        "title": "Series",
+        "tileShape": "POSTER",
+        "hideTitle": false,
+        "catalogSources": [
+          {
+            "addonId": "my.metadata",
+            "addonBaseUrl": "https://metadata.example.invalid/my-config",
+            "type": "series",
+            "catalogId": "popular"
+          }
+        ]
+      }
+    ]
+  }
+]

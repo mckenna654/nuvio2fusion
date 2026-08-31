@@ -1,0 +1,3236 @@
+{
+  "exportType": "fusionWidgets",
+  "exportVersion": 1,
+  "requiredAddons": [
+    "https://addon.example.invalid/profile/manifest.json"
+  ],
+  "widgets": [
+    {
+      "dataSource": {
+        "kind": "collection",
+        "payload": {
+          "items": [
+            {
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::trakt_watchlist_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::trakt_watchlist_series",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::anilist_watching_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::anilist_watching_series",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::anilist_planning_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::anilist_planning_series",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "localWatchlist",
+                  "payload": {
+                    "filter": "all"
+                  }
+                }
+              ],
+              "hideTitle": true,
+              "id": "fb9dcb1a-d615-4471-941f-a09da01b3d47",
+              "imageAspect": "wide",
+              "imageURL": "https://art.example.invalid/covers/fb9dcb1a-d615-4471-941f-a09da01b3d47.webp",
+              "title": "Trakt Watchlist"
+            },
+            {
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::snoak_top100_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::snoak_top100_series",
+                    "type": "series"
+                  }
+                }
+              ],
+              "hideTitle": true,
+              "id": "01e6b8e8-7363-4eb2-a47c-8d00a459484f",
+              "imageAspect": "wide",
+              "imageURL": "https://art.example.invalid/covers/01e6b8e8-7363-4eb2-a47c-8d00a459484f.webp",
+              "title": "For You (Top 100 Today)"
+            },
+            {
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::trending_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::trending_series",
+                    "type": "series"
+                  }
+                }
+              ],
+              "hideTitle": true,
+              "id": "b9422ae5-3ae2-4281-bd9f-aa96446ebc48",
+              "imageAspect": "wide",
+              "imageURL": "https://art.example.invalid/covers/b9422ae5-3ae2-4281-bd9f-aa96446ebc48.webp",
+              "title": "Trending"
+            },
+            {
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::tmdb_popular_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::tmdb_popular_series",
+                    "type": "series"
+                  }
+                }
+              ],
+              "hideTitle": true,
+              "id": "aca20f79-a327-4e0a-8a88-23441c44550c",
+              "imageAspect": "wide",
+              "imageURL": "https://art.example.invalid/covers/aca20f79-a327-4e0a-8a88-23441c44550c.webp",
+              "title": "Popular"
+            },
+            {
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::trakt_trending_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::trakt_trending_series",
+                    "type": "series"
+                  }
+                }
+              ],
+              "hideTitle": true,
+              "id": "56aa7b3e-74f6-4ea1-8c15-023ce40f80fb",
+              "imageAspect": "wide",
+              "imageURL": "https://art.example.invalid/covers/56aa7b3e-74f6-4ea1-8c15-023ce40f80fb.webp",
+              "title": "Trakt Trending"
+            },
+            {
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::trakt_popular_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::trakt_popular_series",
+                    "type": "series"
+                  }
+                }
+              ],
+              "hideTitle": true,
+              "id": "b8697551-eaa9-4bff-89e7-6bab8db492d0",
+              "imageAspect": "wide",
+              "imageURL": "https://art.example.invalid/covers/b8697551-eaa9-4bff-89e7-6bab8db492d0.webp",
+              "title": "Trakt Popular"
+            },
+            {
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::trakt_anticipated_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::trakt_anticipated_series",
+                    "type": "series"
+                  }
+                }
+              ],
+              "hideTitle": true,
+              "id": "ffdd949e-b386-4f35-81e4-92af4e9856b9",
+              "imageAspect": "wide",
+              "imageURL": "https://art.example.invalid/covers/ffdd949e-b386-4f35-81e4-92af4e9856b9.webp",
+              "title": "Trakt Anticipated"
+            },
+            {
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::trending_imdb_top100_movies",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "hideTitle": true,
+              "id": "14bf7291-d231-4278-9f1e-377f76bebfdf",
+              "imageAspect": "wide",
+              "imageURL": "https://art.example.invalid/covers/14bf7291-d231-4278-9f1e-377f76bebfdf.webp",
+              "title": "IMDb Top 100"
+            },
+            {
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::trending_most_popular_top20_movies",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "hideTitle": true,
+              "id": "240175d6-7fc4-4017-abdc-97dadfb09da9",
+              "imageAspect": "wide",
+              "imageURL": "https://art.example.invalid/covers/240175d6-7fc4-4017-abdc-97dadfb09da9.webp",
+              "title": "Most Popular (Top 20)"
+            }
+          ]
+        }
+      },
+      "id": "collection.b1e69a60-c75f-4622-97b4-fd165e008145",
+      "title": "Trending",
+      "type": "collection.row"
+    },
+    {
+      "dataSource": {
+        "kind": "collection",
+        "payload": {
+          "items": [
+            {
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::streaming_netflix_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::streaming_netflix_series",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::snoak_netflix_top10_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::snoak_netflix_top10_series",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::snoak_latest_netflix_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::snoak_latest_netflix_series",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::streaming_netflix_toprated_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::streaming_netflix_toprated_series",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::streaming_netflix_originals_series",
+                    "type": "series"
+                  }
+                }
+              ],
+              "hideTitle": true,
+              "id": "c721943f-0b85-4d54-ba16-c7f79826c27f",
+              "imageAspect": "wide",
+              "imageURL": "https://art.example.invalid/covers/c721943f-0b85-4d54-ba16-c7f79826c27f.webp",
+              "title": "Netflix"
+            },
+            {
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::streaming_prime_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::streaming_prime_series",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::snoak_prime_top10_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::snoak_prime_top10_series",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::snoak_latest_prime_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::snoak_latest_prime_series",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::streaming_prime_toprated_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::streaming_prime_toprated_series",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::streaming_prime_originals_series",
+                    "type": "series"
+                  }
+                }
+              ],
+              "hideTitle": true,
+              "id": "8cde5336-855a-47f5-a233-a2893aa0ffbf",
+              "imageAspect": "wide",
+              "imageURL": "https://art.example.invalid/covers/8cde5336-855a-47f5-a233-a2893aa0ffbf.webp",
+              "title": "Prime Video"
+            },
+            {
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::streaming_disney_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::streaming_disney_series",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::snoak_disney_top10_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::snoak_disney_top10_series",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::snoak_latest_disney_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::snoak_latest_disney_series",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::streaming_disney_toprated_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::streaming_disney_toprated_series",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::streaming_disney_originals_series",
+                    "type": "series"
+                  }
+                }
+              ],
+              "hideTitle": true,
+              "id": "58d7b034-acd8-40fb-bdc6-07408f162184",
+              "imageAspect": "wide",
+              "imageURL": "https://art.example.invalid/covers/58d7b034-acd8-40fb-bdc6-07408f162184.webp",
+              "title": "Disney+"
+            },
+            {
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::streaming_hbo_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::streaming_hbo_series",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::snoak_hbo_top10_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::snoak_hbo_top10_series",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::snoak_latest_hbo_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::snoak_latest_hbo_series",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::streaming_hbo_toprated_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::streaming_hbo_toprated_series",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::streaming_hbo_originals_series",
+                    "type": "series"
+                  }
+                }
+              ],
+              "hideTitle": true,
+              "id": "5074c191-dcf1-4e52-b470-e9698cad7cc2",
+              "imageAspect": "wide",
+              "imageURL": "https://art.example.invalid/covers/5074c191-dcf1-4e52-b470-e9698cad7cc2.webp",
+              "title": "HBO Max"
+            },
+            {
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::streaming_apple_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::streaming_apple_series",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::snoak_apple_top10_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::snoak_apple_top10_series",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::snoak_latest_apple_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::snoak_latest_apple_series",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::streaming_apple_toprated_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::streaming_apple_toprated_series",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::streaming_apple_originals_series",
+                    "type": "series"
+                  }
+                }
+              ],
+              "hideTitle": true,
+              "id": "57706b7f-78a6-4363-9499-484b9fb90ac1",
+              "imageAspect": "wide",
+              "imageURL": "https://art.example.invalid/covers/57706b7f-78a6-4363-9499-484b9fb90ac1.webp",
+              "title": "Apple TV+"
+            },
+            {
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::streaming_paramount_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::streaming_paramount_series",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::snoak_paramount_top10_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::snoak_paramount_top10_series",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::snoak_latest_paramount_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::snoak_latest_paramount_series",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::streaming_paramount_toprated_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::streaming_paramount_toprated_series",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::streaming_paramount_originals_series",
+                    "type": "series"
+                  }
+                }
+              ],
+              "hideTitle": true,
+              "id": "76271513-4578-4132-9250-c9a018778af7",
+              "imageAspect": "wide",
+              "imageURL": "https://art.example.invalid/covers/76271513-4578-4132-9250-c9a018778af7.webp",
+              "title": "Paramount+"
+            },
+            {
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::streaming_hulu_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::streaming_hulu_series",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::snoak_latest_hulu_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::snoak_latest_hulu_series",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::streaming_hulu_toprated_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::streaming_hulu_toprated_series",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::streaming_hulu_originals_series",
+                    "type": "series"
+                  }
+                }
+              ],
+              "hideTitle": true,
+              "id": "119a6b53-7f79-4201-b4f8-d26b3d164f5e",
+              "imageAspect": "wide",
+              "imageURL": "https://art.example.invalid/covers/119a6b53-7f79-4201-b4f8-d26b3d164f5e.webp",
+              "title": "Hulu"
+            },
+            {
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::streaming_peacock_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::streaming_peacock_series",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::kb_peacock_top50_series",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::streaming_peacock_latest_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::streaming_peacock_latest_series",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::streaming_peacock_toprated_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::streaming_peacock_toprated_series",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::streaming_peacock_originals_series",
+                    "type": "series"
+                  }
+                }
+              ],
+              "hideTitle": true,
+              "id": "6b642bea-b890-4bea-836f-24afa42bdda9",
+              "imageAspect": "wide",
+              "imageURL": "https://art.example.invalid/covers/6b642bea-b890-4bea-836f-24afa42bdda9.webp",
+              "title": "Peacock"
+            },
+            {
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::streaming_shudder_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::streaming_shudder_series",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::kb_shudder_top50",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::streaming_shudder_latest_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::streaming_shudder_latest_series",
+                    "type": "series"
+                  }
+                }
+              ],
+              "hideTitle": true,
+              "id": "011b1bde-ad34-46c0-9019-7f04bdee380f",
+              "imageAspect": "wide",
+              "imageURL": "https://art.example.invalid/covers/011b1bde-ad34-46c0-9019-7f04bdee380f.webp",
+              "title": "Shudder"
+            },
+            {
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::streaming_crunchyroll_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::streaming_crunchyroll_series",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::kb_crunchyroll_top50_series",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::streaming_crunchyroll_latest_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::streaming_crunchyroll_latest_series",
+                    "type": "series"
+                  }
+                }
+              ],
+              "hideTitle": true,
+              "id": "b056fc2a-4b65-472d-8c9c-cd6587bcd116",
+              "imageAspect": "wide",
+              "imageURL": "https://art.example.invalid/covers/b056fc2a-4b65-472d-8c9c-cd6587bcd116.webp",
+              "title": "Crunchyroll"
+            },
+            {
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::streaming_mgm_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::streaming_mgm_latest_movies",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "hideTitle": true,
+              "id": "e065ae09-0fd5-4f20-bb30-997f7d2e67d4",
+              "imageAspect": "wide",
+              "imageURL": "https://art.example.invalid/covers/e065ae09-0fd5-4f20-bb30-997f7d2e67d4.webp",
+              "title": "MGM+"
+            },
+            {
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::streaming_discovery_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::streaming_discovery_series",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::streaming_discovery_latest_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::streaming_discovery_latest_series",
+                    "type": "series"
+                  }
+                }
+              ],
+              "hideTitle": true,
+              "id": "24768bf6-7cb7-48cd-9242-ec3e36929186",
+              "imageAspect": "wide",
+              "imageURL": "https://art.example.invalid/covers/24768bf6-7cb7-48cd-9242-ec3e36929186.webp",
+              "title": "Discovery+"
+            }
+          ]
+        }
+      },
+      "id": "collection.3277a8c5-c967-4e87-8f7c-80d66a43df51",
+      "title": "Streaming",
+      "type": "collection.row"
+    },
+    {
+      "dataSource": {
+        "kind": "collection",
+        "payload": {
+          "items": [
+            {
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::studio_marvel_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::studio_marvel_series",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::studio_marvel_toprated_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::collection_mcu",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::studio_marvel_spiderman_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::studio_marvel_xmen_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::studio_marvel_avengers_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::studio_marvel_animation_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::studio_marvel_animation_series",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::studio_marvel_legacy_movies",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "hideTitle": true,
+              "id": "e92ae146-57af-43a7-929f-1ee0c03a4cf1",
+              "imageAspect": "wide",
+              "imageURL": "https://art.example.invalid/covers/e92ae146-57af-43a7-929f-1ee0c03a4cf1.webp",
+              "title": "Marvel"
+            },
+            {
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::studio_dc_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::studio_dc_series",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::studio_dc_toprated_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::studio_dc_dceu_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::studio_dcu_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::studio_dcu_series",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::studio_dc_batman_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::studio_dc_superman_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::studio_dc_animation_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::studio_dc_animation_series",
+                    "type": "series"
+                  }
+                }
+              ],
+              "hideTitle": true,
+              "id": "bdd8581e-b43d-4d4a-9301-403947dc7afd",
+              "imageAspect": "wide",
+              "imageURL": "https://art.example.invalid/covers/bdd8581e-b43d-4d4a-9301-403947dc7afd.webp",
+              "title": "DC"
+            },
+            {
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::studio_a24_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::studio_a24_series",
+                    "type": "series"
+                  }
+                }
+              ],
+              "hideTitle": true,
+              "id": "62627fdf-4a92-449e-a3c8-132d6d6c2a79",
+              "imageAspect": "wide",
+              "imageURL": "https://art.example.invalid/covers/62627fdf-4a92-449e-a3c8-132d6d6c2a79.webp",
+              "title": "A24"
+            },
+            {
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::studio_pixar_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::studio_pixar_series",
+                    "type": "series"
+                  }
+                }
+              ],
+              "hideTitle": true,
+              "id": "a454850f-87cd-4e2a-a287-f24326072f0d",
+              "imageAspect": "wide",
+              "imageURL": "https://art.example.invalid/covers/a454850f-87cd-4e2a-a287-f24326072f0d.webp",
+              "title": "Pixar"
+            },
+            {
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::studio_disney_animated_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::studio_disney_animated_series",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::studio_disney_animated_latest_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::studio_disney_animated_toprated_movies",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "hideTitle": true,
+              "id": "ed7c0bd1-2b7b-4a38-9fc4-fc1a0218e414",
+              "imageAspect": "wide",
+              "imageURL": "https://art.example.invalid/covers/ed7c0bd1-2b7b-4a38-9fc4-fc1a0218e414.webp",
+              "title": "Disney Animated"
+            },
+            {
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::studio_ghibli_movies",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "hideTitle": true,
+              "id": "42f61bb3-1e48-47f0-94fd-1c8b8ee1558d",
+              "imageAspect": "wide",
+              "imageURL": "https://art.example.invalid/covers/42f61bb3-1e48-47f0-94fd-1c8b8ee1558d.webp",
+              "title": "Studio Ghibli"
+            },
+            {
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::studio_lucasfilm_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::studio_lucasfilm_series",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::studio_lucasfilm_latest_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::studio_lucasfilm_toprated_movies",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "hideTitle": true,
+              "id": "e07667ba-68f4-4121-b168-54b9da624d08",
+              "imageAspect": "wide",
+              "imageURL": "https://art.example.invalid/covers/e07667ba-68f4-4121-b168-54b9da624d08.webp",
+              "title": "Lucasfilm"
+            },
+            {
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::studio_warner_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::studio_warner_series",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::studio_warner_latest_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::studio_warner_toprated_movies",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "hideTitle": true,
+              "id": "609fa699-6740-4239-885a-f91e78bb291b",
+              "imageAspect": "wide",
+              "imageURL": "https://art.example.invalid/covers/609fa699-6740-4239-885a-f91e78bb291b.webp",
+              "title": "Warner Bros"
+            },
+            {
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::studio_blumhouse_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::studio_blumhouse_series",
+                    "type": "series"
+                  }
+                }
+              ],
+              "hideTitle": true,
+              "id": "f484b9c0-99a1-492f-8ec2-a37be12fbcdb",
+              "imageAspect": "wide",
+              "imageURL": "https://art.example.invalid/covers/f484b9c0-99a1-492f-8ec2-a37be12fbcdb.webp",
+              "title": "Blumhouse"
+            },
+            {
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::studio_universal_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::studio_universal_series",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::studio_universal_latest_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::studio_universal_toprated_movies",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "hideTitle": true,
+              "id": "10796a0a-2adc-4f0e-bae7-292726088852",
+              "imageAspect": "wide",
+              "imageURL": "https://art.example.invalid/covers/10796a0a-2adc-4f0e-bae7-292726088852.webp",
+              "title": "Universal Pictures"
+            },
+            {
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::studio_sony_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::studio_sony_series",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::studio_sony_latest_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::studio_sony_toprated_movies",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "hideTitle": true,
+              "id": "bbf171cd-9937-4f57-b31a-07e7208968c9",
+              "imageAspect": "wide",
+              "imageURL": "https://art.example.invalid/covers/bbf171cd-9937-4f57-b31a-07e7208968c9.webp",
+              "title": "Sony Pictures"
+            },
+            {
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::studio_paramount_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::studio_paramount_series",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::studio_paramount_latest_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::studio_paramount_toprated_movies",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "hideTitle": true,
+              "id": "87d67179-966d-45ef-92d1-489c1cfc7e95",
+              "imageAspect": "wide",
+              "imageURL": "https://art.example.invalid/covers/87d67179-966d-45ef-92d1-489c1cfc7e95.webp",
+              "title": "Paramount Pictures"
+            }
+          ]
+        }
+      },
+      "id": "collection.6e073ce6-9b96-4745-a092-205176e773bd",
+      "title": "Studios",
+      "type": "collection.row"
+    },
+    {
+      "dataSource": {
+        "kind": "collection",
+        "payload": {
+          "items": [
+            {
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::genre_action_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::genre_action_series",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::genre_action_latest_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::genre_action_latest_series",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::genre_action_toprated_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::genre_action_toprated_series",
+                    "type": "series"
+                  }
+                }
+              ],
+              "hideTitle": true,
+              "id": "56a6d291-3862-49fe-b7ea-eec6aecd38fe",
+              "imageAspect": "wide",
+              "imageURL": "https://art.example.invalid/covers/56a6d291-3862-49fe-b7ea-eec6aecd38fe.webp",
+              "title": "Action"
+            },
+            {
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::genre_comedy_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::genre_comedy_series",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::genre_comedy_latest_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::genre_comedy_latest_series",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::genre_comedy_toprated_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::genre_comedy_toprated_series",
+                    "type": "series"
+                  }
+                }
+              ],
+              "hideTitle": true,
+              "id": "05106de1-a519-4372-9b13-f71f84ef8779",
+              "imageAspect": "wide",
+              "imageURL": "https://art.example.invalid/covers/05106de1-a519-4372-9b13-f71f84ef8779.webp",
+              "title": "Comedy"
+            },
+            {
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::genre_drama_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::genre_drama_series",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::genre_drama_latest_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::genre_drama_latest_series",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::genre_drama_toprated_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::genre_drama_toprated_series",
+                    "type": "series"
+                  }
+                }
+              ],
+              "hideTitle": true,
+              "id": "8421c6e7-f1af-42b4-a976-f3aef06aa050",
+              "imageAspect": "wide",
+              "imageURL": "https://art.example.invalid/covers/8421c6e7-f1af-42b4-a976-f3aef06aa050.webp",
+              "title": "Drama"
+            },
+            {
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::genre_scifi_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::genre_scifi_series",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::genre_scifi_latest_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::genre_scifi_latest_series",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::genre_scifi_toprated_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::genre_scifi_toprated_series",
+                    "type": "series"
+                  }
+                }
+              ],
+              "hideTitle": true,
+              "id": "395ca470-4d43-49b1-8747-833f7dad4fee",
+              "imageAspect": "wide",
+              "imageURL": "https://art.example.invalid/covers/395ca470-4d43-49b1-8747-833f7dad4fee.webp",
+              "title": "Sci-Fi"
+            },
+            {
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::genre_horror_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::genre_horror_series",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::genre_horror_latest_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::genre_horror_latest_series",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::genre_horror_toprated_movies",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "hideTitle": true,
+              "id": "2b3db690-5467-4529-a054-914015df2466",
+              "imageAspect": "wide",
+              "imageURL": "https://art.example.invalid/covers/2b3db690-5467-4529-a054-914015df2466.webp",
+              "title": "Horror"
+            },
+            {
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::genre_crime_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::genre_crime_series",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::genre_crime_latest_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::genre_crime_latest_series",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::genre_crime_toprated_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::genre_crime_toprated_series",
+                    "type": "series"
+                  }
+                }
+              ],
+              "hideTitle": true,
+              "id": "f1671738-082f-4e36-8a47-ec4c35cf02ad",
+              "imageAspect": "wide",
+              "imageURL": "https://art.example.invalid/covers/f1671738-082f-4e36-8a47-ec4c35cf02ad.webp",
+              "title": "Crime"
+            },
+            {
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::genre_fantasy_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::genre_fantasy_series",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::genre_fantasy_latest_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::genre_fantasy_latest_series",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::genre_fantasy_toprated_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::genre_fantasy_toprated_series",
+                    "type": "series"
+                  }
+                }
+              ],
+              "hideTitle": true,
+              "id": "51b900ca-1d2c-44ef-9d05-9c1b57a47c57",
+              "imageAspect": "wide",
+              "imageURL": "https://art.example.invalid/covers/51b900ca-1d2c-44ef-9d05-9c1b57a47c57.webp",
+              "title": "Fantasy"
+            },
+            {
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::genre_mystery_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::genre_mystery_series",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::genre_mystery_latest_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::genre_mystery_latest_series",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::genre_mystery_toprated_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::genre_mystery_toprated_series",
+                    "type": "series"
+                  }
+                }
+              ],
+              "hideTitle": true,
+              "id": "cf1f6123-589c-48cf-a4be-0f857eef1a02",
+              "imageAspect": "wide",
+              "imageURL": "https://art.example.invalid/covers/cf1f6123-589c-48cf-a4be-0f857eef1a02.webp",
+              "title": "Mystery"
+            },
+            {
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::genre_romance_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::genre_romance_series",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::genre_romance_latest_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::genre_romance_latest_series",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::genre_romance_toprated_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::genre_romance_toprated_series",
+                    "type": "series"
+                  }
+                }
+              ],
+              "hideTitle": true,
+              "id": "2e0cd459-ee4e-41b6-92ac-0c4403f9bb86",
+              "imageAspect": "wide",
+              "imageURL": "https://art.example.invalid/covers/2e0cd459-ee4e-41b6-92ac-0c4403f9bb86.webp",
+              "title": "Romance"
+            },
+            {
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::genre_thriller_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::genre_thriller_series",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::genre_thriller_latest_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::genre_thriller_latest_series",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::genre_thriller_toprated_movies",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "hideTitle": true,
+              "id": "27b5ef8e-b4bb-4116-a33d-1e07db0f0374",
+              "imageAspect": "wide",
+              "imageURL": "https://art.example.invalid/covers/27b5ef8e-b4bb-4116-a33d-1e07db0f0374.webp",
+              "title": "Thrillers"
+            },
+            {
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::genre_documentary_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::genre_documentary_series",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::genre_documentary_latest_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::genre_documentary_latest_series",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::genre_documentary_toprated_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::genre_documentary_toprated_series",
+                    "type": "series"
+                  }
+                }
+              ],
+              "hideTitle": true,
+              "id": "e2739024-294e-4a64-bc05-3086251eb7e9",
+              "imageAspect": "wide",
+              "imageURL": "https://art.example.invalid/covers/e2739024-294e-4a64-bc05-3086251eb7e9.webp",
+              "title": "Documentaries"
+            },
+            {
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::genre_animation_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::genre_animation_series",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::genre_animation_latest_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::genre_animation_latest_series",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::genre_animation_toprated_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::genre_animation_toprated_series",
+                    "type": "series"
+                  }
+                }
+              ],
+              "hideTitle": true,
+              "id": "38585c36-3fab-4fd3-b64d-0ad0a02b0775",
+              "imageAspect": "wide",
+              "imageURL": "https://art.example.invalid/covers/38585c36-3fab-4fd3-b64d-0ad0a02b0775.webp",
+              "title": "Animated"
+            },
+            {
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::genre_bollywood_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::genre_bollywood_series",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::genre_bollywood_latest_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::genre_bollywood_latest_series",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::genre_bollywood_toprated_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::genre_bollywood_toprated_series",
+                    "type": "series"
+                  }
+                }
+              ],
+              "hideTitle": true,
+              "id": "e68865a2-f2f9-4cd0-b262-350a14afadc6",
+              "imageAspect": "wide",
+              "imageURL": "https://art.example.invalid/covers/e68865a2-f2f9-4cd0-b262-350a14afadc6.webp",
+              "title": "Bollywood"
+            },
+            {
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::genre_westerns_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::genre_westerns_series",
+                    "type": "series"
+                  }
+                }
+              ],
+              "hideTitle": true,
+              "id": "cf0ce30a-f6df-41ee-9ffe-805717977183",
+              "imageAspect": "wide",
+              "imageURL": "https://art.example.invalid/covers/cf0ce30a-f6df-41ee-9ffe-805717977183.webp",
+              "title": "Westerns"
+            },
+            {
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::genre_sports_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::genre_sports_series",
+                    "type": "series"
+                  }
+                }
+              ],
+              "hideTitle": true,
+              "id": "9bc331c2-8ce1-4b10-82a9-de67c0717e2a",
+              "imageAspect": "wide",
+              "imageURL": "https://art.example.invalid/covers/9bc331c2-8ce1-4b10-82a9-de67c0717e2a.webp",
+              "title": "Sports"
+            },
+            {
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::genre_musicals_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::genre_musicals_latest_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::genre_musicals_toprated_movies",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "hideTitle": true,
+              "id": "51d22d35-6070-4cee-b88c-60fa54fbbe9d",
+              "imageAspect": "wide",
+              "imageURL": "https://art.example.invalid/covers/51d22d35-6070-4cee-b88c-60fa54fbbe9d.webp",
+              "title": "Musicals"
+            },
+            {
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::genre_kdrama_popular_series",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::genre_kdrama_latest_series",
+                    "type": "series"
+                  }
+                }
+              ],
+              "hideTitle": true,
+              "id": "d58e3e5f-f31f-4c01-85c0-31069802fde9",
+              "imageAspect": "wide",
+              "imageURL": "https://art.example.invalid/covers/d58e3e5f-f31f-4c01-85c0-31069802fde9.webp",
+              "title": "K-Drama"
+            },
+            {
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::genre_anime_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::genre_anime_series",
+                    "type": "series"
+                  }
+                }
+              ],
+              "hideTitle": true,
+              "id": "f5ccbb3d-ac20-41b2-801b-ec2052ada478",
+              "imageAspect": "wide",
+              "imageURL": "https://art.example.invalid/covers/f5ccbb3d-ac20-41b2-801b-ec2052ada478.webp",
+              "title": "Anime"
+            },
+            {
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::genre_spy_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::genre_spy_series",
+                    "type": "series"
+                  }
+                }
+              ],
+              "hideTitle": true,
+              "id": "933b03ba-a98e-475f-9466-36170397f22b",
+              "imageAspect": "wide",
+              "imageURL": "https://art.example.invalid/covers/933b03ba-a98e-475f-9466-36170397f22b.webp",
+              "title": "Spy Thrillers"
+            },
+            {
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::genre_war_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::genre_war_series",
+                    "type": "series"
+                  }
+                }
+              ],
+              "hideTitle": true,
+              "id": "476cf6fd-0589-4f96-9c51-2ad50edd5dbe",
+              "imageAspect": "wide",
+              "imageURL": "https://art.example.invalid/covers/476cf6fd-0589-4f96-9c51-2ad50edd5dbe.webp",
+              "title": "War"
+            },
+            {
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::genre_adventure_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::genre_adventure_series",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::genre_adventure_latest_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::genre_adventure_latest_series",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::genre_adventure_toprated_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::genre_adventure_toprated_series",
+                    "type": "series"
+                  }
+                }
+              ],
+              "hideTitle": true,
+              "id": "87b9129d-e78e-44ac-8bce-eb759f9123b1",
+              "imageAspect": "wide",
+              "imageURL": "https://art.example.invalid/covers/87b9129d-e78e-44ac-8bce-eb759f9123b1.webp",
+              "title": "Adventure"
+            },
+            {
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::genre_family_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::genre_family_series",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::genre_family_latest_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::genre_family_latest_series",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::genre_family_toprated_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::genre_family_toprated_series",
+                    "type": "series"
+                  }
+                }
+              ],
+              "hideTitle": true,
+              "id": "6dee87cb-595e-4362-be75-4d7d679ad188",
+              "imageAspect": "wide",
+              "imageURL": "https://art.example.invalid/covers/6dee87cb-595e-4362-be75-4d7d679ad188.webp",
+              "title": "Family"
+            },
+            {
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::genre_history_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::genre_limited_series",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::genre_history_latest_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::genre_history_toprated_movies",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "hideTitle": true,
+              "id": "caefbd80-f8fc-4da9-afaf-2f815b35b604",
+              "imageAspect": "wide",
+              "imageURL": "https://art.example.invalid/covers/caefbd80-f8fc-4da9-afaf-2f815b35b604.webp",
+              "title": "History"
+            },
+            {
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::genre_romantic_comedy_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::genre_romantic_comedy_series",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::genre_romantic_comedy_latest_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::genre_romantic_comedy_toprated_movies",
+                    "type": "movie"
+                  }
+                }
+              ],
+              "hideTitle": true,
+              "id": "3ae572ae-bae9-4095-ae27-31824320ec1c",
+              "imageAspect": "wide",
+              "imageURL": "https://art.example.invalid/covers/3ae572ae-bae9-4095-ae27-31824320ec1c.webp",
+              "title": "Romantic Comedy"
+            }
+          ]
+        }
+      },
+      "id": "collection.cf661ff9-7ae2-46d9-a8d1-822649fcf00e",
+      "title": "Genres",
+      "type": "collection.row"
+    },
+    {
+      "dataSource": {
+        "kind": "collection",
+        "payload": {
+          "items": [
+            {
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::decade_2020s_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::decade_2020s_series",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::decade_2020s_toprated_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::decade_2020s_toprated_series",
+                    "type": "series"
+                  }
+                }
+              ],
+              "hideTitle": true,
+              "id": "787bbbd2-34f8-45b7-adfb-cbb3c8d05c3f",
+              "imageAspect": "wide",
+              "imageURL": "https://art.example.invalid/covers/787bbbd2-34f8-45b7-adfb-cbb3c8d05c3f.webp",
+              "title": "2020s"
+            },
+            {
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::decade_2010s_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::decade_2010s_series",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::decade_2010s_toprated_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::decade_2010s_toprated_series",
+                    "type": "series"
+                  }
+                }
+              ],
+              "hideTitle": true,
+              "id": "c4d302f2-698b-4604-8e67-5e3d11040425",
+              "imageAspect": "wide",
+              "imageURL": "https://art.example.invalid/covers/c4d302f2-698b-4604-8e67-5e3d11040425.webp",
+              "title": "2010s"
+            },
+            {
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::decade_2000s_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::decade_2000s_series",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::decade_2000s_toprated_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::decade_2000s_toprated_series",
+                    "type": "series"
+                  }
+                }
+              ],
+              "hideTitle": true,
+              "id": "ae540167-a60a-4625-8eac-d721d4d60f53",
+              "imageAspect": "wide",
+              "imageURL": "https://art.example.invalid/covers/ae540167-a60a-4625-8eac-d721d4d60f53.webp",
+              "title": "2000s"
+            },
+            {
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::decade_1990s_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::decade_1990s_series",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::decade_1990s_toprated_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::decade_1990s_toprated_series",
+                    "type": "series"
+                  }
+                }
+              ],
+              "hideTitle": true,
+              "id": "d5a3771c-747b-40b0-8832-c7e65f60da93",
+              "imageAspect": "wide",
+              "imageURL": "https://art.example.invalid/covers/d5a3771c-747b-40b0-8832-c7e65f60da93.webp",
+              "title": "1990s"
+            },
+            {
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::decade_1980s_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::decade_1980s_series",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::decade_1980s_toprated_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::decade_1980s_toprated_series",
+                    "type": "series"
+                  }
+                }
+              ],
+              "hideTitle": true,
+              "id": "64c48307-4e4a-4fcc-8af6-53a57e9141c4",
+              "imageAspect": "wide",
+              "imageURL": "https://art.example.invalid/covers/64c48307-4e4a-4fcc-8af6-53a57e9141c4.webp",
+              "title": "1980s"
+            },
+            {
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::decade_1970s_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::decade_1970s_series",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::decade_1970s_toprated_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::decade_1970s_toprated_series",
+                    "type": "series"
+                  }
+                }
+              ],
+              "hideTitle": true,
+              "id": "86eace80-e702-4b8c-97d3-b806b606a5d1",
+              "imageAspect": "wide",
+              "imageURL": "https://art.example.invalid/covers/86eace80-e702-4b8c-97d3-b806b606a5d1.webp",
+              "title": "1970s"
+            },
+            {
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::decade_1960s_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::decade_1960s_series",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::decade_1960s_toprated_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::decade_1960s_toprated_series",
+                    "type": "series"
+                  }
+                }
+              ],
+              "hideTitle": true,
+              "id": "58c9285b-9180-4e63-8dc2-03de4aa27d04",
+              "imageAspect": "wide",
+              "imageURL": "https://art.example.invalid/covers/58c9285b-9180-4e63-8dc2-03de4aa27d04.webp",
+              "title": "1960s"
+            },
+            {
+              "dataSources": [
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::decade_1950s_and_before_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::decade_1950s_and_before_series",
+                    "type": "series"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "movie::decade_1950s_and_before_toprated_movies",
+                    "type": "movie"
+                  }
+                },
+                {
+                  "kind": "addonCatalog",
+                  "payload": {
+                    "addonId": "https://addon.example.invalid/profile/manifest.json",
+                    "catalogId": "series::decade_1950s_and_before_toprated_series",
+                    "type": "series"
+                  }
+                }
+              ],
+              "hideTitle": true,
+              "id": "a7de32e6-2420-42b5-aa7f-b57a1f3fbd54",
+              "imageAspect": "wide",
+              "imageURL": "https://art.example.invalid/covers/a7de32e6-2420-42b5-aa7f-b57a1f3fbd54.webp",
+              "title": "1950s & Before"
+            }
+          ]
+        }
+      },
+      "id": "collection.ec7d3dc8-cc9b-46c8-a224-0cbcefbec270",
+      "title": "Decades",
+      "type": "collection.row"
+    },
+    {
+      "cacheTTL": 1800,
+      "dataSource": {
+        "kind": "addonCatalog",
+        "payload": {
+          "addonId": "https://addon.example.invalid/profile/manifest.json",
+          "catalogId": "movie::ai_movies_for_you",
+          "type": "movie"
+        }
+      },
+      "id": "catalog.ai_movies_for_you",
+      "limit": 20,
+      "presentation": {
+        "aspectRatio": "poster",
+        "badges": {
+          "providers": false,
+          "ratings": true
+        },
+        "cardStyle": "medium"
+      },
+      "title": "AI for you",
+      "type": "row.classic"
+    },
+    {
+      "cacheTTL": 1800,
+      "dataSource": {
+        "kind": "addonCatalog",
+        "payload": {
+          "addonId": "https://addon.example.invalid/profile/manifest.json",
+          "catalogId": "series::ai_series_for_you",
+          "type": "series"
+        }
+      },
+      "id": "catalog.ai_series_for_you",
+      "limit": 20,
+      "presentation": {
+        "aspectRatio": "poster",
+        "badges": {
+          "providers": false,
+          "ratings": true
+        },
+        "cardStyle": "medium"
+      },
+      "title": "AI for you",
+      "type": "row.classic"
+    },
+    {
+      "cacheTTL": 1800,
+      "dataSource": {
+        "kind": "addonCatalog",
+        "payload": {
+          "addonId": "https://addon.example.invalid/profile/manifest.json",
+          "catalogId": "movie::trending_movies",
+          "type": "movie"
+        }
+      },
+      "id": "catalog.trending_movies",
+      "limit": 20,
+      "presentation": {
+        "aspectRatio": "poster",
+        "badges": {
+          "providers": false,
+          "ratings": true
+        },
+        "cardStyle": "medium"
+      },
+      "title": "Trending",
+      "type": "row.classic"
+    },
+    {
+      "cacheTTL": 1800,
+      "dataSource": {
+        "kind": "addonCatalog",
+        "payload": {
+          "addonId": "https://addon.example.invalid/profile/manifest.json",
+          "catalogId": "series::trending_series",
+          "type": "series"
+        }
+      },
+      "id": "catalog.trending_series",
+      "limit": 20,
+      "presentation": {
+        "aspectRatio": "poster",
+        "badges": {
+          "providers": false,
+          "ratings": true
+        },
+        "cardStyle": "medium"
+      },
+      "title": "Trending",
+      "type": "row.classic"
+    },
+    {
+      "cacheTTL": 1800,
+      "dataSource": {
+        "kind": "addonCatalog",
+        "payload": {
+          "addonId": "https://addon.example.invalid/profile/manifest.json",
+          "catalogId": "movie::snoak_top100_movies",
+          "type": "movie"
+        }
+      },
+      "id": "catalog.snoak_top100_movies",
+      "limit": 20,
+      "presentation": {
+        "aspectRatio": "poster",
+        "badges": {
+          "providers": false,
+          "ratings": true
+        },
+        "cardStyle": "medium"
+      },
+      "title": "Top 100 Today",
+      "type": "row.classic"
+    },
+    {
+      "cacheTTL": 1800,
+      "dataSource": {
+        "kind": "addonCatalog",
+        "payload": {
+          "addonId": "https://addon.example.invalid/profile/manifest.json",
+          "catalogId": "series::snoak_top100_series",
+          "type": "series"
+        }
+      },
+      "id": "catalog.snoak_top100_series",
+      "limit": 20,
+      "presentation": {
+        "aspectRatio": "poster",
+        "badges": {
+          "providers": false,
+          "ratings": true
+        },
+        "cardStyle": "medium"
+      },
+      "title": "Top 100 Today",
+      "type": "row.classic"
+    },
+    {
+      "cacheTTL": 1800,
+      "dataSource": {
+        "kind": "addonCatalog",
+        "payload": {
+          "addonId": "https://addon.example.invalid/profile/manifest.json",
+          "catalogId": "movie::now_playing_movies",
+          "type": "movie"
+        }
+      },
+      "id": "catalog.now_playing_movies",
+      "limit": 20,
+      "presentation": {
+        "aspectRatio": "poster",
+        "badges": {
+          "providers": false,
+          "ratings": true
+        },
+        "cardStyle": "medium"
+      },
+      "title": "In Theaters",
+      "type": "row.classic"
+    },
+    {
+      "cacheTTL": 1800,
+      "dataSource": {
+        "kind": "addonCatalog",
+        "payload": {
+          "addonId": "https://addon.example.invalid/profile/manifest.json",
+          "catalogId": "series::on_the_air_series",
+          "type": "series"
+        }
+      },
+      "id": "catalog.on_the_air_series",
+      "limit": 20,
+      "presentation": {
+        "aspectRatio": "poster",
+        "badges": {
+          "providers": false,
+          "ratings": true
+        },
+        "cardStyle": "medium"
+      },
+      "title": "On The Air",
+      "type": "row.classic"
+    }
+  ]
+}

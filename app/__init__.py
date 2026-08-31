@@ -1,1 +1,1 @@
-"""Nuvio to AIOMetadata Bridge Package."""
+"""Nuvio2Fusion — take your collections with you."""

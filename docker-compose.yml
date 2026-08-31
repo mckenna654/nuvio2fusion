@@ -1,12 +1,10 @@
-version: "3.8"
-
 services:
-  xp2aiom:
-    image: ghcr.io/mckenna654/xp2aiom:latest
-    container_name: xp2aiom
+  nuvio2fusion:
+    build: .
+    image: nuvio2fusion:local
     restart: unless-stopped
     ports:
-      - "7088:7088"
+      - "127.0.0.1:7088:7088"
     environment:
-      - PORT=7088
-      - HOST=0.0.0.0
+      PORT: "7088"
+      HOST: "0.0.0.0"

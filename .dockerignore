@@ -1,0 +1,12 @@
+.git
+.venv
+venv
+__pycache__
+*.pyc
+*.log
+.env
+.env.*
+tests
+docs
+.codex
+.agents

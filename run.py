@@ -7,7 +7,7 @@ import sys
 import uvicorn
 
 if __name__ == "__main__":
-    host = os.getenv("HOST", "0.0.0.0")
+    host = os.getenv("HOST", "127.0.0.1")
     port_str = os.getenv("PORT", "7088")
     
     try:
@@ -16,7 +16,7 @@ if __name__ == "__main__":
         sys.stderr.write(f"Invalid PORT value '{port_str}', defaulting to 7088\n")
         port = 7088
 
-    print(f"🚀 Starting XP2AIOM Web GUI on http://{host}:{port}")
+    print(f"🚀 Starting Nuvio2Fusion on http://{host}:{port}")
     sys.stdout.flush()
 
     uvicorn.run(

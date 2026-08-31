@@ -41,3 +41,12 @@ env/
 test_*.json
 output*.json
 *.log
+
+# Private local configuration and exported layouts
+.env
+.env.*
+!.env.example
+/request.json
+/response.json
+/fusion-widgets*.json
+/fusion-compatibility-report*.json

@@ -1,213 +1,108 @@
-"""main.py - FastAPI WebGUI Application for Nuvio/Xperience to AIOMetadata Bridge."""
-
+"""Nuvio2Fusion: local, offline collection-layout conversion."""
 from __future__ import annotations
 
 import json
-import os
+from pathlib import Path
 from typing import Any
-from fastapi import FastAPI, File, Form, HTTPException, Request, UploadFile
-from fastapi.responses import FileResponse
+from urllib.parse import urlsplit
+
+from fastapi import FastAPI, HTTPException
+from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict, Field
+from fastapi.exceptions import RequestValidationError
 
-from app.converter import (
-    XperienceParser,
-    build_final_aio_config,
-    deduplicate_catalogs,
-)
-from app.nuvio_client import NuvioClient
+from app.fusion import convert_to_fusion
 
-app = FastAPI(
-    title="Xperience to AIOMetadata Bridge",
-    description="Web GUI to export Xperience configurations, layouts, and widgets to AIOMetadata.",
-    version="1.0.0",
-)
-
-current_dir = os.path.dirname(os.path.abspath(__file__))
-static_dir = os.path.join(current_dir, "static")
-templates_dir = os.path.join(current_dir, "templates")
-presets_dir = os.path.join(current_dir, "presets")
-index_html_path = os.path.join(templates_dir, "index.html")
-
-app.mount("/static", StaticFiles(directory=static_dir), name="static")
-nuvio_client = NuvioClient()
+ROOT = Path(__file__).parent
+MAX_REQUEST_BYTES = 10 * 1024 * 1024
+app = FastAPI(title='Nuvio2Fusion', version='2.0.0',
+              description='Convert Nuvio collections into Fusion widget JSON.',
+              docs_url=None, redoc_url=None)
+app.mount('/static', StaticFiles(directory=ROOT / 'static'), name='static')
 
 
-# Request Models
-class ConvertRequest(BaseModel):
-    nuvio_data: Any
-    base_config: dict[str, Any] | None = None
-    addon_name: str | None = None
-    prefix_mode: str = "category"
-    force_enabled: bool | None = None
-    force_rating_posters: bool | None = None
-    allow_duplicates: bool = False
+class RequestBoundary:
+    def __init__(self, app):
+        self.app = app
+
+    async def __call__(self, scope, receive, send):
+        if scope['type'] != 'http':
+            return await self.app(scope, receive, send)
+        headers = dict(scope['headers'])
+        if scope['method'] == 'POST':
+            origin = headers.get(b'origin')
+            if origin and urlsplit(origin.decode()).netloc != headers.get(b'host', b'').decode():
+                return await JSONResponse({'detail': 'Cross-origin requests are blocked.'}, 403)(scope, receive, send)
+            body = bytearray()
+            while True:
+                message = await receive()
+                if message['type'] == 'http.disconnect':
+                    return
+                body.extend(message.get('body', b''))
+                if len(body) > MAX_REQUEST_BYTES:
+                    return await JSONResponse({'detail': 'Request exceeds 10 MiB.'}, 413)(scope, receive, send)
+                if not message.get('more_body'):
+                    break
+            consumed = False
+
+            async def bounded_receive():
+                nonlocal consumed
+                if not consumed:
+                    consumed = True
+                    return {'type': 'http.request', 'body': bytes(body), 'more_body': False}
+                return await receive()
+            await self.app(scope, bounded_receive, send)
+        else:
+            await self.app(scope, receive, send)
 
 
-class NuvioTokenRequest(BaseModel):
-    token: str
-    addon_name: str | None = None
-    prefix_mode: str = "category"
+app.add_middleware(RequestBoundary)
 
 
-class NuvioManifestRequest(BaseModel):
-    manifest_url: str
-    addon_name: str | None = None
-    prefix_mode: str = "category"
+@app.exception_handler(RequestValidationError)
+async def validation_error(request, exc):
+    # Input values and mapping keys can both contain private install URLs.
+    return JSONResponse({'detail': 'Invalid request fields. Supply export_data and an optional addon_urls object mapping addon IDs to URL strings.'}, status_code=422)
 
 
-@app.get("/", response_class=FileResponse)
-async def serve_index() -> FileResponse:
-    """Renders the main single-page web GUI."""
-    return FileResponse(index_html_path, media_type="text/html")
+@app.middleware('http')
+async def security_headers(request, call_next):
+    response = await call_next(request)
+    response.headers['Cache-Control'] = 'no-store'
+    response.headers['Referrer-Policy'] = 'no-referrer'
+    response.headers['X-Content-Type-Options'] = 'nosniff'
+    response.headers['Content-Security-Policy'] = "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'none'"
+    return response
 
 
-@app.get("/api/health")
-async def health_check() -> dict[str, str]:
-    return {"status": "ok", "app": "Nuvio-AIOMetadata Bridge"}
+class FusionRequest(BaseModel):
+    model_config = ConfigDict(extra='forbid')
+    export_data: Any
+    addon_urls: dict[str, str] = Field(default_factory=dict)
 
 
-@app.get("/api/presets/{preset_name}")
-async def load_preset(
-    preset_name: str,
-    prefix_mode: str = "category",
-    addon_name: str | None = None,
-) -> dict[str, Any]:
-    """Loads a built-in Xperience preset and converts it."""
-    file_map = {
-        "widgets": "xperience_widgets.json",
-        "xperience": "xperience_widgets.json",
-        "complete": "complete_manifest.json",
-        "manifest": "complete_manifest.json",
-    }
-    fname = file_map.get(preset_name.lower())
-    if not fname:
-        raise HTTPException(status_code=404, detail=f"Preset '{preset_name}' not found.")
+@app.get('/')
+async def index():
+    return FileResponse(ROOT / 'templates' / 'index.html')
 
-    preset_path = os.path.join(presets_dir, fname)
-    if not os.path.exists(preset_path):
-        raise HTTPException(status_code=404, detail=f"Preset file '{fname}' missing.")
 
+@app.get('/api/health')
+async def health():
+    return {'status': 'ok', 'app': 'Nuvio2Fusion', 'version': '2.0.0'}
+
+
+@app.get('/api/presets/{name}')
+async def preset(name: str):
+    files = {'nuvio': 'nuvio_collections.json', 'fusion': 'fusion_example.json'}
+    if name not in files:
+        raise HTTPException(404, 'Unknown example.')
+    return {'rawData': json.loads((ROOT / 'presets' / files[name]).read_text())}
+
+
+@app.post('/api/fusion/convert')
+async def fusion_convert(request: FusionRequest):
     try:
-        with open(preset_path, encoding="utf-8") as f:
-            data = json.load(f)
-
-        parser = XperienceParser(prefix_mode=prefix_mode)
-        catalogs = deduplicate_catalogs(parser.parse(data))
-        final_config = build_final_aio_config(catalogs=catalogs, addon_name=addon_name)
-
-        return {
-            "success": True,
-            "preset": preset_name,
-            "totalCatalogs": len(catalogs),
-            "catalogs": catalogs,
-            "aioConfig": final_config,
-        }
-    except Exception as ex:
-        raise HTTPException(status_code=500, detail=f"Error loading preset: {ex}") from ex
-
-
-@app.post("/api/convert")
-async def convert_payload(request: ConvertRequest) -> dict[str, Any]:
-    """Converts a raw JSON payload (widgets or manifest) into AIOMetadata configuration."""
-    try:
-        parser = XperienceParser(
-            prefix_mode=request.prefix_mode,
-            force_enabled=request.force_enabled,
-            force_rating_posters=request.force_rating_posters,
-        )
-        catalogs = parser.parse(request.nuvio_data)
-
-        if not request.allow_duplicates:
-            catalogs = deduplicate_catalogs(catalogs)
-
-        final_config = build_final_aio_config(
-            catalogs=catalogs,
-            base_config=request.base_config,
-            addon_name=request.addon_name,
-        )
-
-        return {
-            "success": True,
-            "totalCatalogs": len(catalogs),
-            "catalogs": catalogs,
-            "aioConfig": final_config,
-        }
-    except Exception as ex:
-        raise HTTPException(status_code=400, detail=str(ex)) from ex
-
-
-@app.post("/api/nuvio/token")
-async def nuvio_token(request: NuvioTokenRequest) -> dict[str, Any]:
-    """Fetches setup from Nuvio using an existing session token."""
-    try:
-        raw_setup = await nuvio_client.fetch_by_token(token=request.token)
-        parser = XperienceParser(prefix_mode=request.prefix_mode)
-        catalogs = deduplicate_catalogs(parser.parse(raw_setup))
-        final_config = build_final_aio_config(catalogs=catalogs, addon_name=request.addon_name)
-
-        return {
-            "success": True,
-            "message": "Retrieved Nuvio setup via token.",
-            "totalCatalogs": len(catalogs),
-            "catalogs": catalogs,
-            "aioConfig": final_config,
-        }
-    except Exception as ex:
-        raise HTTPException(status_code=400, detail=f"Nuvio token error: {ex}") from ex
-
-
-@app.post("/api/nuvio/manifest")
-async def nuvio_manifest(request: NuvioManifestRequest) -> dict[str, Any]:
-    """Fetches remote Stremio / Nuvio / Xperience manifest URL and converts catalogs."""
-    try:
-        manifest_data = await nuvio_client.fetch_manifest_url(request.manifest_url)
-        parser = XperienceParser(prefix_mode=request.prefix_mode)
-        catalogs = deduplicate_catalogs(parser.parse(manifest_data))
-        final_config = build_final_aio_config(catalogs=catalogs, addon_name=request.addon_name)
-
-        return {
-            "success": True,
-            "message": "Fetched manifest and converted catalogs.",
-            "totalCatalogs": len(catalogs),
-            "catalogs": catalogs,
-            "aioConfig": final_config,
-        }
-    except Exception as ex:
-        raise HTTPException(status_code=400, detail=f"Manifest fetch error: {ex}") from ex
-
-
-@app.post("/api/upload")
-async def upload_files(
-    file: UploadFile = File(...),
-    base_file: UploadFile | None = File(None),
-    prefix_mode: str = Form("category"),
-    addon_name: str | None = Form(None),
-) -> dict[str, Any]:
-    """Handles direct file upload from web interface."""
-    try:
-        content = await file.read()
-        nuvio_data = json.loads(content.decode("utf-8"))
-
-        base_config = None
-        if base_file:
-            base_content = await base_file.read()
-            if base_content:
-                base_config = json.loads(base_content.decode("utf-8"))
-
-        parser = XperienceParser(prefix_mode=prefix_mode)
-        catalogs = deduplicate_catalogs(parser.parse(nuvio_data))
-        final_config = build_final_aio_config(
-            catalogs=catalogs,
-            base_config=base_config,
-            addon_name=addon_name,
-        )
-
-        return {
-            "success": True,
-            "totalCatalogs": len(catalogs),
-            "catalogs": catalogs,
-            "aioConfig": final_config,
-        }
-    except Exception as ex:
-        raise HTTPException(status_code=400, detail=f"File upload error: {ex}") from ex
+        return convert_to_fusion(**request.model_dump())
+    except (ValueError, TypeError, AttributeError, KeyError, RecursionError):
+        raise HTTPException(400, 'Invalid export or addon mapping. Use Nuvio collections JSON or Fusion widget v1 JSON, and full HTTP(S) manifest URLs for mappings. Check array/object fields.') from None

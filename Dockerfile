@@ -1,7 +1,7 @@
 FROM python:3.11-slim
 
 LABEL maintainer="mckenna654"
-LABEL description="Self-hosted Nuvio / Xperience to AIOMetadata Bridge Web App"
+LABEL description="Nuvio2Fusion: offline Nuvio collection to Fusion widget converter"
 
 WORKDIR /app
 
@@ -18,11 +18,15 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY app/ ./app/
 COPY run.py .
 
+RUN useradd --system --uid 10001 --create-home nuvio2fusion
+USER nuvio2fusion
+
 # Environment variables
 ENV PORT=7088
 ENV HOST=0.0.0.0
 ENV PYTHONPATH=/app
 ENV PYTHONUNBUFFERED=1
+ENV PYTHONDONTWRITEBYTECODE=1
 
 # Expose default port
 EXPOSE 7088
