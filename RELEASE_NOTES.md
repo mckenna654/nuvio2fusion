@@ -4,6 +4,8 @@
 
 Optional addons no longer block exports. Connect only the addons you use; missing instances such as Bingecat are reported without preventing export of connected AIOMetadata catalogs.
 
+- Publish the tagged Nuvio2Fusion release with a public versioned container, pinned Unraid XML template, prebuilt-image Compose file and Unraid install guide.
+- Start the published container in CI and check its non-root user, health endpoint, page and example conversion, in addition to the Python test matrix and multi-architecture build.
 - Allow partial downloads when at least one usable source remains, even if other addons have no URL.
 - Omit unconnected addon references and include only connected, used instances in `requiredAddons`.
 - Keep warnings, omitted-source counts and empty-folder reports. Optional addon fields are no longer marked required or invalid.

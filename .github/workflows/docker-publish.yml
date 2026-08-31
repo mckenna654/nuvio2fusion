@@ -67,6 +67,7 @@ jobs:
             org.opencontainers.image.title=Nuvio2Fusion
             org.opencontainers.image.description=Offline Nuvio collections to Fusion widget converter
       - name: Build and publish Linux images
+        id: build
         uses: docker/build-push-action@v6
         with:
           context: .
@@ -76,3 +77,16 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
+      - name: Verify the published container starts and converts
+        env:
+          RELEASE_IMAGE: ghcr.io/${{ github.repository }}@${{ steps.build.outputs.digest }}
+        run: |
+          docker compose -f docker-compose.release.yml config --quiet
+          docker run --detach --name nuvio2fusion-smoke --publish 127.0.0.1:7088:7088 "$RELEASE_IMAGE"
+          test "$(docker inspect --format '{{.Config.User}}' nuvio2fusion-smoke)" = nuvio2fusion
+          python scripts/smoke_container.py http://127.0.0.1:7088
+      - name: Container smoke-test logs and cleanup
+        if: always()
+        run: |
+          docker logs nuvio2fusion-smoke 2>/dev/null || true
+          docker rm --force nuvio2fusion-smoke 2>/dev/null || true

@@ -1,55 +1,17 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Container version="2">
   <Name>Nuvio2Fusion</Name>
-  <Repository>ghcr.io/mckenna654/nuvio2fusion:latest</Repository>
+  <Repository>ghcr.io/mckenna654/nuvio2fusion:2.0.3</Repository>
   <Registry>https://github.com/mckenna654/nuvio2fusion/pkgs/container/nuvio2fusion</Registry>
   <Network>bridge</Network>
-  <MyIP/>
   <Shell>sh</Shell>
   <Privileged>false</Privileged>
   <Support>https://github.com/mckenna654/nuvio2fusion/issues</Support>
   <Project>https://github.com/mckenna654/nuvio2fusion</Project>
-  <Overview>
-    Nuvio ➔ Fusion layout converter
-    
-    Convert configured Nuvio collections into Fusion widget JSON while preserving addon sources. No account login. Keep on a trusted network; exported addon URLs may contain secrets.
-  </Overview>
-  <Category>MediaApp:Video MediaServer:Other Tools:Utilities</Category>
+  <Overview>Convert Nuvio collections into Fusion widget JSON. Keep folders, covers and connected addon sources; skip optional addons with warnings. No account login, database, appdata mapping or media mounts required. For trusted networks only: the app has no authentication and exported addon URLs may contain private tokens.</Overview>
+  <Category>MediaApp:Video Tools:Utilities</Category>
   <WebUI>http://[IP]:[PORT:7088]/</WebUI>
-  <TemplateURL>https://raw.githubusercontent.com/mckenna654/nuvio2fusion/main/unraid-template.xml</TemplateURL>
-  <Icon>https://raw.githubusercontent.com/mckenna654/nuvio2fusion/main/app/static/brand/icon.png</Icon>
-  <ExtraParams/>
-  <PostArgs/>
-  <CPUset/>
-  <DateInstalled/>
-  <DonateText/>
-  <DonateLink/>
-  <Description>
-    Local Nuvio-to-Fusion layout converter.
-  </Description>
-  <Networking>
-    <Mode>bridge</Mode>
-    <Publish>
-      <Port>
-        <HostPort>7088</HostPort>
-        <ContainerPort>7088</ContainerPort>
-        <Protocol>tcp</Protocol>
-      </Port>
-    </Publish>
-  </Networking>
-  <Data/>
-  <Environment>
-    <Variable>
-      <Value>7088</Value>
-      <Name>PORT</Name>
-      <Mode/>
-    </Variable>
-    <Variable>
-      <Value>0.0.0.0</Value>
-      <Name>HOST</Name>
-      <Mode/>
-    </Variable>
-  </Environment>
-  <Labels/>
-  <Config Name="WebUI Port" Target="7088" Default="7088" Mode="tcp" Description="Port for the Nuvio2Fusion Web UI" Type="Port" Display="always" Required="true" Mask="false">7088</Config>
+  <TemplateURL>https://raw.githubusercontent.com/mckenna654/nuvio2fusion/v2.0.3/unraid-template.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/mckenna654/nuvio2fusion/v2.0.3/app/static/brand/icon.png</Icon>
+  <Config Name="WebUI Port" Target="7088" Default="7088" Mode="tcp" Description="Open http://your-unraid-ip:7088. Change only the host port if it is already used. Keep access on your trusted network." Type="Port" Display="always" Required="true" Mask="false">7088</Config>
 </Container>

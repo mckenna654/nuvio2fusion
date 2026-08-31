@@ -31,6 +31,8 @@ Nuvio2Fusion preserves the layout and references to your original catalog source
 
 ## Quick start
 
+**Installing on Unraid?** Use the [Unraid installation guide](docs/UNRAID.md) and the [v2.0.3 release downloads](https://github.com/mckenna654/nuvio2fusion/releases/tag/v2.0.3). The public image is `ghcr.io/mckenna654/nuvio2fusion:2.0.3`; no registry login is needed.
+
 ### Run with Python
 
 Requires Python 3.11 or later. Node.js is only needed for development checks, not to run the app.
@@ -66,19 +68,19 @@ To update a local build, pull the repository changes and run `docker compose up 
 
 ### Use the published container
 
-After the repository's publish workflow completes, images are available from GitHub Container Registry:
+Published images are available from [GitHub Container Registry](https://github.com/mckenna654/nuvio2fusion/pkgs/container/nuvio2fusion). For the pinned release:
 
 ```sh
 docker run -d \
   --name nuvio2fusion \
   --restart unless-stopped \
   -p 127.0.0.1:7088:7088 \
-  ghcr.io/mckenna654/nuvio2fusion:latest
+  ghcr.io/mckenna654/nuvio2fusion:2.0.3
 ```
 
 `latest` follows successful builds of `main`; `sha-<commit>` identifies a particular build. Version tags are generated when a matching `v<version>` Git tag is published. Builds target Linux `amd64` and `arm64`. Check [Actions](https://github.com/mckenna654/nuvio2fusion/actions) before assuming a particular image tag exists.
 
-For Unraid, [unraid-template.xml](unraid-template.xml) includes the image, port and app icon. Restrict access to trusted devices; the app has no authentication layer.
+For Unraid, the [installation guide](docs/UNRAID.md) covers the [versioned XML template](unraid-template.xml), manual Add Container setup and updates. No appdata or media volumes are needed. [docker-compose.release.yml](docker-compose.release.yml) runs the prebuilt release without cloning or building the application. Both Compose examples bind to localhost by default; set the release file's `NUVIO2FUSION_BIND_IP` to your server's LAN address for trusted network access. The app has no authentication layer.
 
 ## Convert a setup
 
@@ -262,7 +264,7 @@ git diff --check
 
 The suite covers URL resolution, source mirrors, ordering, multiple providers, native-source limitations, partial reports, duplicate IDs, Fusion round-trips and API privacy/boundaries. A sanitized fixture exercises **13 widgets, 65 folders and 308 source references**. The browser-generated download has also been compared with the expected widget JSON.
 
-CI tests Python 3.11 and 3.14 before publishing Linux container images. Pull requests run checks without publishing. Schema checks do not replace testing an import in your Fusion version.
+CI tests Python 3.11 and 3.14 before publishing Linux container images, then starts the published image on an `amd64` runner and verifies its non-root user, health endpoint, page and example conversion. Pull requests run checks without publishing. Schema checks do not replace testing an import in your Fusion version.
 
 Project layout: `app/fusion.py` handles conversion; `app/main.py` serves the API; `app/static/js/fusion.js` handles the browser workflow; `app/presets/` contains neutral examples; `tests/` contains regression coverage.
 
