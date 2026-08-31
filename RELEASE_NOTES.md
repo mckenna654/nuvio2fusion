@@ -1,5 +1,18 @@
 # Nuvio2Fusion release notes
 
+## 2.0.3 · 31 August 2026
+
+Optional addons no longer block exports. Connect only the addons you use; missing instances such as Bingecat are reported without preventing export of connected AIOMetadata catalogs.
+
+- Allow partial downloads when at least one usable source remains, even if other addons have no URL.
+- Omit unconnected addon references and include only connected, used instances in `requiredAddons`.
+- Keep warnings, omitted-source counts and empty-folder reports. Optional addon fields are no longer marked required or invalid.
+- Remove the partial-export confirmation checkbox. Warnings do not require acknowledgement.
+- Keep the guard against files containing no usable sources or supported widgets.
+- Preserve `report.requiresPartialApproval` for API compatibility, always `false`; `report.canExport` now permits missing addons when usable content remains.
+
+Refresh the updated app and convert again. An AIOMetadata-only conversion can now be downloaded without connecting optional addons.
+
 ## 2.0.2 · 31 August 2026
 
 Removes the need to write JSON when connecting an addon. Pasting a normal AIOMetadata installation URL into the previous advanced mapping box produced a JSON error before conversion could run.

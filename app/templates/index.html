@@ -22,12 +22,12 @@
         <div id="pasteSource" hidden><label for="rawJson">Export JSON</label><textarea id="rawJson" rows="9" placeholder='[{"id":"my-collection","title":"Movies","folders":[...]}]' spellcheck="false"></textarea></div>
         <p class="hint">Use Nuvio’s collections export. A manifest alone has no folder layout. Already-exported Fusion widgets can also be checked and re-exported.</p>
         <div class="section-title options-title"><span class="step">02</span><h2>Connect the same addons</h2></div>
-        <p class="hint">Nuvio collections often contain only an addon ID, not its installation URL. Choose the addon below and paste its configured manifest URL. Each addon needs its own URL.</p>
+        <p class="hint">Connect only the addons you use. Choose an addon below and paste its configured manifest URL. Unconnected addons are skipped with a warning; they do not block sources from other addons.</p>
         <label for="addonChoice">Addon to connect</label><select id="addonChoice" disabled><option value="">Load collections to choose an addon</option></select>
         <label for="addonManifest">Addon manifest URL</label><input id="addonManifest" type="text" autocomplete="off" spellcheck="false" placeholder="https://your-addon/config/manifest.json">
         <button id="connectAddon" type="button">Connect addon</button>
         <p id="addonEntryStatus" class="hint" aria-live="polite">Paste a normal URL here. JSON is only needed for the optional advanced field.</p>
-        <p id="missingAddonNotice" class="error" role="alert" hidden><strong>Connect your sources to unlock the download.</strong> The collections file is missing addon installation URLs. Fill every field below, then select Connect addons & convert. No catalog links can be exported until this step is complete.</p>
+        <p id="missingAddonNotice" class="notice" role="status" hidden><strong>Some addons are not connected.</strong> Their catalog references will be omitted. These fields are optional: leave addons you do not use blank and download the partial export. Folders relying only on skipped addons will be empty.</p>
         <div id="missingMappings"></div>
         <details><summary>Advanced: JSON URL mappings</summary>
           <label for="addonUrls">Addon URL mappings (JSON object)</label><textarea id="addonUrls" rows="5" spellcheck="false" autocomplete="off" placeholder='{"my.addon":"https://your-addon/config/manifest.json"}'></textarea>
@@ -44,9 +44,8 @@
         <div id="emptyState"><div class="empty-icon"><img src="/static/brand/mark.svg" width="83" height="83" alt=""></div><h3>Your layout, carried across.</h3><p>Collections become Fusion collection widgets. Folder order, covers, shapes and multiple catalog sources stay together.</p><div class="legend"><span>Folders & covers</span><span>Catalog sources</span><span>Addon URLs</span><span>Compatibility report</span></div></div>
         <div id="results" hidden>
           <div id="stats" class="stats"></div><p id="resultSummary"></p><p id="coverage" class="notice"></p>
-          <label id="partialApproval" class="partial-approval" hidden><input id="allowPartial" type="checkbox"> I have reviewed the omitted sources and empty folders and want to export this partial layout.</label>
           <div class="downloads"><button id="downloadFusion" type="button" class="primary">Download Fusion widgets</button><button id="downloadReport" type="button">Compatibility report</button></div>
-          <p class="hint">Back up your Fusion widgets, then use Fusion’s widget import with the downloaded JSON. Use the same configured addon URLs in Fusion. Downloads stay blocked while addon URLs are missing or no usable sources remain.</p>
+          <p class="hint">Back up your Fusion widgets, then import the downloaded JSON. Only connected addons are included. Missing addons show warnings; downloads are blocked only when no usable sources or widgets remain.</p>
           <details open><summary>Warnings & requirements</summary><ul id="warnings"></ul></details>
           <details id="issuesSection" open><summary>Settings that need attention</summary><ul id="issues"></ul></details>
           <div class="filters"><label class="sr-only" for="search">Search sources</label><input id="search" type="search" placeholder="Find a folder, catalog or issue…"><label class="sr-only" for="statusFilter">Filter results</label><select id="statusFilter"><option value="all">All sources</option><option value="preserved">Preserved</option><option value="unsupported">Needs attention</option></select></div>

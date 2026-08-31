@@ -18,7 +18,6 @@ function invalidate() {
   $('results').hidden = true;
   $('emptyState').hidden = false;
   $('resultBadge').textContent = 'AWAITING INPUT';
-  $('allowPartial').checked = false;
   $('error').hidden = true;
 }
 function clearMappings() {
@@ -178,10 +177,11 @@ $('fusionForm').addEventListener('submit', async event => {
     if (requestGeneration !== generation) return;
     result = data;
     render();
-    $('inputStatus').textContent = data.report.missingAddons.length
-      ? 'Export blocked: paste the original addon manifest URL into each highlighted field, then convert again.'
-      : data.report.canExport ? 'Conversion complete. Review compatibility before importing.' : 'Export blocked. Review the source issues before trying again.';
-    if (data.report.missingAddons.length) mappingInputs.get(data.report.missingAddons[0].addonId)?.focus();
+    $('inputStatus').textContent = !data.report.canExport
+      ? 'No usable sources to export. Connect at least one addon or review the source issues.'
+      : data.report.missingAddons.length
+        ? 'Partial export ready. Unconnected addons are optional; their sources will be omitted.'
+        : 'Conversion complete. Review compatibility before importing.';
   } catch (err) {
     if (requestGeneration === generation) { showError(err.message); $('inputStatus').textContent = 'No export generated.'; }
   } finally { $('convertButton').disabled = false; }
@@ -217,22 +217,13 @@ function render() {
   $('coverage').textContent = !report.canExport ? report.exportBlockReason : report.complete
     ? 'All source references and supported layout fields were carried across. Live addon availability and import into your Fusion version still need checking.'
     : `${report.counts.unsupported} sources omitted; ${report.emptyFolders} empty folders; ${report.skippedWidgets} widgets omitted. Review the issues below. The download is marked partial.`;
-  $('partialApproval').hidden = !report.canExport || !report.requiresPartialApproval;
   updateDownload();
   $('warnings').replaceChildren(...report.warnings.map(w => element('li', w)));
   $('issuesSection').hidden = report.issues.length === 0;
   $('issues').replaceChildren(...report.issues.map(issue => element('li', `${issue.path}: ${issue.message}${issue.fields ? ' Fields: ' + issue.fields.join(', ') : ''}`)));
   $('missingAddonNotice').hidden = report.missingAddons.length === 0;
-  $('convertButton').textContent = report.missingAddons.length ? 'Connect addons & convert →' : 'Convert to Fusion →';
-  for (const [id, input] of mappingInputs) {
-    const missing = report.missingAddons.some(addon => addon.addonId === id);
-    input.setAttribute('aria-required', String(missing));
-    input.setAttribute('aria-invalid', String(missing));
-  }
   for (const missing of report.missingAddons) {
-    const input = mappingInput(missing.addonId, missing.references);
-    input.setAttribute('aria-required', 'true');
-    input.setAttribute('aria-invalid', 'true');
+    mappingInput(missing.addonId, missing.references);
   }
   renderTable();
   $('layoutSummary').textContent = `Widget layout (${report.widgets})`;
@@ -247,9 +238,8 @@ function render() {
   }
 }
 function updateDownload() {
-  $('downloadFusion').disabled = !result?.report.canExport || (result.report.requiresPartialApproval && !$('allowPartial').checked);
+  $('downloadFusion').disabled = !result?.report.canExport;
 }
-$('allowPartial').addEventListener('change', updateDownload);
 function renderTable() {
   if (!result) return;
   const query = $('search').value.toLowerCase(), status = $('statusFilter').value;
@@ -273,7 +263,7 @@ function download(data, name) {
   setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 $('downloadFusion').addEventListener('click', () => {
-  if (result?.fusionConfig && result.report.canExport && (!result.report.requiresPartialApproval || $('allowPartial').checked)) {
+  if (result?.fusionConfig && result.report.canExport) {
     download(result.fusionConfig, `fusion-widgets${result.report.complete ? '' : '-partial'}.json`);
   }
 });

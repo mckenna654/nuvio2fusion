@@ -128,7 +128,7 @@ class FusionConversion:
                 self.missing[aid] += 1
             return self.record(raw, path, title, 'unsupported', 'Invalid addon URL. Supply a full manifest URL for this addon.')
         if not url:
-            return self.record(raw, path, title, 'unsupported', 'Missing addon manifest URL. Add a URL mapping and convert again.')
+            return self.record(raw, path, title, 'unsupported', 'Addon not connected; this source is omitted. Supply its manifest URL only if you want to include it.')
         if not fusion:
             allowed = {'provider', 'addonId', 'addonBaseUrl', 'manifestUrl', 'addonName',
                        'type', 'catalogId', 'genre', 'catalogName', 'title', 'name', 'aiometadata'}
@@ -312,12 +312,12 @@ class FusionConversion:
         ]
         if not fusion:
             warnings.append('Nuvio focus GIFs, hero artwork/video, title logos and collection view settings have no verified v1 mapping; see the per-entry issues.')
+        if self.missing:
+            warnings.append(f'{len(self.missing)} addons are not connected; {sum(self.missing.values())} catalog references are omitted. Connecting these addons is optional. Sources from connected addons remain exportable.')
         if self.empty_folders:
             warnings.append(f'{self.empty_folders} folders have no usable sources. Installing an addon later cannot restore omitted catalog references; repair the original Nuvio export and convert again.')
         block_reason = ''
-        if self.missing:
-            block_reason = 'Connect every missing addon below and convert again. A catalog needs its original instance manifest URL in the widget itself; installing the addon in Fusion later does not repair omitted sources.'
-        elif not counts['preserved']:
+        if not counts['preserved']:
             block_reason = 'No usable catalog sources remain. Use the original Nuvio collections export and resolve the source issues; a layout-only Fusion file cannot recover missing catalogs.'
         elif not widgets:
             block_reason = 'No supported widgets remain to export.'
@@ -325,13 +325,12 @@ class FusionConversion:
         complete = can_export and counts['unsupported'] == 0 and not self.issues and self.skipped_widgets == 0
         return {'success': True, 'fusionConfig': {'exportType': 'fusionWidgets', 'exportVersion': 1,
                     'requiredAddons': list(self.required), 'widgets': widgets} if can_export else None,
-                # A blocked conversion is still inspectable, but never supplies
-                # an importable file with its required catalog links missing.
+                # Keep a diagnostic preview when no usable content remains.
                 'previewWidgets': widgets if not can_export else [],
                 'report': {'inputFormat': 'Fusion widgets' if fusion else 'Nuvio collections',
                     'complete': complete, 'sourceCoverageComplete': counts['unsupported'] == 0,
                     'canExport': can_export, 'exportBlockReason': block_reason,
-                    'requiresPartialApproval': bool(counts['unsupported'] or self.empty_folders or self.skipped_widgets),
+                    'requiresPartialApproval': False,  # Compatibility field; omissions are warnings only.
                     'widgets': len(widgets), 'folders': folders, 'emptyFolders': self.empty_folders,
                     'skippedWidgets': self.skipped_widgets, 'sourceReferences': len(self.records),
                     'counts': {k: counts[k] for k in ('preserved', 'unsupported')},
