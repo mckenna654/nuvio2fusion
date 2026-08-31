@@ -30,7 +30,7 @@ No upstream implementation is vendored. Native source conversion is intentionall
 
 All addon URLs required by exported sources are collected once in `requiredAddons`, in first-use order. URLs are not contacted during conversion. Query strings and private configuration path segments stay intact. URL mappings are explicit per addon ID; a single supplied URL never implicitly binds all addons. A mapping can override an embedded obsolete URL.
 
-Missing URLs produce repair fields in the UI, not invalid placeholders in a supposedly complete output. Missing/duplicate layout IDs receive deterministic IDs and a report entry. Unknown settings are reported; malformed container structures are rejected.
+Missing URLs produce highlighted repair fields and block the widget download until every referenced addon is connected. Both `requiredAddons` and each source's `payload.addonId` must contain the same configured manifest URL. Installing an addon in Fusion does not restore sources omitted from a previous file. Missing/duplicate layout IDs receive deterministic IDs and a report entry. Unknown settings are reported; malformed container structures are rejected.
 
 ## Limitations
 
@@ -41,7 +41,7 @@ Missing URLs produce repair fields in the UI, not invalid placeholders in a supp
 - Already-Fusion native sources such as `localWatchlist` retain their payloads. Their actual content comes from the target Fusion account/device; copying the widget does not copy a watchlist. Unknown native Fusion kinds are retained from Fusion input without asserting semantic validation.
 - Classic addon rows accept movie/series types. Other types must be placed in a collection folder; incompatible classic rows are omitted and reported. Unknown widget types are also reported, not treated as supported.
 - `report.complete` means no omitted source/widget, empty folder, repair or unmapped setting was detected. `sourceCoverageComplete` refers only to source references. Neither proves live addon access or native client import.
-- The supplied Fusion example round-trips exactly, but a user-specific Nuvio export and an actual import into the user's Fusion version have not yet been tested. Container builds and publication are performed by GitHub Actions; consult the run for the commit you deploy.
+- The supplied Fusion example round-trips exactly. A user-supplied native Nuvio export was checked locally: 12 collections, 154 folders and 347 addon references, with neither of its two install URLs included. With separate test URL mappings, all references, catalog IDs, types, genres and ordering were retained and no folders remained empty. The user's file and addon-specific data are not committed. Live instance access and an actual import into the user's Fusion version remain unverified. Container builds and publication are performed by GitHub Actions; consult the run for the commit you deploy.
 
 ## API
 
@@ -69,6 +69,6 @@ Missing URLs produce repair fields in the UI, not invalid placeholders in a supp
 }
 ```
 
-Response: `success`, `fusionConfig` (the importable file), and `report` (counts, per-source results, missing addons, layout issues and warnings). Send `fusionConfig` to Fusion, not the whole API response. `export_data` also accepts a single Nuvio collection, `{collections: [...]}`, Fusion `{widgets: [...]}`/v1 envelope, or a Fusion widget array. Manifests and arbitrary full-backup schemas are rejected.
+Response: `success` indicates analysis completed, not that a file is ready. Check `report.canExport`. While any addon URL is missing or no usable sources remain, `fusionConfig` is `null`; `previewWidgets` provides the diagnostic layout and `report.exportBlockReason` explains what to repair. Otherwise `fusionConfig` is the importable file and `previewWidgets` is empty. `report.requiresPartialApproval` flags remaining source/widget omissions or empty folders; the UI requires acknowledgement before downloading such files. Send only a non-null `fusionConfig` to Fusion, never the preview or whole response. `export_data` also accepts a single Nuvio collection, `{collections: [...]}`, Fusion `{widgets: [...]}`/v1 envelope, or a Fusion widget array. Manifests and arbitrary full-backup schemas are rejected.
 
 Privacy: inputs are held only in application memory. The report does not include addon URL fields, but still includes user-provided titles, IDs and setting field names. The Fusion file contains the actual URLs and must be kept private. The app is unauthenticated and intended for local use.

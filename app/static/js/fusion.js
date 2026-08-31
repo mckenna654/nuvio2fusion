@@ -17,11 +17,14 @@ function invalidate() {
   $('results').hidden = true;
   $('emptyState').hidden = false;
   $('resultBadge').textContent = 'AWAITING INPUT';
+  $('allowPartial').checked = false;
   $('error').hidden = true;
 }
 function clearMappings() {
   mappingInputs.clear();
   $('missingMappings').replaceChildren();
+  $('missingAddonNotice').hidden = true;
+  $('convertButton').textContent = 'Convert to Fusion →';
 }
 function showError(message) {
   $('error').textContent = message;
@@ -77,8 +80,9 @@ $('fusionForm').addEventListener('submit', async event => {
     result = data;
     render();
     $('inputStatus').textContent = data.report.missingAddons.length
-      ? 'Add the missing addon URLs above, then convert again.'
-      : 'Conversion complete. Review compatibility before importing.';
+      ? 'Export blocked: paste the original addon manifest URL into each highlighted field, then convert again.'
+      : data.report.canExport ? 'Conversion complete. Review compatibility before importing.' : 'Export blocked. Review the source issues before trying again.';
+    if (data.report.missingAddons.length) mappingInputs.get(data.report.missingAddons[0].addonId)?.focus();
   } catch (err) {
     if (requestGeneration === generation) { showError(err.message); $('inputStatus').textContent = 'No export generated.'; }
   } finally { $('convertButton').disabled = false; }
@@ -101,7 +105,7 @@ function render() {
   const report = result.report;
   $('results').hidden = false;
   $('emptyState').hidden = true;
-  $('resultBadge').textContent = report.complete ? 'READY TO REVIEW' : 'NEEDS ATTENTION';
+  $('resultBadge').textContent = !report.canExport ? 'EXPORT BLOCKED' : report.complete ? 'READY TO REVIEW' : 'NEEDS ATTENTION';
   $('stats').replaceChildren();
   for (const [number, label, style] of [[report.widgets, 'Widgets', 'native'], [report.folders, 'Folders', 'native'],
     [report.counts.preserved, 'Sources kept', 'native'], [report.counts.unsupported, 'Sources omitted', 'unsupported']]) {
@@ -110,28 +114,38 @@ function render() {
     $('stats').append(stat);
   }
   $('resultSummary').textContent = `${report.inputFormat} → Fusion widget v1 · ${report.requiredAddonCount} required addons · ${report.issues.length} layout issues.`;
-  $('coverage').textContent = report.complete
+  $('coverage').textContent = !report.canExport ? report.exportBlockReason : report.complete
     ? 'All source references and supported layout fields were carried across. Live addon availability and import into your Fusion version still need checking.'
     : `${report.counts.unsupported} sources omitted; ${report.emptyFolders} empty folders; ${report.skippedWidgets} widgets omitted. Review the issues below. The download is marked partial.`;
-  $('downloadFusion').disabled = report.widgets === 0;
+  $('partialApproval').hidden = !report.canExport || !report.requiresPartialApproval;
+  updateDownload();
   $('warnings').replaceChildren(...report.warnings.map(w => element('li', w)));
   $('issuesSection').hidden = report.issues.length === 0;
   $('issues').replaceChildren(...report.issues.map(issue => element('li', `${issue.path}: ${issue.message}${issue.fields ? ' Fields: ' + issue.fields.join(', ') : ''}`)));
+  $('missingAddonNotice').hidden = report.missingAddons.length === 0;
+  $('convertButton').textContent = report.missingAddons.length ? 'Connect addons & convert →' : 'Convert to Fusion →';
+  for (const [id, input] of mappingInputs) {
+    const missing = report.missingAddons.some(addon => addon.addonId === id);
+    input.setAttribute('aria-required', String(missing));
+    input.setAttribute('aria-invalid', String(missing));
+  }
   for (const missing of report.missingAddons) {
     if (mappingInputs.has(missing.addonId)) continue;
     const input = element('input');
     input.id = 'addon-map-' + mappingInputs.size;
     input.type = 'text'; input.autocomplete = 'off'; input.spellcheck = false;
+    input.setAttribute('aria-required', 'true');
+    input.setAttribute('aria-invalid', 'true');
     input.placeholder = 'https://your-addon/config/manifest.json';
     const label = element('label', `Manifest URL for ${missing.addonId}`);
     label.htmlFor = input.id;
-    $('missingMappings').append(label, input, element('p', `${missing.references} source reference${missing.references === 1 ? '' : 's'} use this addon.`, 'hint'));
+    $('missingMappings').append(label, input, element('p', `${missing.references} catalog reference${missing.references === 1 ? '' : 's'} need this exact addon instance. Copy its configured install URL (ending in /manifest.json) from Nuvio or your addon configuration page. A display name or the site's homepage is not enough.`, 'hint'));
     mappingInputs.set(missing.addonId, input);
   }
   renderTable();
   $('layoutSummary').textContent = `Widget layout (${report.widgets})`;
   $('layoutPreview').replaceChildren();
-  for (const widget of result.fusionConfig.widgets) {
+  for (const widget of result.fusionConfig?.widgets || result.previewWidgets) {
     const row = element('div', undefined, 'layout-entry');
     row.append(element('strong', widget.title));
     if (widget.type === 'collection.row') for (const folder of widget.dataSource.payload.items) {
@@ -140,6 +154,10 @@ function render() {
     $('layoutPreview').append(row);
   }
 }
+function updateDownload() {
+  $('downloadFusion').disabled = !result?.report.canExport || (result.report.requiresPartialApproval && !$('allowPartial').checked);
+}
+$('allowPartial').addEventListener('change', updateDownload);
 function renderTable() {
   if (!result) return;
   const query = $('search').value.toLowerCase(), status = $('statusFilter').value;
@@ -163,6 +181,8 @@ function download(data, name) {
   setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 $('downloadFusion').addEventListener('click', () => {
-  if (result) download(result.fusionConfig, `fusion-widgets${result.report.complete ? '' : '-partial'}.json`);
+  if (result?.fusionConfig && result.report.canExport && (!result.report.requiresPartialApproval || $('allowPartial').checked)) {
+    download(result.fusionConfig, `fusion-widgets${result.report.complete ? '' : '-partial'}.json`);
+  }
 });
 $('downloadReport').addEventListener('click', () => { if (result) download(result.report, 'fusion-compatibility-report.json'); });

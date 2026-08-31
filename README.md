@@ -85,7 +85,7 @@ For Unraid, [unraid-template.xml](unraid-template.xml) includes the image, port 
 1. **Back up your existing Fusion widgets.** Keep the original Nuvio export as well.
 2. **Export collections from Nuvio.** Use its collection-management export. The usual result is a JSON array of collections, not a manifest URL or account backup.
 3. **Upload or paste the JSON** into Nuvio2Fusion and select **Convert to Fusion**.
-4. **Supply missing addon URLs.** If Nuvio recorded an addon ID without its install URL, a labelled field appears. Paste that addon's complete manifest URL and convert again.
+4. **Connect missing addons.** If Nuvio recorded an addon ID without its install URL, the download is blocked and a highlighted field appears. Paste each addon's complete configured manifest URL and select **Connect addons & convert**. For `aio-metadata`, use the install URL for your own AIOMetadata configuration, not its homepage. Other addon IDs need their own URLs.
 5. **Review the results.** Inspect omitted sources, empty folders and settings that need attention. Use the search and result filter to find affected rows.
 6. **Download Fusion widgets.** The compatibility report is a separate download for your review; it is not a Fusion import file.
 7. **Import through Fusion's widget import.** Use the downloaded file or its JSON text as supported by your Fusion version. Keep the required addons installed and test a few folders after import.
@@ -127,7 +127,7 @@ Mappings may override an obsolete embedded URL. Configuration path segments and 
 | Multiple addon sources per folder | Preserved in order |
 | Catalog IDs and genre selections | Preserved with Fusion's `type::catalogId` representation |
 | Both `sources` and `catalogSources` | `sources` is authoritative; the legacy mirror is not duplicated |
-| Missing addon URL | Source omitted and a repair field/report entry provided |
+| Missing addon URL | Download blocked until every missing addon is connected; repair fields list affected catalog counts |
 | Nuvio-native TMDB or Trakt query | Reported as unsupported; no speculative Fusion payload is invented |
 | Focus GIF, emoji, hero backdrop/video, title logo | Reported as unmapped; no equivalent is claimed |
 | Nuvio collection view, background or pinning settings | Listed for review when present |
@@ -135,7 +135,7 @@ Mappings may override an obsolete embedded URL. Configuration path segments and 
 | Existing Fusion-native source | Payload retained; account/library contents are not copied |
 | Unknown widget type | Omitted and reported |
 
-Classic addon rows require `movie` or `series`. Other catalog types can be retained inside collection folders; incompatible classic rows are reported. Empty folders remain as repairable tiles. Missing or duplicate layout IDs receive deterministic replacements and an issue entry.
+Classic addon rows require `movie` or `series`. Other catalog types can be retained inside collection folders; incompatible classic rows are reported. Empty folders remain visible in the preview. A file with no usable sources cannot be downloaded. Missing or duplicate layout IDs receive deterministic replacements and an issue entry.
 
 See [the format contract and implementation notes](docs/FUSION.md) for field mappings and evidence.
 
@@ -146,7 +146,9 @@ See [the format contract and implementation notes](docs/FUSION.md) for field map
 - **Layout issues:** settings without a verified mapping, repaired IDs/titles, or empty folders.
 - **Complete:** no detected omission, repair, empty folder or unmapped setting. It is not a guarantee of live catalog access or pixel-identical rendering.
 
-A partial conversion downloads as `fusion-widgets-partial.json`. A complete conversion downloads as `fusion-widgets.json`. The separate `fusion-compatibility-report.json` explains the result. You may import a partial file after reviewing it, but affected folders can be empty or incomplete.
+A partial conversion downloads as `fusion-widgets-partial.json`. A complete conversion downloads as `fusion-widgets.json`. The separate `fusion-compatibility-report.json` explains the result. Missing addon URLs or zero usable sources block the widget download entirely. Other source/widget omissions or empty folders require checking the partial-export acknowledgement first; visual-setting warnings alone do not require it.
+
+**Recovering an empty file from version 2.0.0:** start again with the original Nuvio export. That version allowed downloads containing folders but no catalog links. Installing AIOMetadata in Fusion afterward cannot reconnect them, and re-importing the empty Fusion file cannot recover the missing IDs. Supply the original addon URLs during conversion, confirm the source counts, then import the corrected widgets. Back up your Fusion layout before replacing the empty copies.
 
 The import file has this envelope:
 
@@ -228,14 +230,15 @@ curl --fail-with-body http://127.0.0.1:7088/api/fusion/convert \
 
 `export_data` accepts a Nuvio collection array, a single collection, `{ "collections": [...] }`, a Fusion widget array, or a Fusion widget v1 envelope. Full-backup fields outside `collections` are not transferred and are reported. Manifests and unrecognized structures are rejected.
 
-Success responses contain `success`, `fusionConfig` and `report`. Save **only `fusionConfig`** as your import file. Invalid structures/mappings return HTTP 400, invalid request fields 422, cross-origin posts 403, and oversized requests 413.
+Responses contain `success`, `fusionConfig`, `previewWidgets` and `report`. `success` means the input was analyzed; check **`report.canExport`** before saving an import. When URLs are missing or no usable sources remain, `fusionConfig` is `null`, `previewWidgets` contains the diagnostic layout, and `report.exportBlockReason` explains the repair. Once exportable, save **only `fusionConfig`**. If `report.requiresPartialApproval` is true, require deliberate acceptance of source/widget omissions before saving. Invalid structures/mappings return HTTP 400, invalid request fields 422, cross-origin posts 403, and oversized requests 413.
 
 ## Troubleshooting
 
 | Problem | What to check |
 | --- | --- |
 | Missing manifest URL | Enter the original addon's complete install URL for the exact ID shown. |
-| Empty folder after conversion | Inspect omitted sources. Native queries may need recreating in Fusion or exposing through an addon. |
+| Empty folders from a 2.0.0 download | Reconvert the original Nuvio JSON with all addon URL mappings. Manually installing an addon cannot restore omitted catalog references. |
+| Download blocked | Connect every missing addon and convert again. If no usable sources remain, review the source report; native queries may need recreating in Fusion or exposing through an addon. |
 | Tiles appear, but catalogs fail | Confirm the referenced addon is installed, accessible and still serves those catalog IDs. Conversion does not test the service. |
 | Artwork is missing | The original URL must remain reachable. Example URLs intentionally do not resolve. |
 | File is marked partial with all sources kept | Review unmapped visual settings or repaired layout IDs. Source coverage and layout fidelity are separate. |

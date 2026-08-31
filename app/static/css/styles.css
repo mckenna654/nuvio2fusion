@@ -2,3 +2,4 @@
 .fusion-page td:last-child{width:auto;text-align:left}.fusion-page .filters{margin-bottom:10px}#missingMappings label{overflow-wrap:anywhere}
 .brand{display:inline-flex;align-items:center;gap:11px;white-space:nowrap}.brand img{display:block;flex-shrink:0}header .tag{letter-spacing:1px}@media(max-width:700px){header .tag{display:none}.brand{font-size:21px}header{gap:15px}header>a:last-child{font-size:11px}}
 .brand .brand-name{color:var(--text)}.empty-icon img{display:block;border-radius:21px}
+.partial-approval{display:flex;align-items:flex-start;gap:9px;padding:12px;border:1px solid #5b5034;border-radius:6px;color:var(--orange);font-weight:400}.partial-approval input{margin-top:3px}#missingMappings input[aria-invalid=true]{border-color:var(--red)}button:disabled{cursor:not-allowed}

@@ -1,5 +1,21 @@
 # Nuvio2Fusion release notes
 
+## 2.0.1 · 31 August 2026
+
+Fixes an export workflow that allowed collection tiles to be downloaded without their catalog sources. Native Nuvio collection exports can contain logical addon IDs such as `aio-metadata` without the configured installation URLs Fusion needs. Version 2.0.0 reported those omissions but still allowed an empty widget file to be downloaded.
+
+- Block widget exports until every missing addon URL is supplied, and block files with no usable sources.
+- Highlight each missing instance URL, show the number of affected catalog references, focus the first repair field and provide a **Connect addons & convert** action.
+- Keep each addon mapped separately; write its configured manifest URL into both `requiredAddons` and every matching catalog source.
+- Offer repair fields for malformed embedded URLs when an addon ID is available.
+- Require deliberate acknowledgement before downloading other partial layouts with omitted sources/widgets or empty folders.
+- Keep the compatibility report and diagnostic preview available while export is blocked.
+- Add regression coverage for missing instances, independent addon mappings, empty-file recovery, API readiness and partial-export decisions. A locally supplied 12-collection, 154-folder Nuvio export retained all 347 sources with two test URL mappings; live addon availability and native Fusion import were not verified.
+
+**Upgrade and repair:** refresh the updated app, load the **original Nuvio export**, enter every configured addon manifest URL, then convert again. Do not reconvert the empty Fusion file: it no longer contains the source references. Installing an addon manually in Fusion cannot restore those links. Back up your Fusion widgets before replacing any empty imports.
+
+**API behavior change:** `fusionConfig` is now `null` while an export is blocked. Check `report.canExport` and `report.exportBlockReason`; diagnostic widgets are in `previewWidgets`. `success` means the input was analyzed. Respect `report.requiresPartialApproval` before saving a partial file.
+
 ## 2.0.0 · 31 August 2026
 
 Nuvio2Fusion is now a focused Nuvio collections → Fusion widgets converter. This major release replaces the earlier provider-migration direction with a direct layout transfer, a new identity and explicit compatibility reporting. Existing repository history is preserved.

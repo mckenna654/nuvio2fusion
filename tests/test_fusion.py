@@ -23,7 +23,8 @@ def collection(*sources, **folder):
 
 
 def item(result):
-    return result['fusionConfig']['widgets'][0]['dataSource']['payload']['items'][0]
+    widgets = result['fusionConfig']['widgets'] if result['fusionConfig'] else result['previewWidgets']
+    return widgets[0]['dataSource']['payload']['items'][0]
 
 
 class FusionTests(unittest.TestCase):
@@ -48,11 +49,14 @@ class FusionTests(unittest.TestCase):
         self.assertEqual(item(result)['dataSources'], [])
         self.assertEqual(result['report']['emptyFolders'], 1)
         self.assertFalse(result['report']['complete'])
+        self.assertIsNone(result['fusionConfig'])
+        self.assertFalse(result['report']['canExport'])
 
     def test_one_url_never_binds_other_addons_implicitly(self):
         result = convert_to_fusion(collection(source(), source('other')), {'my.addon': MANIFEST})
         self.assertEqual(len(item(result)['dataSources']), 1)
         self.assertEqual(result['report']['counts']['unsupported'], 1)
+        self.assertIsNone(result['fusionConfig'])
 
     def test_base_url_and_query_preserved(self):
         base = 'https://addon.example/TOKEN?key=PRIVATE'
@@ -93,7 +97,7 @@ class FusionTests(unittest.TestCase):
     def test_unknown_source_options_not_silently_discarded(self):
         result = convert_to_fusion(collection(source(filters={'rating': 9})), {'my.addon': MANIFEST})
         self.assertEqual(item(result)['dataSources'], [])
-        self.assertEqual(result['fusionConfig']['requiredAddons'], [])
+        self.assertIsNone(result['fusionConfig'])
 
     def test_visual_settings_reported_instead_of_promising_fidelity(self):
         raw = collection(source(), focusGifUrl='https://art.example/focus.gif',
@@ -154,8 +158,8 @@ class FusionTests(unittest.TestCase):
         raw = {'widgets': [{'id': 'row', 'title': 'Anime', 'type': 'row.classic',
             'dataSource': {'kind': 'addonCatalog', 'payload': {'addonId': MANIFEST, 'type': 'anime', 'catalogId': 'anime::original'}}}]}
         result = convert_to_fusion(raw)
-        self.assertEqual(result['fusionConfig']['widgets'], [])
-        self.assertEqual(result['fusionConfig']['requiredAddons'], [])
+        self.assertIsNone(result['fusionConfig'])
+        self.assertEqual(result['previewWidgets'], [])
         self.assertEqual(result['report']['skippedWidgets'], 1)
 
     def test_custom_media_type_supported_in_collection(self):
@@ -187,6 +191,64 @@ class FusionTests(unittest.TestCase):
             with self.subTest(raw=raw), self.assertRaises((ValueError, TypeError)):
                 convert_to_fusion(raw)
 
+    def test_missing_instance_urls_block_until_both_addons_are_connected(self):
+        # The native Nuvio export records logical IDs but drops install URLs.
+        # Keep two instances separate even when one supplies almost every source.
+        raw = collection(*[source('aio-metadata', f'list.{i}', genre='None') for i in range(341)],
+                         *[source('com.example.second.nuvio', f'custom.{i}', typ='all') for i in range(6)])
+        original = copy.deepcopy(raw)
+        missing = convert_to_fusion(raw)
+        self.assertEqual(missing['report']['missingAddons'], [
+            {'addonId': 'aio-metadata', 'references': 341},
+            {'addonId': 'com.example.second.nuvio', 'references': 6}])
+        self.assertIsNone(missing['fusionConfig'])
+        mapped = {'aio-metadata': MANIFEST}
+        still_missing = convert_to_fusion(raw, mapped)
+        self.assertEqual(still_missing['report']['counts'], {'preserved': 341, 'unsupported': 6})
+        self.assertFalse(still_missing['report']['canExport'])
+        self.assertIsNone(still_missing['fusionConfig'])
+        second = 'https://second.example/config/manifest.json'
+        mapped['com.example.second.nuvio'] = second
+        repaired = convert_to_fusion(raw, mapped)
+        self.assertEqual(repaired['fusionConfig']['requiredAddons'], [MANIFEST, second])
+        self.assertEqual(repaired['report']['counts'], {'preserved': 347, 'unsupported': 0})
+        self.assertEqual(repaired['report']['emptyFolders'], 0)
+        self.assertTrue(repaired['report']['canExport'])
+        self.assertFalse(repaired['report']['requiresPartialApproval'])
+        for before, after in zip(raw[0]['folders'][0]['sources'], item(repaired)['dataSources']):
+            self.assertEqual(after['payload']['addonId'], mapped[before['addonId']])
+            self.assertEqual(after['payload']['catalogId'], f"{before['type']}::{before['catalogId']}")
+        self.assertEqual(raw, original)
+        self.assertNotIn('TOKEN', json.dumps(repaired['report']))
+
+    def test_already_empty_fusion_file_cannot_be_exported_as_repaired(self):
+        raw = {'widgets': [{'id': 'empty', 'title': 'Empty', 'type': 'collection.row',
+            'dataSource': {'kind': 'collection', 'payload': {'items': [
+                {'id': 'folder', 'title': 'Folder', 'dataSources': []}]}}}]}
+        result = convert_to_fusion(raw, {'aio-metadata': MANIFEST})
+        self.assertIsNone(result['fusionConfig'])
+        self.assertFalse(result['report']['canExport'])
+        self.assertIn('original Nuvio', result['report']['exportBlockReason'])
+
+    def test_invalid_embedded_instance_url_gets_a_repair_field(self):
+        raw = collection(source('aio-metadata', addonBaseUrl='file:///PRIVATE'))
+        result = convert_to_fusion(raw)
+        self.assertIsNone(result['fusionConfig'])
+        self.assertEqual(result['report']['missingAddons'], [{'addonId': 'aio-metadata', 'references': 1}])
+        self.assertNotIn('PRIVATE', json.dumps(result))
+        repaired = convert_to_fusion(raw, {'aio-metadata': MANIFEST})
+        self.assertTrue(repaired['report']['canExport'])
+
+    def test_partial_source_loss_requires_acknowledgement_but_visual_loss_does_not(self):
+        native = {'provider': 'tmdb', 'tmdbSourceType': 'DISCOVER'}
+        partial = convert_to_fusion(collection(source(addonBaseUrl=MANIFEST), native))
+        self.assertTrue(partial['report']['canExport'])
+        self.assertTrue(partial['report']['requiresPartialApproval'])
+        visual = convert_to_fusion(collection(source(addonBaseUrl=MANIFEST), heroVideoUrl='https://art.example/video'))
+        self.assertFalse(visual['report']['complete'])
+        self.assertTrue(visual['report']['canExport'])
+        self.assertFalse(visual['report']['requiresPartialApproval'])
+
 
 class FusionApiTests(unittest.TestCase):
     def setUp(self):
@@ -215,3 +277,14 @@ class FusionApiTests(unittest.TestCase):
             {'type': 'collection.row', 'dataSource': {'kind': 'collection', 'payload': 'PRIVATE'}}]}})
         self.assertEqual(response.status_code, 400)
         self.assertNotIn('PRIVATE', response.text)
+
+    def test_api_withholds_import_file_until_instance_urls_are_resolved(self):
+        request = {'export_data': collection(source('aio-metadata'))}
+        response = self.client.post('/api/fusion/convert', json=request)
+        self.assertEqual(response.status_code, 200)
+        self.assertIsNone(response.json()['fusionConfig'])
+        self.assertFalse(response.json()['report']['canExport'])
+        request['addon_urls'] = {'aio-metadata': MANIFEST}
+        fixed = self.client.post('/api/fusion/convert', json=request).json()
+        self.assertTrue(fixed['report']['canExport'])
+        self.assertEqual(fixed['fusionConfig']['requiredAddons'], [MANIFEST])
