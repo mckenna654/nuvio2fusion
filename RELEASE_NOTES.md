@@ -1,5 +1,17 @@
 # Nuvio2Fusion release notes
 
+## 2.0.2 · 31 August 2026
+
+Removes the need to write JSON when connecting an addon. Pasting a normal AIOMetadata installation URL into the previous advanced mapping box produced a JSON error before conversion could run.
+
+- Add an **Addon to connect** selector populated from the input's actual addon IDs and catalog-reference counts.
+- Add a normal **Addon manifest URL** field and **Connect addon** button; saved URLs remain editable per addon.
+- Accept the selected addon's pending URL when converting, even if Connect addon was not clicked separately.
+- Clearly label bulk JSON mappings as advanced. Recover a plain URL pasted there into the normal URL field and ask which addon it belongs to, keeping the entered URL intact.
+- Keep independent addon mappings and missing-URL export blocking. Connecting AIOMetadata does not silently assign its URL to another addon.
+
+Refresh the updated app to load the new form. API conversion behavior is unchanged from 2.0.1.
+
 ## 2.0.1 · 31 August 2026
 
 Fixes an export workflow that allowed collection tiles to be downloaded without their catalog sources. Native Nuvio collection exports can contain logical addon IDs such as `aio-metadata` without the configured installation URLs Fusion needs. Version 2.0.0 reported those omissions but still allowed an empty widget file to be downloaded.

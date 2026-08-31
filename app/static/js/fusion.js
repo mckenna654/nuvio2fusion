@@ -4,6 +4,7 @@ let result = null;
 let exampleData = null;
 let generation = 0;
 const mappingInputs = new Map();
+const addonChoices = new Map();
 
 function element(tag, text, className) {
   const el = document.createElement(tag);
@@ -26,6 +27,103 @@ function clearMappings() {
   $('missingAddonNotice').hidden = true;
   $('convertButton').textContent = 'Convert to Fusion →';
 }
+async function readSource() {
+  if (exampleData !== null) return exampleData;
+  let text;
+  if ($('inputMode').value === 'paste') text = $('rawJson').value;
+  else {
+    const file = $('sourceFile').files[0];
+    if (!file) throw new Error('Choose your Nuvio collections or Fusion widgets JSON.');
+    if (file.size > 5 * 1024 * 1024) throw new Error('The JSON file must be smaller than 5 MiB.');
+    text = await file.text();
+  }
+  try { return JSON.parse(text); }
+  catch { throw new Error('The source is not valid JSON. No export was generated.'); }
+}
+function updateAddonChoices(raw) {
+  const previous = $('addonChoice').value;
+  addonChoices.clear();
+  const count = source => {
+    if (!source || typeof source !== 'object' || (source.provider && String(source.provider).trim().toLowerCase() !== 'addon')) return;
+    if (typeof source.addonId === 'string' && source.addonId.trim()) {
+      const id = source.addonId.trim();
+      addonChoices.set(id, (addonChoices.get(id) || 0) + 1);
+    }
+  };
+  const fusionSource = source => { if (source?.kind === 'addonCatalog') count(source.payload); };
+  const rows = Array.isArray(raw) ? raw : raw?.collections || raw?.widgets || (raw?.folders ? [raw] : []);
+  if (Array.isArray(rows)) for (const row of rows) {
+    if (Array.isArray(row?.folders)) for (const folder of row.folders) {
+      const sources = folder?.sources ?? folder?.catalogSources;
+      if (Array.isArray(sources)) sources.forEach(count);
+    }
+    if (row?.dataSource?.kind === 'collection') {
+      const items = row.dataSource.payload?.items;
+      if (Array.isArray(items)) for (const item of items) {
+        if (Array.isArray(item?.dataSources)) item.dataSources.forEach(fusionSource);
+      }
+    } else fusionSource(row?.dataSource);
+  }
+  const placeholder = element('option', addonChoices.size ? 'Choose which addon uses this URL' : 'Load collections to choose an addon');
+  placeholder.value = '';
+  $('addonChoice').replaceChildren(placeholder);
+  for (const [id, references] of addonChoices) {
+    const name = id.includes('://') ? `Embedded addon ${$('addonChoice').options.length}` : id;
+    const option = element('option', `${name} · ${references} catalog reference${references === 1 ? '' : 's'}`);
+    option.value = id;
+    $('addonChoice').append(option);
+  }
+  $('addonChoice').disabled = addonChoices.size === 0;
+  if (addonChoices.has(previous)) $('addonChoice').value = previous;
+}
+async function refreshAddonChoices() {
+  const requestGeneration = generation;
+  try {
+    const raw = await readSource();
+    if (requestGeneration === generation) updateAddonChoices(raw);
+  } catch {
+    if (requestGeneration === generation) updateAddonChoices(null);
+  }
+}
+function mappingInput(id, references) {
+  if (mappingInputs.has(id)) return mappingInputs.get(id);
+  const input = element('input');
+  input.id = 'addon-map-' + mappingInputs.size;
+  input.type = 'text'; input.autocomplete = 'off'; input.spellcheck = false;
+  input.placeholder = 'https://your-addon/config/manifest.json';
+  const name = id.includes('://') ? 'embedded addon' : id;
+  const label = element('label', `Manifest URL for ${name}`);
+  label.htmlFor = input.id;
+  $('missingMappings').append(label, input, element('p', `${references} catalog reference${references === 1 ? '' : 's'} use this addon instance. Use its full configured install URL, ending in /manifest.json.`, 'hint'));
+  mappingInputs.set(id, input);
+  return input;
+}
+function connectAddon() {
+  const url = $('addonManifest').value.trim(), id = $('addonChoice').value;
+  if (!url) {
+    $('addonManifest').focus();
+    throw new Error('Paste the configured manifest URL in Addon manifest URL.');
+  }
+  if (!id || !addonChoices.has(id)) {
+    $('addonChoice').focus();
+    throw new Error('Choose which addon uses this URL in Addon to connect. Your URL has been kept.');
+  }
+  if (!/^(https?|stremio):\/\//.test(url)) throw new Error('Use an HTTP(S) or stremio:// manifest URL.');
+  mappingInput(id, addonChoices.get(id)).value = url;
+  $('addonManifest').value = '';
+  $('addonChoice').value = '';
+  $('addonEntryStatus').textContent = 'URL saved in the labelled field below. Connect any other addons, then convert.';
+}
+$('connectAddon').addEventListener('click', async () => {
+  invalidate();
+  const requestGeneration = generation;
+  try {
+    const raw = await readSource();
+    if (requestGeneration !== generation) return;
+    updateAddonChoices(raw);
+    connectAddon();
+  } catch (err) { if (requestGeneration === generation) showError(err.message); }
+});
 function showError(message) {
   $('error').textContent = message;
   $('error').hidden = false;
@@ -47,6 +145,10 @@ $('fusionForm').addEventListener('input', event => {
   }
   invalidate();
   inputMode();
+  if (['sourceFile', 'rawJson', 'inputMode'].includes(event.target.id)) {
+    $('addonChoice').value = '';
+    refreshAddonChoices();
+  }
 });
 $('fusionForm').addEventListener('submit', async event => {
   event.preventDefault();
@@ -55,22 +157,19 @@ $('fusionForm').addEventListener('submit', async event => {
   $('convertButton').disabled = true;
   $('inputStatus').textContent = 'Checking the layout and addon references…';
   try {
-    let raw = exampleData;
-    if (raw === null) {
-      let text;
-      if ($('inputMode').value === 'paste') text = $('rawJson').value;
-      else {
-        const file = $('sourceFile').files[0];
-        if (!file) throw new Error('Choose your Nuvio collections or Fusion widgets JSON.');
-        if (file.size > 5 * 1024 * 1024) throw new Error('The JSON file must be smaller than 5 MiB.');
-        text = await file.text();
-      }
-      try { raw = JSON.parse(text); }
-      catch { throw new Error('The source is not valid JSON. No export was generated.'); }
+    const raw = await readSource();
+    if (requestGeneration !== generation) return;
+    updateAddonChoices(raw);
+    if (/^(https?|stremio):\/\//.test($('addonUrls').value.trim())) {
+      if ($('addonManifest').value.trim()) throw new Error('The advanced field contains a plain URL. Keep it in Addon manifest URL, or use a JSON object for advanced mappings.');
+      $('addonManifest').value = $('addonUrls').value.trim();
+      $('addonUrls').value = '';
+      $('addonEntryStatus').textContent = 'Your URL was moved here from the advanced field. Choose its addon and connect it.';
     }
+    if ($('addonManifest').value.trim()) connectAddon();
     let mappings;
     try { mappings = JSON.parse($('addonUrls').value.trim() || '{}'); }
-    catch { throw new Error('Addon URL mappings must be a JSON object.'); }
+    catch { throw new Error('The advanced mappings field needs a JSON object. For a normal URL, use Addon manifest URL and choose its addon.'); }
     if (!mappings || Array.isArray(mappings) || typeof mappings !== 'object' || Object.values(mappings).some(v => typeof v !== 'string')) {
       throw new Error('Addon URL mappings must map addon IDs to URL strings.');
     }
@@ -98,6 +197,7 @@ for (const button of document.querySelectorAll('[data-preset]')) button.addEvent
     $('inputMode').value = 'file';
     $('sourceFile').value = '';
     inputMode();
+    updateAddonChoices(exampleData);
     $('inputStatus').textContent = 'Sanitized example loaded. Click Convert to Fusion. Example addon URLs are not live.';
   } catch (err) { if (requestGeneration === generation) showError(err.message); }
 });
@@ -130,17 +230,9 @@ function render() {
     input.setAttribute('aria-invalid', String(missing));
   }
   for (const missing of report.missingAddons) {
-    if (mappingInputs.has(missing.addonId)) continue;
-    const input = element('input');
-    input.id = 'addon-map-' + mappingInputs.size;
-    input.type = 'text'; input.autocomplete = 'off'; input.spellcheck = false;
+    const input = mappingInput(missing.addonId, missing.references);
     input.setAttribute('aria-required', 'true');
     input.setAttribute('aria-invalid', 'true');
-    input.placeholder = 'https://your-addon/config/manifest.json';
-    const label = element('label', `Manifest URL for ${missing.addonId}`);
-    label.htmlFor = input.id;
-    $('missingMappings').append(label, input, element('p', `${missing.references} catalog reference${missing.references === 1 ? '' : 's'} need this exact addon instance. Copy its configured install URL (ending in /manifest.json) from Nuvio or your addon configuration page. A display name or the site's homepage is not enough.`, 'hint'));
-    mappingInputs.set(missing.addonId, input);
   }
   renderTable();
   $('layoutSummary').textContent = `Widget layout (${report.widgets})`;

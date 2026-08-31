@@ -84,8 +84,8 @@ For Unraid, [unraid-template.xml](unraid-template.xml) includes the image, port 
 
 1. **Back up your existing Fusion widgets.** Keep the original Nuvio export as well.
 2. **Export collections from Nuvio.** Use its collection-management export. The usual result is a JSON array of collections, not a manifest URL or account backup.
-3. **Upload or paste the JSON** into Nuvio2Fusion and select **Convert to Fusion**.
-4. **Connect missing addons.** If Nuvio recorded an addon ID without its install URL, the download is blocked and a highlighted field appears. Paste each addon's complete configured manifest URL and select **Connect addons & convert**. For `aio-metadata`, use the install URL for your own AIOMetadata configuration, not its homepage. Other addon IDs need their own URLs.
+3. **Upload or paste the JSON** into Nuvio2Fusion. The **Addon to connect** menu lists addon IDs found in your file, with their catalog counts.
+4. **Connect missing addons.** Choose an addon, paste its normal URL in **Addon manifest URL**, and click **Connect addon**. Repeat for other addons, then select **Convert to Fusion**. You can also convert first and fill the highlighted missing-URL fields. For `aio-metadata`, use the full install URL for your own AIOMetadata configuration, not its homepage. Other addon IDs need their own URLs. No JSON formatting is needed for these fields.
 5. **Review the results.** Inspect omitted sources, empty folders and settings that need attention. Use the search and result filter to find affected rows.
 6. **Download Fusion widgets.** The compatibility report is a separate download for your review; it is not a Fusion import file.
 7. **Import through Fusion's widget import.** Use the downloaded file or its JSON text as supported by your Fusion version. Keep the required addons installed and test a few folders after import.
@@ -103,7 +103,9 @@ Nuvio often stores a logical addon ID, such as `my.addon`. Fusion stores the ful
 3. The source's `addonBaseUrl`, with `/manifest.json` appended when needed.
 4. An HTTP(S) or `stremio://` URL already stored in `addonId`.
 
-You can fill the missing-URL fields after conversion, or enter an object under **Supply addon URLs manually**:
+Normally, choose **Addon to connect**, paste the full URL in **Addon manifest URL**, and click **Connect addon**. The saved URL remains editable in a labelled field. A URL entered before clicking **Convert to Fusion** is also saved when an addon is selected. One URL is never guessed to apply to every addon.
+
+For bulk entry only, enter an object under **Advanced: JSON URL mappings**:
 
 ```json
 {
@@ -237,6 +239,7 @@ Responses contain `success`, `fusionConfig`, `previewWidgets` and `report`. `suc
 | Problem | What to check |
 | --- | --- |
 | Missing manifest URL | Enter the original addon's complete install URL for the exact ID shown. |
+| Advanced mappings JSON error | Use **Addon manifest URL** for a normal URL. If a plain URL was pasted into the advanced field, converting moves it into the normal field; choose its addon and convert again. |
 | Empty folders from a 2.0.0 download | Reconvert the original Nuvio JSON with all addon URL mappings. Manually installing an addon cannot restore omitted catalog references. |
 | Download blocked | Connect every missing addon and convert again. If no usable sources remain, review the source report; native queries may need recreating in Fusion or exposing through an addon. |
 | Tiles appear, but catalogs fail | Confirm the referenced addon is installed, accessible and still serves those catalog IDs. Conversion does not test the service. |
