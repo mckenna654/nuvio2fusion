@@ -9,7 +9,7 @@ class ApiTests(unittest.TestCase):
         self.client = TestClient(app)
 
     def test_health_and_local_assets(self):
-        self.assertEqual(self.client.get('/api/health').json(), {'status': 'ok', 'app': 'Nuvio2Fusion', 'version': '2.0.5'})
+        self.assertEqual(self.client.get('/api/health').json(), {'status': 'ok', 'app': 'Nuvio2Fusion', 'version': '2.1.0'})
         page = self.client.get('/')
         self.assertEqual(page.status_code, 200)
         self.assertIn("script-src 'self'", page.headers['Content-Security-Policy'])
@@ -38,9 +38,12 @@ class ApiTests(unittest.TestCase):
         response = self.client.post('/api/fusion/convert', content=b'x' * (MAX_REQUEST_BYTES + 1), headers={'Content-Type': 'application/json'})
         self.assertEqual(response.status_code, 413)
 
-    def test_only_layout_conversion_is_exposed(self):
+    def test_layout_conversion_and_fixed_compatibility_routes_are_exposed(self):
         paths = set(self.client.get('/openapi.json').json()['paths'])
-        self.assertEqual(paths, {'/', '/api/health', '/api/presets/{name}', '/api/fusion/convert'})
+        self.assertEqual(paths, {'/', '/api/health', '/api/presets/{name}', '/api/fusion/convert',
+                                '/api/bridge/settings', '/bridge/{token}/manifest.json',
+                                '/bridge/{token}/catalog/{typ}/{cid}.json',
+                                '/bridge/{token}/catalog/{typ}/{cid}/{extra}.json'})
 
     def test_examples_are_data_not_an_alternate_conversion_pipeline(self):
         response = self.client.get('/api/presets/fusion')

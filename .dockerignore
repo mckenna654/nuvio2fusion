@@ -10,3 +10,9 @@ tests
 docs
 .codex
 .agents
+data
+downloads
+fusion-widgets*.json
+fusion-compatibility-report*.json
+request.json
+response.json

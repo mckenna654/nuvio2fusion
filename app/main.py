@@ -1,25 +1,31 @@
-"""Nuvio2Fusion: local, offline collection-layout conversion."""
+"""Nuvio2Fusion: local collection-layout conversion."""
 from __future__ import annotations
 
 import json
+import os
 from pathlib import Path
 from typing import Any
 from urllib.parse import urlsplit
 
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, ConfigDict, Field
 from fastapi.exceptions import RequestValidationError
 
 from app.fusion import convert_to_fusion
+from app.bridge import BridgeError, BridgePlan, BridgeService, ProfileStore
+from app.upstream import UpstreamError
+from urllib.parse import parse_qsl
 
 ROOT = Path(__file__).parent
 MAX_REQUEST_BYTES = 10 * 1024 * 1024
-app = FastAPI(title='Nuvio2Fusion', version='2.0.5',
+VERSION = '2.1.0'
+app = FastAPI(title='Nuvio2Fusion', version=VERSION,
               description='Convert Nuvio collections into Fusion widget JSON.',
               docs_url=None, redoc_url=None)
 app.mount('/static', StaticFiles(directory=ROOT / 'static'), name='static')
+app.state.bridge = BridgeService(ProfileStore(os.getenv('NUVIO2FUSION_DATA_DIR', str(ROOT.parent / 'data'))))
 
 
 class RequestBoundary:
@@ -73,6 +79,8 @@ async def security_headers(request, call_next):
     response.headers['Referrer-Policy'] = 'no-referrer'
     response.headers['X-Content-Type-Options'] = 'nosniff'
     response.headers['Content-Security-Policy'] = "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'none'"
+    if request.url.path.startswith('/bridge/'):
+        response.headers['Access-Control-Allow-Origin'] = '*'
     return response
 
 
@@ -80,6 +88,8 @@ class FusionRequest(BaseModel):
     model_config = ConfigDict(extra='forbid')
     export_data: Any
     addon_urls: dict[str, str] = Field(default_factory=dict)
+    bridge_url: str | None = None
+    omit_empty_folders: bool = False
 
 
 @app.get('/')
@@ -89,7 +99,49 @@ async def index():
 
 @app.get('/api/health')
 async def health():
-    return {'status': 'ok', 'app': 'Nuvio2Fusion', 'version': '2.0.5'}
+    return {'status': 'ok', 'app': 'Nuvio2Fusion', 'version': VERSION}
+
+
+@app.get('/api/bridge/settings')
+def bridge_settings():
+    return {'publicUrl': os.getenv('NUVIO2FUSION_PUBLIC_URL', ''),
+            'privateUpstreamsAllowed': os.getenv('NUVIO2FUSION_ALLOW_PRIVATE_UPSTREAM') == '1'}
+
+
+@app.exception_handler(BridgeError)
+async def bridge_error(request, exc):
+    return JSONResponse({'detail': str(exc)}, status_code=503)
+
+
+@app.exception_handler(UpstreamError)
+async def upstream_error(request, exc):
+    return JSONResponse({'error': str(exc)}, status_code=502)
+
+
+@app.get('/bridge/{token}/manifest.json')
+def bridge_manifest(token: str, request: Request):
+    try:
+        return request.app.state.bridge.manifest(token)
+    except KeyError:
+        raise HTTPException(404, 'Unknown compatibility profile. Keep the appdata used to generate this export.') from None
+
+
+@app.get('/bridge/{token}/catalog/{typ}/{cid}.json')
+@app.get('/bridge/{token}/catalog/{typ}/{cid}/{extra}.json')
+def bridge_catalog(token: str, typ: str, cid: str, request: Request, extra: str = ''):
+    try:
+        pairs = parse_qsl(extra, keep_blank_values=True, strict_parsing=True) if extra else []
+        pairs += list(request.query_params.multi_items())
+        if any(k != 'skip' for k, _ in pairs) or len(pairs) != len(dict(pairs)):
+            raise ValueError
+        offset = dict(pairs).get('skip', '0')
+        if not offset.isdigit() or len(offset) > 6:
+            raise ValueError
+        return request.app.state.bridge.catalog(token, typ, cid, int(offset))
+    except ValueError:
+        raise HTTPException(400, 'Only a non-negative skip offset is supported by this fixed catalog.') from None
+    except KeyError:
+        raise HTTPException(404, 'Unknown compatibility profile or catalog.') from None
 
 
 @app.get('/api/presets/{name}')
@@ -101,8 +153,9 @@ async def preset(name: str):
 
 
 @app.post('/api/fusion/convert')
-async def fusion_convert(request: FusionRequest):
+def fusion_convert(request: FusionRequest, http_request: Request):
     try:
-        return convert_to_fusion(**request.model_dump())
+        plan = BridgePlan(http_request.app.state.bridge.store, request.bridge_url) if request.bridge_url else None
+        return convert_to_fusion(request.export_data, request.addon_urls, plan, request.omit_empty_folders)
     except (ValueError, TypeError, AttributeError, KeyError, RecursionError):
         raise HTTPException(400, 'Invalid export or addon mapping. Use Nuvio collections JSON or Fusion widget v1 JSON, and full HTTP(S) manifest URLs for mappings. Check array/object fields.') from None

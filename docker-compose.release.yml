@@ -3,7 +3,9 @@
 # to your server's LAN address (or 0.0.0.0 to listen on all interfaces).
 services:
   nuvio2fusion:
-    image: ghcr.io/mckenna654/nuvio2fusion:2.0.5
+    image: ghcr.io/mckenna654/nuvio2fusion:2.1.0
     restart: unless-stopped
+    volumes:
+      - ./data:/data
     ports:
       - "${NUVIO2FUSION_BIND_IP:-127.0.0.1}:${NUVIO2FUSION_PORT:-7088}:7088"

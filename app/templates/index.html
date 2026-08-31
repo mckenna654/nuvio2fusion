@@ -27,23 +27,30 @@
         <label for="addonManifest">Addon manifest URL</label><input id="addonManifest" type="text" autocomplete="off" spellcheck="false" placeholder="https://your-addon/config/manifest.json">
         <button id="connectAddon" type="button">Connect addon</button>
         <p id="addonEntryStatus" class="hint" aria-live="polite">Paste a normal URL here. JSON is only needed for the optional advanced field.</p>
-        <p id="missingAddonNotice" class="notice" role="status" hidden><strong>Some addons are not connected.</strong> Their catalog references will be omitted. These fields are optional: leave addons you do not use blank and download the partial export. Folders relying only on skipped addons will be empty.</p>
+        <p id="missingAddonNotice" class="notice" role="status" hidden><strong>Some addons are not connected.</strong> Their catalog references will be omitted. These fields are optional: leave addons you do not use blank and download the partial export. Folders relying only on skipped addons are hidden when Hide empty folders is enabled.</p>
         <div id="missingMappings"></div>
         <details><summary>Advanced: JSON URL mappings</summary>
           <label for="addonUrls">Addon URL mappings (JSON object)</label><textarea id="addonUrls" rows="5" spellcheck="false" autocomplete="off" placeholder='{"my.addon":"https://your-addon/config/manifest.json"}'></textarea>
           <p class="hint">Use the original addon ID as the key. Separate addons need separate URLs. Do not substitute a different provider’s URL unless its catalog IDs match.</p>
         </details>
-        <p class="notice">The same manifest URL is written into <code>requiredAddons</code> and every matching catalog source. Installing an addon manually in Fusion does not reconnect an empty folder.</p>
+        <details open><summary>Mixed catalogs &amp; compatibility addon</summary>
+          <label class="check"><input id="useBridge" type="checkbox" checked>Keep mixed catalogs using the compatibility addon</label>
+          <div id="bridgeOptions"><label for="bridgeUrl">Nuvio2Fusion address reachable from Fusion</label><input id="bridgeUrl" type="url" autocomplete="off" placeholder="http://YOUR-UNRAID-IP:7088">
+          <p class="hint">Use your Unraid LAN address, not localhost, for other devices. Mixed catalogs become movie and series feeds in the same folder. Keep this container running and map persistent appdata to <code>/data</code>; private upstream URLs are stored there. The addon fetches catalog pages when Fusion browses them.</p></div>
+          <label class="check"><input id="omitEmptyFolders" type="checkbox" checked>Hide folders with no usable sources</label>
+          <p class="hint">Optional-addon-only folders are omitted with a warning. Turn this off to keep their empty tiles.</p>
+        </details>
         <button class="primary" id="convertButton" type="submit">Convert to Fusion <span>→</span></button>
         <p id="inputStatus" class="hint" aria-live="polite">Choose your export or try a sanitized example.</p>
         <div class="examples"><span>Examples</span><button type="button" data-preset="nuvio">Nuvio collections</button><button type="button" data-preset="fusion">Fusion widgets</button></div>
-        <p class="hint">Uploads stay in server memory. Addon URLs may contain private tokens; keep downloads private. Example URLs are placeholders and will not serve catalogs.</p>
+        <p class="hint">The layout stays in memory. Compatibility profiles save private addon URLs in appdata. Keep downloads and appdata private. Example URLs are placeholders and will not serve catalogs.</p>
       </form>
       <section class="panel results" aria-label="Fusion conversion results">
         <div class="section-title"><span class="step">03</span><h2>Review & export</h2><span id="resultBadge" class="tag">AWAITING INPUT</span></div>
         <div id="emptyState"><div class="empty-icon"><img src="/static/brand/mark.svg" width="83" height="83" alt=""></div><h3>Your layout, carried across.</h3><p>Collections become Fusion collection widgets. Folder order, covers, shapes and multiple catalog sources stay together.</p><div class="legend"><span>Folders & covers</span><span>Catalog sources</span><span>Addon URLs</span><span>Compatibility report</span></div></div>
         <div id="results" hidden>
           <div id="stats" class="stats"></div><p id="resultSummary"></p><p id="coverage" class="notice"></p>
+          <div id="bridgeResult" class="notice" hidden><strong>Compatibility addon required</strong><p id="bridgeSummary"></p><label for="bridgeManifest">Private addon manifest URL</label><input id="bridgeManifest" type="text" readonly><p class="hint">This URL is also included in the widget file's required addons. Install it in Fusion if prompted, alongside your original metadata addon. Keep it private. Preserve appdata and the server address across updates.</p></div>
           <div class="downloads"><button id="downloadFusion" type="button" class="primary">Download Fusion widgets</button><button id="downloadReport" type="button">Compatibility report</button></div>
           <p class="hint">Back up your Fusion widgets, then import the downloaded JSON. Only connected addons are included. Missing addons show warnings; downloads are blocked only when no usable sources or widgets remain.</p>
           <details open><summary>Warnings & requirements</summary><ul id="warnings"></ul></details>
@@ -55,7 +62,7 @@
         <div id="error" class="error" role="alert" hidden></div>
       </section>
     </div>
-    <footer>Nuvio2Fusion · Independent, open-source layout converter. No account sign-in or remote catalog fetching. Not affiliated with Nuvio or Fusion. Player settings, accounts and watch history are not transferred.</footer>
+    <footer>Nuvio2Fusion · Independent, open-source collection converter and optional compatibility addon. Not affiliated with Nuvio or Fusion. Player settings, accounts and watch history are not transferred.</footer>
   </main>
 </body>
 </html>

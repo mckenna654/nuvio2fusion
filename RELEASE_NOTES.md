@@ -1,5 +1,24 @@
 # Nuvio2Fusion release notes
 
+## 2.1.0 · 31 August 2026
+
+Restore mixed-only collection folders with a persistent compatibility addon. The 2.0.5 safeguard removed `all` references to prevent Fusion rejecting entire folders, but left folders with no movie/series alternative empty. This release serves the original mixed feed as separate, correctly filtered movie and series catalogs.
+
+- Preserve original upstream URLs, catalog IDs and genre selections. Fetch the original catalog type and filter the returned item types; do not invent movie/series upstream catalog IDs.
+- Keep ordinary movie/series catalogs direct. Include both the compatibility addon and the original metadata addon in the exported requirements.
+- Preserve pagination after filtering, scan past pages without the requested type, and recognize repeated pages from addons that ignore pagination. Upstream failures are reported as errors, not cached as empty lists.
+- Enable compatibility and Hide empty folders by default in the browser. Missing optional addons remain warnings; no Bingecat connection is required.
+- Store private source profiles in `/data/bridge.sqlite3`. Random bearer links survive restarts and container replacement when appdata is preserved. Identical profiles reuse their links.
+- Add DNS-pinned destination checks, verified TLS, same-origin-only redirects, bounded network/cache usage and sanitized errors. Disable request access logs to protect private profile paths.
+- Add a persistent appdata mapping to the Unraid template and Compose files. The entrypoint prepares that dedicated directory, then runs the application as UID/GID 10001.
+- Expand automated coverage for filtering, pagination, retry behavior, profile persistence, re-export metadata dependencies and network safety. CI also replaces the published container and checks that the same profile URL still works.
+
+**Upgrade:** use `ghcr.io/mckenna654/nuvio2fusion:2.1.0` and add a Read/Write path from `/mnt/user/appdata/nuvio2fusion` to `/data`. Reconvert the **original Nuvio export**, enable compatibility and enter an address reachable from every Fusion device. Back up Fusion, import the new widget JSON and install its listed compatibility addon alongside your metadata addon. Keep the container running. Earlier partial exports have already lost the mixed sources and cannot reconstruct them.
+
+**Privacy and lifetime:** compatibility mode saves private upstream configuration URLs on your server. Keep appdata, addon links and generated widget files private. Back up appdata while the container is stopped. Losing the database or changing the server address requires restoring it or regenerating/re-importing the layout. The management UI has no authentication; use a trusted LAN or VPN. Existing direct-only API behavior remains available by omitting `bridge_url`.
+
+**Validation:** a private full-layout check preserved all 341 connected AIOMetadata references, including 23 adapted mixed references, across 12 rows and 153 nonempty folders. Six unconnected optional-addon references and their sole dependent folder were omitted with warnings. Live catalog checks recovered content for all ten formerly empty mixed-only folders; no user configuration or credentials are included in this release. The adapter preserves movie/series order separately, not their original interleaving. Unsupported native Nuvio providers and unmapped visual settings remain reported limitations. See the [Unraid guide](docs/UNRAID.md) and [format notes](docs/FUSION.md).
+
 ## 2.0.5 · 31 August 2026
 
 Protect collection folders from mixed-type catalog sources. Native Fusion inspection showed folders containing an `all` catalog importing as **No source**, while folders containing only movie/series catalogs retained their source lists.

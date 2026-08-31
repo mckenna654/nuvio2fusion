@@ -130,6 +130,7 @@ function showError(message) {
 function inputMode() {
   $('fileSource').hidden = $('inputMode').value !== 'file';
   $('pasteSource').hidden = $('inputMode').value !== 'paste';
+  $('bridgeOptions').hidden = !$('useBridge').checked;
 }
 async function api(path, body) {
   const response = await fetch(path, body ? {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(body)} : {});
@@ -173,7 +174,10 @@ $('fusionForm').addEventListener('submit', async event => {
       throw new Error('Addon URL mappings must map addon IDs to URL strings.');
     }
     for (const [id, input] of mappingInputs) if (input.value.trim()) mappings[id] = input.value.trim();
-    const data = await api('/api/fusion/convert', {export_data: raw, addon_urls: mappings});
+    const bridgeUrl = $('bridgeUrl').value.trim();
+    if ($('useBridge').checked && !bridgeUrl) throw new Error('Enter the Nuvio2Fusion address that your Fusion devices can reach.');
+    const data = await api('/api/fusion/convert', {export_data: raw, addon_urls: mappings,
+      bridge_url: $('useBridge').checked ? bridgeUrl : null, omit_empty_folders: $('omitEmptyFolders').checked});
     if (requestGeneration !== generation) return;
     result = data;
     render();
@@ -214,9 +218,12 @@ function render() {
     $('stats').append(stat);
   }
   $('resultSummary').textContent = `${report.inputFormat} → Fusion widget v1 · ${report.requiredAddonCount} required addons · ${report.issues.length} layout issues.`;
+  $('bridgeResult').hidden = !result.bridge;
+  $('bridgeManifest').value = result.bridge?.manifestUrl || '';
+  if (result.bridge) $('bridgeSummary').textContent = `${result.bridge.sourceReferences} original mixed references are retained through ${result.bridge.catalogs} movie/series feeds. Keep this Nuvio2Fusion service running; ordinary catalogs still use their original addons directly.`;
   $('coverage').textContent = !report.canExport ? report.exportBlockReason : report.complete
     ? 'All source references and supported layout fields were carried across. Live addon availability and import into your Fusion version still need checking.'
-    : `${report.counts.unsupported} sources omitted; ${report.emptyFolders} empty folders; ${report.skippedWidgets} widgets omitted. Review the issues below. The download is marked partial.`;
+    : `${report.counts.unsupported} sources omitted; ${report.omittedEmptyFolders || 0} empty folders hidden; ${report.emptyFolders - (report.omittedEmptyFolders || 0)} empty folders retained; ${report.skippedWidgets} widgets omitted. Review the issues below. The download is marked partial.`;
   updateDownload();
   $('warnings').replaceChildren(...report.warnings.map(w => element('li', w)));
   $('issuesSection').hidden = report.issues.length === 0;
@@ -268,3 +275,7 @@ $('downloadFusion').addEventListener('click', () => {
   }
 });
 $('downloadReport').addEventListener('click', () => { if (result) download(result.report, 'fusion-compatibility-report.json'); });
+$('bridgeUrl').value = window.location.origin;
+api('/api/bridge/settings').then(settings => {
+  if (settings.publicUrl && $('bridgeUrl').value === window.location.origin) $('bridgeUrl').value = settings.publicUrl;
+}).catch(() => {});

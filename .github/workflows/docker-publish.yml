@@ -65,7 +65,7 @@ jobs:
             type=sha,format=short
           labels: |
             org.opencontainers.image.title=Nuvio2Fusion
-            org.opencontainers.image.description=Offline Nuvio collections to Fusion widget converter
+            org.opencontainers.image.description=Nuvio collections converter and mixed-catalog compatibility addon
       - name: Build and publish Linux images
         id: build
         uses: docker/build-push-action@v6
@@ -82,9 +82,15 @@ jobs:
           RELEASE_IMAGE: ghcr.io/${{ github.repository }}@${{ steps.build.outputs.digest }}
         run: |
           docker compose -f docker-compose.release.yml config --quiet
-          docker run --detach --name nuvio2fusion-smoke --publish 127.0.0.1:7088:7088 "$RELEASE_IMAGE"
-          test "$(docker inspect --format '{{.Config.User}}' nuvio2fusion-smoke)" = nuvio2fusion
+          mkdir -p "$RUNNER_TEMP/nuvio2fusion-data"
+          docker run --detach --name nuvio2fusion-smoke --publish 127.0.0.1:7088:7088 --volume "$RUNNER_TEMP/nuvio2fusion-data:/data" "$RELEASE_IMAGE"
           python scripts/smoke_container.py http://127.0.0.1:7088
+          docker exec nuvio2fusion-smoke python -c 'from pathlib import Path; status = Path("/proc/1/status").read_text(); assert "Uid:\t10001\t10001\t10001\t10001" in status'
+          python scripts/smoke_bridge.py create http://127.0.0.1:7088 "$RUNNER_TEMP/nuvio2fusion-profile.json"
+          docker rm --force nuvio2fusion-smoke
+          docker run --detach --name nuvio2fusion-smoke --publish 127.0.0.1:7088:7088 --volume "$RUNNER_TEMP/nuvio2fusion-data:/data" "$RELEASE_IMAGE"
+          python scripts/smoke_container.py http://127.0.0.1:7088
+          python scripts/smoke_bridge.py verify http://127.0.0.1:7088 "$RUNNER_TEMP/nuvio2fusion-profile.json"
       - name: Container smoke-test logs and cleanup
         if: always()
         run: |

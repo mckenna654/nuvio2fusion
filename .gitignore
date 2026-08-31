@@ -50,3 +50,4 @@ output*.json
 /response.json
 /fusion-widgets*.json
 /fusion-compatibility-report*.json
+/data/

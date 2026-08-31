@@ -17,10 +17,11 @@
 
 Export your configured collections from Nuvio, open the JSON in Nuvio2Fusion, resolve any missing addon URLs, and download a Fusion widget file. Existing Fusion widget exports can also be checked and re-exported.
 
-Nuvio2Fusion preserves the layout and references to your original catalog sources. It does **not** host catalogs, replace your providers, copy account data or install anything in Fusion automatically. Keep the referenced addons installed and accessible in Fusion.
+Nuvio2Fusion preserves the layout and references to your original catalog sources. Ordinary catalogs stay connected directly to their addons. The optional compatibility addon serves mixed catalogs as separate movie and series feeds, keeping the original provider and query. Keep Nuvio2Fusion running when using that addon, and keep your original addons installed for metadata. Accounts and provider configurations are not migrated.
 
 - Preserve collection and folder order, titles, covers, tile shapes and hidden folder titles.
 - Keep multiple catalog sources in each folder, including their genre selections.
+- Restore mixed-only folders through persistent compatibility profiles, instead of dropping their `all` sources.
 - Resolve addon IDs to their full manifest URLs without guessing another provider.
 - Preserve supported classic rows and native sources when the input is already a Fusion export.
 - Review every omitted source, missing URL and unmapped visual setting before importing.
@@ -31,7 +32,7 @@ Nuvio2Fusion preserves the layout and references to your original catalog source
 
 ## Quick start
 
-**Installing on Unraid?** Use the [Unraid installation guide](docs/UNRAID.md) and the [v2.0.5 release downloads](https://github.com/mckenna654/nuvio2fusion/releases/tag/v2.0.5). The public image is `ghcr.io/mckenna654/nuvio2fusion:2.0.5`; no registry login is needed.
+**Installing on Unraid?** Use the [Unraid installation guide](docs/UNRAID.md) and the [v2.1.0 release downloads](https://github.com/mckenna654/nuvio2fusion/releases/tag/v2.1.0). The public image is `ghcr.io/mckenna654/nuvio2fusion:2.1.0`; no registry login is needed. **Upgrading from 2.0.x requires an appdata path mapped to `/data` if you enable mixed-catalog support.**
 
 ### Run with Python
 
@@ -64,7 +65,7 @@ docker compose logs --tail=100
 docker compose down
 ```
 
-To update a local build, pull the repository changes and run `docker compose up --build -d` again. No persistent volume is required.
+To update a local build, pull the repository changes and run `docker compose up --build -d` again. Compose stores compatibility profiles in `./data`, mounted at `/data`. Preserve this directory across updates.
 
 ### Use the published container
 
@@ -75,12 +76,13 @@ docker run -d \
   --name nuvio2fusion \
   --restart unless-stopped \
   -p 127.0.0.1:7088:7088 \
-  ghcr.io/mckenna654/nuvio2fusion:2.0.5
+  -v nuvio2fusion-data:/data \
+  ghcr.io/mckenna654/nuvio2fusion:2.1.0
 ```
 
 `latest` follows successful builds of `main`; `sha-<commit>` identifies a particular build. Version tags are generated when a matching `v<version>` Git tag is published. Builds target Linux `amd64` and `arm64`. Check [Actions](https://github.com/mckenna654/nuvio2fusion/actions) before assuming a particular image tag exists.
 
-For Unraid, the [installation guide](docs/UNRAID.md) covers the [versioned XML template](unraid-template.xml), manual Add Container setup and updates. No appdata or media volumes are needed. [docker-compose.release.yml](docker-compose.release.yml) runs the prebuilt release without cloning or building the application. Both Compose examples bind to localhost by default; set the release file's `NUVIO2FUSION_BIND_IP` to your server's LAN address for trusted network access. The app has no authentication layer.
+For Unraid, the [installation guide](docs/UNRAID.md) covers the [versioned XML template](unraid-template.xml), manual Add Container setup and updates. One private appdata volume is needed for compatibility profiles; no media or Docker socket mounts are needed. [docker-compose.release.yml](docker-compose.release.yml) runs the prebuilt release without cloning or building the application. Both Compose examples bind to localhost by default; set the release file's `NUVIO2FUSION_BIND_IP` to your server's LAN address for trusted network access. The management UI/API has no authentication layer.
 
 ## Convert a setup
 
@@ -88,9 +90,9 @@ For Unraid, the [installation guide](docs/UNRAID.md) covers the [versioned XML t
 2. **Export collections from Nuvio.** Use its collection-management export. The usual result is a JSON array of collections, not a manifest URL or account backup.
 3. **Upload or paste the JSON** into Nuvio2Fusion. The **Addon to connect** menu lists addon IDs found in your file, with their catalog counts.
 4. **Connect only the addons you use.** Choose an addon, paste its normal URL in **Addon manifest URL**, and click **Connect addon**, then select **Convert to Fusion**. For `aio-metadata`, use your own configuration's full install URL, not its homepage. Leave optional addons such as Bingecat blank: their sources are omitted with a warning, while connected sources remain exportable. You can also convert first and fill the optional missing-URL fields. No JSON formatting is needed.
-5. **Review the results.** Inspect omitted sources, empty folders and settings that need attention. Use the search and result filter to find affected rows.
+5. **Keep mixed catalogs enabled.** Set **Nuvio2Fusion address reachable from Fusion** to your server's LAN URL, such as `http://192.168.1.10:7088`. Do not use localhost for another device. Leave **Hide folders with no usable sources** enabled to omit optional-addon-only tiles. Convert and review the results.
 6. **Download Fusion widgets.** The compatibility report is a separate download for your review; it is not a Fusion import file.
-7. **Import through Fusion's widget import.** Use the downloaded file or its JSON text as supported by your Fusion version. Keep the required addons installed and test a few folders after import.
+7. **Import through Fusion's widget import.** Install the listed compatibility addon if prompted; its private manifest URL is also shown below the results. Keep both Nuvio2Fusion and the original metadata addons available. Test a few folders after import.
 
 If your Fusion device only offers URL import, use a Fusion client that accepts the file/text or a private hosting method you control. Widget files can contain account-specific install URLs: **do not publish them to a public gist or repository**.
 
@@ -130,7 +132,7 @@ Mappings may override an obsolete embedded URL. Configuration path segments and 
 | Poster / landscape / square tiles | Mapped to Fusion poster / wide / square |
 | Multiple addon sources per folder | Compatible sources preserved in order |
 | Catalog IDs and genre selections | Preserved with Fusion's `type::catalogId` representation |
-| Mixed `all` or custom catalog media type | Omitted with a warning to protect the folder's other sources; never guessed as movie/series |
+| Mixed `all` or custom catalog media type in a folder | Compatibility addon fetches the original feed and separates actual movie/series items; omitted with a warning if disabled |
 | Both `sources` and `catalogSources` | `sources` is authoritative; the legacy mirror is not duplicated |
 | Missing addon URL | Its sources are omitted with a warning; connected addons remain exportable |
 | Nuvio-native TMDB or Trakt query | Reported as unsupported; no speculative Fusion payload is invented |
@@ -140,7 +142,7 @@ Mappings may override an obsolete embedded URL. Configuration path segments and 
 | Existing Fusion-native source | Payload retained; account/library contents are not copied |
 | Unknown widget type | Omitted and reported |
 
-Addon sources in both classic rows and collection folders are limited to the verified `movie` and `series` widget payloads. A mixed `all` source can cause Fusion to discard a folder's entire source list on import, even when the other sources are valid. Incompatible sources are omitted individually and reported; their catalog IDs and types are never rewritten to guess a replacement. Empty folders remain visible in the preview. A file with no usable sources cannot be downloaded. Missing or duplicate layout IDs receive deterministic replacements and an issue entry.
+Fusion widget payloads use `movie` and `series`. A raw `all` source can make Fusion discard a folder's source list. The compatibility addon requests the original catalog using its original type, ID and genre, then filters returned items by their actual type. It does not simply rename `all` to `movie`. Both feeds stay in the same folder. Original ordering is preserved within each type, but movie/series interleaving becomes two feeds. Mixed classic rows still need to be placed in collection folders. Unsupported item types cannot be guessed. A file with no usable sources cannot be downloaded.
 
 See [the format contract and implementation notes](docs/FUSION.md) for field mappings and evidence.
 
@@ -148,13 +150,23 @@ See [the format contract and implementation notes](docs/FUSION.md) for field map
 
 - **Sources kept:** source references represented in the output. Several folders may refer to the same catalog.
 - **Sources omitted:** references that need a URL, a compatible source, or another repair.
-- **Incompatible catalog types:** mixed `all` or custom-type references excluded from widget payloads. Other movie/series catalogs in the same folder remain exportable.
+- **Compatibility addon:** mixed references retained as two filtered feeds per original catalog. `bridgedSourceReferences` counts original references, not the expanded payload count.
+- **Incompatible catalog types:** references excluded when compatibility is disabled, or when a classic row cannot hold them.
 - **Layout issues:** settings without a verified mapping, repaired IDs/titles, or empty folders.
 - **Complete:** no detected omission, repair, empty folder or unmapped setting. It is not a guarantee of live catalog access or pixel-identical rendering.
 
-A partial conversion downloads as `fusion-widgets-partial.json`. A complete conversion downloads as `fusion-widgets.json`. The separate `fusion-compatibility-report.json` explains the result. Missing addon URLs, omitted sources and empty folders produce warnings without an acknowledgement checkbox. You can download as long as usable sources and supported widgets remain. Folders relying only on skipped addons retain their tiles but have no catalogs.
+A partial conversion downloads as `fusion-widgets-partial.json`. A complete conversion downloads as `fusion-widgets.json`. The separate `fusion-compatibility-report.json` explains the result. Missing addon URLs, omitted sources and empty folders produce warnings without an acknowledgement checkbox. You can download as long as usable sources and supported widgets remain. The browser hides empty folders by default; switch this off to retain their tiles. API callers retain empty tiles unless `omit_empty_folders` is true.
 
-**Fusion shows “No source” for some folders after importing a 2.0.4 or earlier export:** check whether those folders contain a catalog with type `all`. Earlier converter versions retained that type, which can make Fusion discard all of the folder's sources. Reconvert the original Nuvio export, or the converter's original Fusion JSON before Fusion discarded its sources, using version 2.0.5 or later. Compatible movie/series sources are kept; mixed/custom sources are listed as omitted. A folder containing only incompatible sources needs movie/series catalogs supplied by your addon. A new export from Fusion cannot recover sources it already discarded. See the [release notes](RELEASE_NOTES.md); re-pulling the pinned 2.0.4 image does not install this correction.
+**Empty mixed-only folders from 2.0.x:** start from the original Nuvio export in 2.1.0 with compatibility enabled. Version 2.0.5 removed mixed sources to protect valid siblings, but could not restore mixed-only folders. An already-partial export no longer contains those references. A converter export from before removal can also be repaired; an export from Fusion after it discarded sources cannot recover them.
+
+### Keeping compatibility links working
+
+- Preserve the server address and `data/bridge.sqlite3` (Docker: `/data/bridge.sqlite3`) across container recreation. The same profile generates the same link while its database exists.
+- Back up appdata privately with the container stopped. It contains plaintext configured addon URLs; profile links are bearer credentials. Do not upload either to Discord, issues or a public repository.
+- If the database is lost, regenerate from the original Nuvio export and re-import the new links. If the server address changes, reconvert using the new address. Old files are not rewritten automatically.
+- Upstream catalogs are fetched on demand and cached in memory for five minutes. The adapter scans upstream pages until it can fill the requested filtered page. It returns an error on outages or safety limits rather than claiming the catalog is empty.
+- The service caches at most eight catalogs, each up to 10,000 items/8 MiB. Large or sparse lists may need a retry while scanning continues. There are at most 200 stored profiles; identical conversions reuse a profile. Unknown item types are reported in the catalog response rather than guessed.
+- Conversion itself does not probe providers. A populated widget file does not prove every live catalog is available. You can disable compatibility to keep the original stateless, direct-catalog workflow.
 
 **Recovering an empty file from version 2.0.0:** start again with the original Nuvio export. That version allowed downloads containing folders but no catalog links. Installing AIOMetadata in Fusion afterward cannot reconnect them, and re-importing the empty Fusion file cannot recover the missing IDs. Supply the original addon URLs during conversion, confirm the source counts, then import the corrected widgets. Back up your Fusion layout before replacing the empty copies.
 
@@ -177,19 +189,24 @@ Only the widget file goes into Fusion. Do not import the report or the entire AP
 | --- | --- | --- |
 | `HOST` | `127.0.0.1` with Python; `0.0.0.0` inside Docker | Listening address |
 | `PORT` | `7088` | Listening port |
+| `NUVIO2FUSION_DATA_DIR` | `./data` with Python; `/data` in Docker | Private persistent compatibility profiles |
+| `NUVIO2FUSION_PUBLIC_URL` | Browser's current origin | Optional default public/LAN address placed into exports |
+| `NUVIO2FUSION_ALLOW_PRIVATE_UPSTREAM` | Off | Set `1` only for trusted RFC1918/ULA LAN addon servers |
 | Browser upload limit | 5 MiB | Maximum individual source file |
 | API request limit | 10 MiB | Maximum request body |
 | Conversion limits | 1,000 widgets/collections; 10,000 source references | Bound large inputs |
 
 For example, `PORT=8080 .venv/bin/python run.py` changes the local port. If you change the container's internal `PORT`, update its published port mapping too.
 
-- Uploaded data and results are held in server memory; the application does not persist them. Browser downloads are saved by your browser.
-- The converter does not contact catalog providers, fetch artwork, authenticate accounts or probe private APIs.
+- Uploaded layouts and results stay in server memory. Compatibility mode persists only the original source connection/query information needed to serve its feeds.
+- The addon makes bounded catalog GET requests. It does not fetch artwork, proxy streams, copy accounts, accept arbitrary destination URLs in catalog requests or serve filesystem paths.
+- TLS certificates are verified. DNS destinations are checked and pinned; redirects to other origins, loopback, link-local and reserved addresses are blocked. LAN upstreams require the explicit environment setting above.
+- The Docker entrypoint prepares the dedicated data directory as root, then runs the application as UID/GID 10001. No privileged mode is needed. Request access logging is disabled to avoid logging bearer profile URLs.
 - The UI loads its own local scripts, styles and logo. It does not use analytics, remote fonts or external preview images.
 - Downloads can contain private addon URLs and tokens. Keep them private and inspect exports before sharing.
 - Reports omit addon URL fields but retain titles, catalog IDs and setting names; those may still be personal.
 - Requests have body limits and same-origin checks. Responses use a restrictive content-security policy, no-store caching and no-referrer policy. Validation errors avoid reflecting submitted values.
-- **There is no built-in authentication.** Keep the app local. For shared access, provide your own authenticated HTTPS reverse proxy; do not expose the port directly to the internet.
+- **There is no management authentication.** Keep the UI/API on your trusted LAN or VPN. If using a reverse proxy, protect management routes and avoid logging `/bridge/` token paths. Fusion needs access to its private bearer addon URL without an interactive login. Do not expose the entire service publicly.
 
 ## API
 
@@ -201,6 +218,9 @@ The machine-readable API schema is available at `/openapi.json` on your local in
 | `GET` | `/api/presets/nuvio` | Neutral Nuvio example in `rawData` |
 | `GET` | `/api/presets/fusion` | Neutral Fusion example in `rawData` |
 | `POST` | `/api/fusion/convert` | Convert JSON and return `fusionConfig` plus `report` |
+| `GET` | `/api/bridge/settings` | Default server address and LAN-upstream policy |
+| `GET` | `/bridge/{token}/manifest.json` | Registered compatibility profile manifest |
+| `GET` | `/bridge/{token}/catalog/{type}/{id}/skip={offset}.json` | Filtered page; skip is optional and also accepted as a query parameter |
 
 Example request:
 
@@ -238,6 +258,8 @@ curl --fail-with-body http://127.0.0.1:7088/api/fusion/convert \
 
 `export_data` accepts a Nuvio collection array, a single collection, `{ "collections": [...] }`, a Fusion widget array, or a Fusion widget v1 envelope. Full-backup fields outside `collections` are not transferred and are reported. Manifests and unrecognized structures are rejected.
 
+To enable compatibility, add `"bridge_url": "http://YOUR-UNRAID-IP:7088"` and optionally `"omit_empty_folders": true` to the request. Omitting `bridge_url` keeps stateless 2.0.5 behavior. The response's separate `bridge` object contains the private manifest URL and feed counts; only `fusionConfig` should be imported into Fusion. Storage failures return 503. Catalog upstream failures return 502, unknown profiles 404, and invalid pagination 400.
+
 Responses contain `success`, `fusionConfig`, `previewWidgets` and `report`. `success` means the input was analyzed; check **`report.canExport`** before saving an import. Missing addons are warnings and do not block connected sources. If no usable sources or supported widgets remain, `fusionConfig` is `null`, `previewWidgets` contains the diagnostic layout, and `report.exportBlockReason` explains the repair. Once exportable, save **only `fusionConfig`**. `report.requiresPartialApproval` is retained for compatibility and is always `false`; omissions are listed in `report.missingAddons`, source records and warnings. Invalid structures/mappings return HTTP 400, invalid request fields 422, cross-origin posts 403, and oversized requests 413.
 
 ## Troubleshooting
@@ -268,7 +290,7 @@ git diff --check
 
 The suite covers URL resolution, source mirrors, ordering, multiple providers, native-source limitations, partial reports, duplicate IDs, Fusion round-trips and API privacy/boundaries. A sanitized fixture exercises **13 widgets, 65 folders and 308 source references**. The browser-generated download has also been compared with the expected widget JSON.
 
-CI tests Python 3.11 and 3.14 before publishing Linux container images, then starts the published image on an `amd64` runner and verifies its non-root user, health endpoint, page and example conversion. Pull requests run checks without publishing. Schema checks do not replace testing an import in your Fusion version.
+CI tests Python 3.11 and 3.14 before publishing Linux container images, then checks the running application's UID, health, page and example conversion. It creates a compatibility profile, replaces the container using the same bind mount, and verifies the original manifest link still works. Pull requests run checks without publishing. Tests also cover filtering, pagination, error recovery, storage, unsafe network destinations and profile URL privacy.
 
 Project layout: `app/fusion.py` handles conversion; `app/main.py` serves the API; `app/static/js/fusion.js` handles the browser workflow; `app/presets/` contains neutral examples; `tests/` contains regression coverage.
 

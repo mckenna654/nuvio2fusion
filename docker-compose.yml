@@ -3,6 +3,8 @@ services:
     build: .
     image: nuvio2fusion:local
     restart: unless-stopped
+    volumes:
+      - ./data:/data
     ports:
       - "127.0.0.1:7088:7088"
     environment:

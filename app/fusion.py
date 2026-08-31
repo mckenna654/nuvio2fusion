@@ -52,7 +52,7 @@ def is_web_url(value):
 
 
 class FusionConversion:
-    def __init__(self, addon_urls=None):
+    def __init__(self, addon_urls=None, bridge=None, omit_empty_folders=False):
         self.addon_urls = {}
         for key, value in (addon_urls or {}).items():
             if not string(key):
@@ -66,6 +66,9 @@ class FusionConversion:
         self.empty_folders = 0
         self.skipped_widgets = 0
         self.incompatible_catalogs = 0
+        self.bridge = bridge
+        self.omit_empty_folders = omit_empty_folders
+        self.omitted_empty_folders = 0
 
     def issue(self, path, code, message, fields=None):
         self.issues.append({'path': path, 'code': code, 'message': message,
@@ -120,7 +123,7 @@ class FusionConversion:
             self.missing[aid] += 1
         return None
 
-    def addon_source(self, raw, path, title, *, fusion=False):
+    def addon_source(self, raw, path, title, *, fusion=False, allow_bridge=True):
         cid, typ = string(raw.get('catalogId')), string(raw.get('type'))
         if not cid or not typ:
             return self.record(raw, path, title, 'unsupported', 'Missing catalog ID or media type.')
@@ -144,18 +147,30 @@ class FusionConversion:
             prefix = TYPE_ALIASES.get(prefix.lower(), prefix.lower())
             if prefix != typ:
                 return self.record(raw, path, title, 'unsupported', 'Catalog prefix and media type disagree; resolve the type before exporting.')
-        if not cid or not re.fullmatch(r'[a-z0-9_-]+', typ):
+        if not cid or not re.fullmatch(r'[a-z0-9_.-]+', typ):
             return self.record(raw, path, title, 'unsupported', 'Invalid catalog ID or media type.')
-        if typ not in FUSION_MEDIA_TYPES:
-            self.incompatible_catalogs += 1
-            return self.record(raw, path, title, 'unsupported',
-                'Fusion widget import is verified only for movie and series. Mixed/all or custom media types can make Fusion discard a folder\'s entire source list. This source was omitted; its query was not rewritten. Use a movie/series catalog supplied by the same addon to replace it.')
         if raw.get('genre') is not None and not isinstance(raw['genre'], str):
             return self.record(raw, path, title, 'unsupported', 'Genre must be text.')
+        if typ not in FUSION_MEDIA_TYPES:
+            if self.bridge and allow_bridge:
+                try:
+                    sources = self.bridge.add(url, typ, cid, string(raw.get('genre')),
+                                              string(raw.get('catalogName')) or title)
+                except ValueError:
+                    return self.record(raw, path, title, 'unsupported', 'This catalog has unsupported encoded options and cannot be adapted without changing its query.')
+                self.required[url] = None  # Keep the original addon for metadata.
+                return self.record(raw, path, title, 'preserved',
+                    'Original mixed catalog retained through the compatibility addon as movie and series feeds. The upstream query is unchanged; each feed filters returned item types.', sources)
+            self.incompatible_catalogs += 1
+            return self.record(raw, path, title, 'unsupported',
+                'Fusion widget import is verified only for movie and series. This source was omitted; its query was not rewritten. Enable the compatibility addon for mixed catalogs inside collection folders, or use a compatible upstream catalog.')
         payload = copy.deepcopy(raw) if fusion else {}
         payload.update(addonId=url, catalogId=f'{typ}::{cid}', type=typ)
         if not fusion and string(raw.get('genre')):
             payload['genre'] = raw['genre']
+        if self.bridge:
+            for upstream in self.bridge.upstream_addons(url):
+                self.required[upstream] = None
         self.required[url] = None
         return self.record(raw, path, title, 'preserved', 'Original addon and catalog retained; no catalog recipe was changed.',
                            {'kind': 'addonCatalog', 'payload': payload})
@@ -169,11 +184,11 @@ class FusionConversion:
                 'Nuvio-native source has no verified direct Fusion mapping. Recreate it in Fusion or expose it through an addon first.')
         return self.addon_source(raw, path, title)
 
-    def fusion_source(self, raw, path, title):
+    def fusion_source(self, raw, path, title, *, allow_bridge=True):
         if not isinstance(raw, dict) or not string(raw.get('kind')) or not isinstance(raw.get('payload'), dict):
             return self.record({}, path, title, 'unsupported', 'Malformed Fusion data source.')
         if raw['kind'] == 'addonCatalog':
-            return self.addon_source(raw['payload'], path, title, fusion=True)
+            return self.addon_source(raw['payload'], path, title, fusion=True, allow_bridge=allow_bridge)
         if raw['kind'] == 'collection':
             return self.record(raw, path, title, 'unsupported', 'Nested collections are not supported in a folder source.')
         # This source already came from Fusion, so retain its native payload.
@@ -218,10 +233,14 @@ class FusionConversion:
             for k, raw_source in enumerate(sources):
                 source = self.nuvio_source(raw_source, f'{fp}.sources[{k}]', ft)
                 if source:
-                    item['dataSources'].append(source)
+                    item['dataSources'].extend(source if isinstance(source, list) else [source])
             if not item['dataSources']:
                 self.empty_folders += 1
                 self.issue(fp, 'empty_folder', 'Folder artwork and position retained, but it has no usable sources.')
+                if self.omit_empty_folders:
+                    self.omitted_empty_folders += 1
+                    self.issues[-1]['message'] = 'Folder omitted because none of its sources are connected and compatible. Its original layout remains in the input file.'
+                    continue
             widget['dataSource']['payload']['items'].append(item)
         return widget
 
@@ -250,12 +269,17 @@ class FusionConversion:
                     item['imageAspect'] = 'square'
                     self.issue(fp, 'unknown_shape', 'Missing or invalid image aspect replaced with square.')
                 sources = [self.fusion_source(s, f'{fp}.sources[{k}]', item['title']) for k, s in enumerate(item['dataSources'])]
-                item['dataSources'] = [s for s in sources if s]
+                item['dataSources'] = [s for value in sources if value for s in (value if isinstance(value, list) else [value])]
                 if not item['dataSources']:
                     self.empty_folders += 1
-                    self.issue(fp, 'empty_folder', 'Folder retained without usable sources.')
+                    self.issue(fp, 'empty_folder', 'Folder omitted without usable sources.' if self.omit_empty_folders else 'Folder retained without usable sources.')
+            if self.omit_empty_folders:
+                before = widget['dataSource']['payload']['items']
+                after = [item for item in before if item['dataSources']]
+                self.omitted_empty_folders += len(before) - len(after)
+                widget['dataSource']['payload']['items'] = after
         else:
-            source = self.fusion_source(ds, path + '.source', widget['title'])
+            source = self.fusion_source(ds, path + '.source', widget['title'], allow_bridge=False)
             if not source:
                 self.skipped_widgets += 1
                 return None
@@ -305,7 +329,7 @@ class FusionConversion:
         counts = Counter(r['status'] for r in self.records)
         folders = sum(len(w['dataSource']['payload']['items']) for w in widgets if w['type'] == 'collection.row')
         warnings = [
-            'This converts layout only. Referenced addons must remain installed and accessible in Fusion; their catalogs are not copied or hosted by this tool.',
+            'Referenced original addons must remain installed and accessible in Fusion. Their catalog definitions and accounts are not copied.',
             'Addon URLs can contain private tokens. Keep the exported file private; the report omits addon URLs.',
             'Artwork stays at its original URL. No artwork, catalogs, accounts, watch history or library contents are copied.',
             'Output targets Fusion widget export v1. Structural validation is not a live import or catalog-availability check.',
@@ -315,25 +339,33 @@ class FusionConversion:
         if self.missing:
             warnings.append(f'{len(self.missing)} addons are not connected; {sum(self.missing.values())} catalog references are omitted. Connecting these addons is optional. Sources from connected addons remain exportable.')
         if self.incompatible_catalogs:
-            warnings.append(f'{self.incompatible_catalogs} catalog references use media types outside the verified movie/series widget format. They are omitted so an incompatible source cannot erase the other catalogs in its Fusion folder. Mixed/all sources are not relabelled as movie or series; choose compatible catalogs from your addon for these entries.')
+            warnings.append(f'{self.incompatible_catalogs} catalog references use media types outside the verified movie/series widget format. Enable the compatibility addon for collection sources; otherwise an incompatible source is omitted to protect the other catalogs in its folder.')
         if self.empty_folders:
             warnings.append(f'{self.empty_folders} folders have no usable sources. Review their omitted-source reasons: connect any wanted addons or replace incompatible catalogs in the original layout, then convert again. Installing an addon in Fusion alone cannot restore omitted references.')
+        if self.omitted_empty_folders:
+            warnings.append(f'{self.omitted_empty_folders} empty folders were left out of this export. Turn off Hide empty folders to retain their tiles.')
         block_reason = ''
         if not counts['preserved']:
             block_reason = 'No usable catalog sources remain. Use the original Nuvio collections export and resolve the source issues; a layout-only Fusion file cannot recover missing catalogs.'
         elif not widgets:
             block_reason = 'No supported widgets remain to export.'
         can_export = not block_reason
+        bridge_info = self.bridge.finish() if can_export and self.bridge else None
+        if bridge_info:
+            self.required[bridge_info['manifestUrl']] = None
+            warnings.append(f'{bridge_info["sourceReferences"]} mixed catalog references use the Nuvio2Fusion compatibility addon. Keep this service running at the exported address and preserve its appdata. Movie/series order is preserved within each feed; their original interleaving is separated. Original addon URLs are saved privately on this server.')
         complete = can_export and counts['unsupported'] == 0 and not self.issues and self.skipped_widgets == 0
         return {'success': True, 'fusionConfig': {'exportType': 'fusionWidgets', 'exportVersion': 1,
                     'requiredAddons': list(self.required), 'widgets': widgets} if can_export else None,
                 # Keep a diagnostic preview when no usable content remains.
-                'previewWidgets': widgets if not can_export else [],
+                'previewWidgets': widgets if not can_export else [], 'bridge': bridge_info,
                 'report': {'inputFormat': 'Fusion widgets' if fusion else 'Nuvio collections',
                     'complete': complete, 'sourceCoverageComplete': counts['unsupported'] == 0,
                     'canExport': can_export, 'exportBlockReason': block_reason,
                     'requiresPartialApproval': False,  # Compatibility field; omissions are warnings only.
                     'widgets': len(widgets), 'folders': folders, 'emptyFolders': self.empty_folders,
+                    'omittedEmptyFolders': self.omitted_empty_folders,
+                    'bridgedSourceReferences': bridge_info['sourceReferences'] if bridge_info else 0,
                     'skippedWidgets': self.skipped_widgets, 'sourceReferences': len(self.records),
                     'incompatibleCatalogs': self.incompatible_catalogs,
                     'counts': {k: counts[k] for k in ('preserved', 'unsupported')},
@@ -343,5 +375,5 @@ class FusionConversion:
                     'items': self.records, 'issues': self.issues, 'warnings': warnings}}
 
 
-def convert_to_fusion(export_data, addon_urls=None):
-    return FusionConversion(addon_urls).convert(export_data)
+def convert_to_fusion(export_data, addon_urls=None, bridge=None, omit_empty_folders=False):
+    return FusionConversion(addon_urls, bridge, omit_empty_folders).convert(export_data)
