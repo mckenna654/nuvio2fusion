@@ -9,8 +9,12 @@
 
 <p align="center">
   <a href="https://github.com/mckenna654/nuvio2fusion/actions/workflows/docker-publish.yml"><img src="https://github.com/mckenna654/nuvio2fusion/actions/workflows/docker-publish.yml/badge.svg" alt="Build status"></a>
+  <a href="https://github.com/mckenna654/nuvio2fusion/releases/latest"><img src="https://img.shields.io/github/v/release/mckenna654/nuvio2fusion?display_name=tag&sort=semver" alt="Latest release"></a>
+  <a href="https://github.com/mckenna654/nuvio2fusion/pkgs/container/nuvio2fusion"><img src="https://img.shields.io/badge/container-ghcr.io-2496ED?logo=docker&logoColor=white" alt="Container image on GitHub Container Registry"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-b5eed2" alt="MIT license"></a>
   <img src="https://img.shields.io/badge/Python-3.11%2B-a7a0ef" alt="Python 3.11 or later">
+  <img src="https://img.shields.io/badge/platform-linux%2Famd64%20%7C%20arm64-8bd5ca" alt="Linux amd64 and arm64">
+  <img src="https://img.shields.io/badge/built%20with-OpenAI%20Codex-111111" alt="Built with OpenAI Codex">
 </p>
 
 ## What it does
@@ -298,6 +302,11 @@ The suite covers URL resolution, source mirrors, ordering, multiple providers, n
 CI tests Python 3.11 and 3.14 before publishing Linux container images, then checks the running application's UID, health, page and example conversion. It creates a compatibility profile, replaces the container using the same bind mount, and verifies the original manifest link still works. Pull requests run checks without publishing. Tests also cover filtering, pagination, error recovery, storage, unsafe network destinations and profile URL privacy.
 
 Project layout: `app/fusion.py` handles conversion; `app/main.py` serves the API; `app/static/js/fusion.js` handles the browser workflow; `app/presets/` contains neutral examples; `tests/` contains regression coverage.
+
+## Contributors
+
+- **Jake McKenna** — creator and maintainer.
+- **OpenAI Codex** — implementation, debugging, testing and documentation contributor.
 
 ## Project identity and license
 
